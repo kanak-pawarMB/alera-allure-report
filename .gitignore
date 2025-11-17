@@ -1,0 +1,18 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Allure
+/allure-results/
+/allure-report/
+
+# Environment Variables
+.env
+.env.local
+
+ode_modules/
+nul
