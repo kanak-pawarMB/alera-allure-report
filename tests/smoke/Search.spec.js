@@ -11,10 +11,10 @@ test.describe('Search - Smoke Tests', () => {
   const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard and wait for load
-    await page.goto(DASHBOARD_URL);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
+    // Navigate to dashboard with increased timeout
+    await page.goto(DASHBOARD_URL, { timeout: 60000 });
+    await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+    await page.waitForTimeout(2000);
   });
 
   // Qase Test Case ID: 66
@@ -87,9 +87,10 @@ test.describe('Search - Smoke Tests', () => {
     const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
     await expect(searchResult).toBeVisible({ timeout: 5000 });
 
-    // Step 4: Click patient record
-    await searchResult.click();
-    await page.waitForTimeout(2000);
+    // Step 4: Wait for result to be visible and click patient record
+    await searchResult.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResult.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
 
     // Verify patient dashboard loads
     const patientCards = page.locator('[class*="card"]').first();
@@ -118,9 +119,10 @@ test.describe('Search - Smoke Tests', () => {
     const searchResults = page.locator('p').filter({ hasText: 'NC' }).first();
     await expect(searchResults).toBeVisible({ timeout: 5000 });
 
-    // Step 4: Click on result
-    await searchResults.click();
-    await page.waitForTimeout(2000);
+    // Step 4: Wait for result to be visible and click on result
+    await searchResults.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResults.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
 
     // Verify patient dashboard loads
     const patientCards = page.locator('[class*="card"]').first();
@@ -162,9 +164,10 @@ test.describe('Search - Smoke Tests', () => {
     const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
     await expect(searchResult).toBeVisible({ timeout: 5000 });
 
-    // Step 2: Click on one of the results
-    await searchResult.click();
-    await page.waitForTimeout(2000);
+    // Step 2: Wait for result to be visible and click on one of the results
+    await searchResult.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResult.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
 
     // Verify full patient dashboard loads with at least one card visible
     const cardsVisible = page.locator(':text("Demographics"), :text("PCP"), :text("Primary Care")').first();
@@ -200,9 +203,10 @@ test.describe('Search - Smoke Tests', () => {
     await page.waitForTimeout(200);
 
     // Step 2: Press Enter on a result
-    // Alternative: Click on the first result directly
-    await searchResults.click();
-    await page.waitForTimeout(2000);
+    // Alternative: Wait for result to be visible and click on the first result directly
+    await searchResults.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResults.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
 
     // Verify patient dashboard loads
     const patientCards = page.locator('[class*="card"]').first();
@@ -220,8 +224,9 @@ test.describe('Search - Smoke Tests', () => {
     await page.waitForTimeout(1500);
 
     const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await searchResult.click();
-    await page.waitForTimeout(2000);
+    await searchResult.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResult.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
 
     // Verify cards are visible at default size
     const patientCards = page.locator('[class*="card"]').first();

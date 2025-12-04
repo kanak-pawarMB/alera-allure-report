@@ -65,10 +65,17 @@ API_PASSWORD=your-password
 # Run UI smoke tests (recommended first - fast critical path)
 npx playwright test --project=smoke
 
+# Run UI smoke tests in headed mode (visible browser)
+# IMPORTANT: Use --project=smoke (NOT --project=chromium) for smoke tests
+npx playwright test --project=smoke --headed
+
+# Run a specific smoke test file in headed mode
+npx playwright test tests/smoke/HealthPlanCard.spec.js --headed --project=smoke
+
 # Run all UI tests
 npx playwright test
 
-# Run tests in a specific browser
+# Run tests in a specific browser (regression tests only, excludes smoke)
 npx playwright test --project=chromium
 npx playwright test --project=firefox
 npx playwright test --project=webkit
@@ -85,6 +92,8 @@ npx playwright test --debug
 # Run specific test by pattern
 npx playwright test -g "should load the login page"
 ```
+
+> **Note:** The `chromium`, `firefox`, and `safari` projects exclude smoke tests to avoid duplication. Always use `--project=smoke` when running smoke tests, even in headed mode.
 
 ### API Tests
 
@@ -114,9 +123,28 @@ npx playwright test --project=smoke --project=api-smoke
 
 ### View Test Reports
 
+#### Playwright HTML Report
 ```bash
-# Open the HTML report
+# Open the Playwright HTML report
 npx playwright show-report
+```
+
+#### Allure Report
+```bash
+# Clean previous Allure results and reports
+npm run allure:clean
+
+# Generate Allure report from test results
+npm run allure:generate
+
+# Open generated Allure report
+npm run allure:open
+
+# Serve Allure report (generates and opens in one command)
+npm run allure:serve
+
+# Complete workflow: Clean, run tests, and generate report
+npm run allure:clean && npx playwright test --project=smoke && npm run allure:generate && npm run allure:open
 ```
 
 ## Project Structure

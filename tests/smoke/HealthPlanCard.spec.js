@@ -11,10 +11,10 @@ test.describe('Health Plan Card - Smoke Tests', () => {
   const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard
-    await page.goto(DASHBOARD_URL);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
+    // Navigate to dashboard with increased timeout
+    await page.goto(DASHBOARD_URL, { timeout: 60000 });
+    await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+    await page.waitForTimeout(2000);
 
     // Search for a valid patient and open their record
     const searchField = page.getByRole('textbox', { name: /search/i }).first();
@@ -22,10 +22,12 @@ test.describe('Health Plan Card - Smoke Tests', () => {
     await searchField.fill(validMedicaidId);
     await page.waitForTimeout(1500);
 
-    // Click on search result to load patient dashboard
+    // Wait for search result to be visible before clicking
     const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await searchResult.click();
-    await page.waitForTimeout(2000);
+    await expect(searchResult).toBeVisible({ timeout: 10000 });
+    await searchResult.waitFor({ state: 'visible', timeout: 10000 });
+    await searchResult.click({ timeout: 10000 });
+    await page.waitForTimeout(3000);
   });
 
   // Qase Test Case ID: 81

@@ -29,6 +29,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html'],
+    ['list'], // Console output during test execution
     ['allure-playwright', {
       outputFolder: 'allure-results',
       detail: true,
@@ -36,6 +37,7 @@ export default defineConfig({
       environmentInfo: {
         'Environment': process.env.CI ? 'CI' : 'Local',
         'Node Version': process.version,
+        'OS': process.platform,
       }
     }],
     ['playwright-qase-reporter', {
@@ -59,6 +61,9 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     // UI Smoke Tests - Fast critical path tests (Chromium only)
+    // USAGE: npx playwright test --project=smoke
+    // For headed mode: npx playwright test --project=smoke --headed
+    // IMPORTANT: Use --project=smoke (NOT --project=chromium) for smoke tests
     {
       name: 'smoke',
       testMatch: /tests\/smoke\/.*\.spec\.js/,
@@ -68,6 +73,7 @@ export default defineConfig({
     },
 
     // API Smoke Tests - Fast critical API endpoint tests
+    // USAGE: npx playwright test --project=api-smoke
     {
       name: 'api-smoke',
       testMatch: /tests\/api\/smoke\/.*\.spec\.js/,
@@ -78,6 +84,7 @@ export default defineConfig({
     },
 
     // API Regression Tests - Comprehensive API test coverage
+    // USAGE: npx playwright test --project=api-regression
     {
       name: 'api-regression',
       testMatch: /tests\/api\/regression\/.*\.spec\.js/,
@@ -87,19 +94,26 @@ export default defineConfig({
       retries: process.env.CI ? 2 : 0,
     },
 
-    // Full UI Test Suite - All browsers
+    // Full UI Regression Test Suite - Chromium (excludes smoke tests)
+    // USAGE: npx playwright test --project=chromium
+    // NOTE: This project excludes smoke tests to avoid duplication
+    // To run smoke tests, use --project=smoke instead
     {
       name: 'chromium',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/], // Exclude smoke and API tests
       use: { ...devices['Desktop Chrome'] },
     },
 
+    // Full UI Regression Test Suite - Firefox (excludes smoke tests)
+    // USAGE: npx playwright test --project=firefox
     {
       name: 'firefox',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
       use: { ...devices['Desktop Firefox'] },
     },
 
+    // Full UI Regression Test Suite - Safari (excludes smoke tests)
+    // USAGE: npx playwright test --project=safari
     {
       name: 'safari',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],

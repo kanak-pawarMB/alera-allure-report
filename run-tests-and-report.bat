@@ -1,23 +1,25 @@
 @echo off
-title Generate Allure Report
+title Run Smoke Tests and Generate Report
 echo.
 echo ========================================
-echo   Generating Allure Report
+echo   Run Smoke Tests + Generate Allure Report
 echo ========================================
 echo.
 
 cd /d "%~dp0"
 
-REM Check if allure-results exists
-if not exist "allure-results" (
-    echo [ERROR] allure-results directory not found!
-    echo Please run tests first: npm run test:smoke
+echo [1/3] Running smoke tests...
+echo.
+call npm run test:smoke
+
+if %errorlevel% neq 0 (
     echo.
-    pause
-    exit /b 1
+    echo [WARNING] Some tests failed, but continuing with report generation...
+    echo.
 )
 
-echo [1/2] Generating Allure report...
+echo.
+echo [2/3] Generating Allure report...
 call "%~dp0node_modules\.bin\allure.cmd" generate allure-results --clean -o allure-report
 
 if %errorlevel% neq 0 (
@@ -28,13 +30,12 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [2/2] Opening Allure report in browser...
+echo [3/3] Opening Allure report...
 call "%~dp0node_modules\.bin\allure.cmd" open allure-report
 
 echo.
 echo ========================================
-echo   Report Generated Successfully!
-echo   Location: %CD%\allure-report
+echo   All Done!
 echo ========================================
 echo.
 pause
