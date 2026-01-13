@@ -6,29 +6,36 @@
 export const TEST_DATA = {
   // Application URLs
   urls: {
-    dashboard: 'https://demooneview.z20.web.core.windows.net/dashboard',
-    login: process.env.LOGIN_URL || 'https://demooneview.z20.web.core.windows.net/login'
+    dashboard: 'https://qa.oneview.alerahealth.com/dashboard',
+    login: 'https://qa.oneview.alerahealth.com/login'
   },
 
   // Test Patients
   patients: {
-    // Patient with complete data (used for most tests)
+    // Patient with most complete data (PRIMARY - use for most test cases)
     completeData: {
+      medicaidId: 'NC767095351',
+      searchTerm: 'Gar 12/09/1961', // First 3 letters of last name + DOB
+      description: 'Patient with most complete data - use for most test cases'
+    },
+
+    // Patient for switching/secondary tests
+    secondary: {
+      medicaidId: 'NC335442919',
+      description: 'Secondary patient for patient switch tests'
+    },
+
+    // Patient for duplicate search testing (multiple patients with same search criteria)
+    duplicateSearch: {
+      searchTerm: 'wil 01/29/2020', // Multiple patients match this criteria
+      description: 'Search term that returns multiple patients (tests duplicate handling)'
+    },
+
+    // Legacy patient (kept for backward compatibility if needed)
+    legacy: {
       medicaidId: 'NC160943625',
-      description: 'Patient with complete PCP and demographic data'
-    },
-
-    // Patient with null fields (for testing null handling)
-    withNullFields: {
-      medicaidId: 'NC160943625', // Update this if you have a different patient
-      description: 'Patient with some null demographic fields'
-    },
-
-    // Additional test patients can be added here
-    // example: {
-    //   medicaidId: 'NC123456789',
-    //   description: 'Patient for specific test scenario'
-    // }
+      description: 'Previously used primary patient'
+    }
   },
 
   // Timeouts and Waits
@@ -81,13 +88,14 @@ export const TEST_DATA = {
 
 /**
  * Helper function to get a patient by scenario
- * @param {string} scenario - 'complete', 'nullFields', etc.
+ * @param {string} scenario - 'complete', 'secondary', 'legacy'
  * @returns {object} Patient data
  */
 export function getPatient(scenario = 'complete') {
   const patientMap = {
     'complete': TEST_DATA.patients.completeData,
-    'nullFields': TEST_DATA.patients.withNullFields
+    'secondary': TEST_DATA.patients.secondary,
+    'legacy': TEST_DATA.patients.legacy
   };
 
   return patientMap[scenario] || TEST_DATA.patients.completeData;

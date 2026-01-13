@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TEST_DATA } from '../testData.js';
 
 /**
  * SMOKE TEST - Dynamic Dashboard Critical Path
@@ -7,26 +8,18 @@ import { test, expect } from '@playwright/test';
  * Qase Test Management Suite: Suite 8
  */
 
+test.use({ storageState: 'auth.json' });
+
 test.describe('Dynamic Dashboard - Smoke Tests', () => {
-  const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard with increased timeout
-    await page.goto(DASHBOARD_URL, { timeout: 60000 });
-    await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
-    await page.waitForTimeout(2000);
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
+    await page.waitForLoadState('networkidle');
 
-    // Search for a valid patient and open their record
-    const searchField = page.getByRole('textbox', { name: /search/i }).first();
-    const validMedicaidId = 'NC160943625';
-    await searchField.fill(validMedicaidId);
-    await page.waitForTimeout(3000);
-
-    // Wait for search result to be visible before clicking
-    const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await searchResult.waitFor({ state: 'visible', timeout: 15000 });
-    await searchResult.click({ timeout: 15000 });
-    await page.waitForTimeout(3000);
+    // Search and select primary patient
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
   });
 
   // Qase Test Case ID: 35

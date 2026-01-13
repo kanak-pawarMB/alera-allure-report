@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TEST_DATA } from '../testData.js';
 
 /**
  * SMOKE TEST - Health Plan Card Critical Path
@@ -7,27 +8,18 @@ import { test, expect } from '@playwright/test';
  * Qase Test Management Suite: Suite 10
  */
 
+test.use({ storageState: 'auth.json' });
+
 test.describe('Health Plan Card - Smoke Tests', () => {
-  const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard with increased timeout
-    await page.goto(DASHBOARD_URL, { timeout: 60000 });
-    await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
-    await page.waitForTimeout(2000);
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
+    await page.waitForLoadState('networkidle');
 
-    // Search for a valid patient and open their record
-    const searchField = page.getByRole('textbox', { name: /search/i }).first();
-    const validMedicaidId = 'NC160943625';
-    await searchField.fill(validMedicaidId);
-    await page.waitForTimeout(1500);
-
-    // Wait for search result to be visible before clicking
-    const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await expect(searchResult).toBeVisible({ timeout: 10000 });
-    await searchResult.waitFor({ state: 'visible', timeout: 10000 });
-    await searchResult.click({ timeout: 10000 });
-    await page.waitForTimeout(3000);
+    // Search and select patient (primary complete data)
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
   });
 
   // Qase Test Case ID: 81
@@ -42,9 +34,9 @@ test.describe('Health Plan Card - Smoke Tests', () => {
 
     const healthPlanCard = page.locator(':text("Health Plan")')
       .or(page.locator(':text("Healthplan")'))
-      .or(page.locator(':text("Health")')
+      .or(page.locator(':text("Health")'))
       .or(page.locator('[class*="health"]'))
-      .or(page.locator('[data-testid="health-plan"]')));
+      .or(page.locator('[data-testid="health-plan"]'));
 
     // Verify Health Plan card is visible
     await expect(healthPlanCard.first()).toBeVisible({ timeout: 5000 });

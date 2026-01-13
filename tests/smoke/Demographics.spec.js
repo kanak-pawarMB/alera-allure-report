@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TEST_DATA } from '../testData.js';
 
 /**
  * SMOKE TEST - Demographics Card Critical Path
@@ -7,25 +8,18 @@ import { test, expect } from '@playwright/test';
  * Qase Test Management Suite: Suite 6
  */
 
+test.use({ storageState: 'auth.json' });
+
 test.describe('Demographics Card - Smoke Tests', () => {
-  const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard
-    await page.goto(DASHBOARD_URL);
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(1000);
 
-    // Search for a valid patient and open their record
-    const searchField = page.getByRole('textbox', { name: /search/i }).first();
-    const validMedicaidId = 'NC160943625';
-    await searchField.fill(validMedicaidId);
-    await page.waitForTimeout(1500);
-
-    // Click on search result to load patient dashboard
-    const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await searchResult.click();
-    await page.waitForTimeout(2000);
+    // Search and select patient (primary complete data)
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
   });
 
   // Qase Test Case ID: 22

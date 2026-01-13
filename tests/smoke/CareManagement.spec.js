@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TEST_DATA } from '../testData.js';
 
 /**
  * SMOKE TEST - Care Management Card Critical Path
@@ -7,26 +8,18 @@ import { test, expect } from '@playwright/test';
  * Qase Test Management Suite: Suite 16
  */
 
+test.use({ storageState: 'auth.json' });
+
 test.describe('Care Management - Smoke Tests', () => {
-  const DASHBOARD_URL = 'https://demooneview.z20.web.core.windows.net/dashboard';
 
   test.beforeEach(async ({ page }) => {
-    // Navigate to dashboard with increased timeout
-    await page.goto(DASHBOARD_URL, { timeout: 60000 });
-    await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
-    await page.waitForTimeout(2000);
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
+    await page.waitForLoadState('networkidle');
 
-    // Search for a valid patient and open their record
-    const searchField = page.getByRole('textbox', { name: /search/i }).first();
-    const validMedicaidId = 'NC160943625';
-    await searchField.fill(validMedicaidId);
-    await page.waitForTimeout(3000);
-
-    // Wait for search result to be visible before clicking
-    const searchResult = page.locator('p').filter({ hasText: validMedicaidId }).first();
-    await searchResult.waitFor({ state: 'visible', timeout: 15000 });
-    await searchResult.click({ timeout: 15000 });
-    await page.waitForTimeout(3000);
+    // Search and select patient
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
   });
 
   // Qase Test Case ID: 163
@@ -87,33 +80,26 @@ test.describe('Care Management - Smoke Tests', () => {
     test.info().annotations.push({ type: 'qaseId', description: '176' });
 
     // Step 1: Verify initial patient dashboard is loaded (done in beforeEach)
+    // Verify Care Management card is visible for initial patient
+    const careManagementCard = page.locator(':text("Care Management")').first();
+    await expect(careManagementCard).toBeVisible({ timeout: 5000 });
+
     // Step 2: Switch to another patient
-    const searchField = page.getByRole('textbox', { name: /search/i }).first();
-    await searchField.clear();
-    await page.waitForTimeout(500);
-    await searchField.fill('rob 07/19/1981');
-    await page.waitForTimeout(1500);
+    const searchField = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
+    await searchField.click();
+    await searchField.fill(TEST_DATA.patients.secondary.medicaidId);
+    await page.waitForTimeout(2000);
 
-    // Find and click on any search result
-    const searchResults = page.locator('p').filter({ hasText: /NC/ });
-    const resultCount = await searchResults.count();
+    // Click on search result
+    const searchResult = page.locator('p').filter({ hasText: TEST_DATA.patients.secondary.medicaidId }).first();
+    await searchResult.click();
+    await page.waitForTimeout(2000);
 
-    if (resultCount > 0) {
-      await searchResults.first().click();
-      await page.waitForTimeout(2000);
+    // Step 3: Verify patient dashboard loaded for new patient
+    // Card refreshes and displays new patient's data
+    await expect(careManagementCard).toBeVisible({ timeout: 5000 });
 
-      // Step 3: Verify patient dashboard loaded for new patient
-      // Just verify any card is visible (dashboard refreshed)
-      const anyCard = page.locator('[class*="card"]').first();
-      await expect(anyCard).toBeVisible({ timeout: 5000 });
-
-      console.log('Patient change successful - dashboard refreshed');
-    } else {
-      // If search doesn't work, just verify current dashboard is still visible
-      const dashboardVisible = page.locator('[class*="card"]').first();
-      await expect(dashboardVisible).toBeVisible({ timeout: 3000 });
-      console.log('Search returned no results, skipping patient switch verification');
-    }
+    console.log('Patient change successful - dashboard refreshed');
   });
 
   // Qase Test Case ID: 182
