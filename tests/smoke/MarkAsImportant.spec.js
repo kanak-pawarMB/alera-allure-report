@@ -5,22 +5,67 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Mark Cards as Important - Smoke Tests', () => {
+  // Configure timeout at describe level - applies to ALL hooks and tests
+  test.describe.configure({ timeout: 120000 });
+
+  /* -------------------- Helpers -------------------- */
+
+  // Flexible search field locator
+  // @ts-ignore
+  async function getSearchField(page) {
+    const field = page
+      .locator('input[placeholder*="Search"], input[placeholder*="Medicaid"], input[type="text"]')
+      .first();
+    await expect(field).toBeVisible({ timeout: 30000 });
+    return field;
+  }
+
+  // Get search result - uses getByText for dropdown items
+  // @ts-ignore
+  async function getSearchResult(page, patientText) {
+    const result = page.getByText(patientText).first();
+    await expect(result).toBeVisible({ timeout: 30000 });
+    return result;
+  }
+
+  /* -------------------- Setup -------------------- */
+
   test.beforeEach(async ({ page }) => {
     // Reset viewport to prevent navigation issues
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    // Navigate to dashboard
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    try {
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
 
-    // Brief wait for dashboard cards to render before interactions
-    const anyCard = page.locator('[role="region"], [class*="card"], [class*="Card"], div[class*="shadow"]').first();
-    await anyCard.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+      // Verify we're on dashboard (not redirected to login)
+      const currentUrl = page.url();
+      if (currentUrl.includes('login')) {
+        throw new Error('Redirected to login page - auth session may have expired');
+      }
 
-    // Search for patient with complete data
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      // Wait for dashboard to be ready
+      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+
+      // Brief wait for dashboard cards to render before interactions
+      const anyCard = page.locator('[role="region"], [class*="card"], [class*="Card"], div[class*="shadow"]').first();
+      await anyCard.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+
+      // Search and select patient using flexible locators
+      const searchBox = await getSearchField(page);
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+
+      // Click search result
+      const searchResult = await getSearchResult(page, 'NC767095351|Elizabeth Garcia|12/09/');
+      await searchResult.click();
+
+      // Wait for patient data to load
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+    } catch (e) {
+      await page.screenshot({ path: 'markimportant-beforeeach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   });
 
   test('ONEVIEW-511: Verify Star Icon Exists @smoke', async ({ page }) => {

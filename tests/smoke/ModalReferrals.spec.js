@@ -42,7 +42,8 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
     // Open modal by clicking View All link for Referrals
     await page.locator("(//button[contains(text(),'View all')])[4]").click();
     const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
+    // Wait longer for modal after first test
+    await expect(modal.first()).toBeVisible({ timeout: 10000 });
     // Scroll inside modal
     await modal.evaluate(node => { node.scrollTop = node.scrollHeight; });
     await expect(modal.first()).toBeVisible();

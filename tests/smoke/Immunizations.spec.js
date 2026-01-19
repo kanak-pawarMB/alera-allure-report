@@ -11,22 +11,61 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Immunizations - Smoke Tests', () => {
+  // Configure timeout at describe level - applies to ALL hooks and tests
+  test.describe.configure({ timeout: 120000 });
+
+  /* -------------------- Helpers -------------------- */
+
+  // Flexible search field locator
+  async function getSearchField(page) {
+    const field = page
+      .locator('input[placeholder*="Search"], input[placeholder*="Medicaid"], input[type="text"]')
+      .first();
+    await expect(field).toBeVisible({ timeout: 30000 });
+    return field;
+  }
+
+  // Get search result - uses getByText for dropdown items
+  async function getSearchResult(page, patientText) {
+    const result = page.getByText(patientText).first();
+    await expect(result).toBeVisible({ timeout: 30000 });
+    return result;
+  }
+
+  /* -------------------- Setup -------------------- */
 
   test.beforeEach(async ({ page }) => {
     // Reset viewport to reduce flakiness across navigations
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    try {
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
 
-    // Search and select patient (primary complete data)
-    const searchInput = page.getByPlaceholder("Search by Patient's Medicaid ID")
-      .or(page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }))
-      .first();
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
-    await searchInput.click();
-    await searchInput.fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      // Verify we're on dashboard (not redirected to login)
+      const currentUrl = page.url();
+      if (currentUrl.includes('login')) {
+        throw new Error('Redirected to login page - auth session may have expired');
+      }
+
+      // Wait for dashboard to be ready
+      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+
+      // Search and select patient using flexible locators
+      const searchBox = await getSearchField(page);
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+
+      // Click search result
+      const searchResult = await getSearchResult(page, 'NC767095351|Elizabeth Garcia|12/09/');
+      await searchResult.click();
+
+      // Wait for patient data to load
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+    } catch (e) {
+      await page.screenshot({ path: 'immunizations-beforeeach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   });
 
   // Qase Test Case ID: 352

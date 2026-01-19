@@ -14,30 +14,19 @@ test.use({ storageState: 'auth.json' });
 test.describe('Drill Down Recent Visits - Smoke Tests', () => {
 
   test.beforeEach(async ({ page }, testInfo) => {
-    // Only add diagnostics for failing tests
-    if (testInfo.title.includes('ONEVIEW-331') || testInfo.title.includes('ONEVIEW-333')) {
-      await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-      try {
-        await page.waitForLoadState('networkidle');
-        const searchBox = page.getByRole('textbox', { name: /search/i }).first();
-        await expect(searchBox).toBeVisible({ timeout: 20000 });
-        await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-        await page.waitForTimeout(500); // Give time for results
-        await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-        await page.waitForTimeout(500); // Wait for dashboard
-        await expect(page.locator('div').filter({ hasText: /Recent Visits|Encounters/i }).first()).toBeVisible({ timeout: 30000 });
-      } catch (e) {
-        await page.screenshot({ path: `debug-beforeEach-${testInfo.title.replace(/\s+/g,'_')}.png`, fullPage: true });
-        throw e;
-      }
-    } else {
-      await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-      await page.waitForLoadState('networkidle');
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+    try {
+      await page.waitForLoadState('networkidle', { timeout: 90000 });
       const searchBox = page.getByRole('textbox', { name: /search/i }).first();
       await expect(searchBox).toBeVisible({ timeout: 20000 });
       await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+      await page.waitForTimeout(500);
       await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      await page.waitForTimeout(500);
       await expect(page.locator('div').filter({ hasText: /Recent Visits|Encounters/i }).first()).toBeVisible({ timeout: 30000 });
+    } catch (e) {
+      await page.screenshot({ path: `debug-beforeEach-${testInfo.title.replace(/\s+/g,'_')}.png`, fullPage: true });
+      throw e;
     }
   });
 

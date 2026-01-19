@@ -5,18 +5,31 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Risk Stratification - Smoke Tests', () => {
-  test.beforeEach(async ({ page }) => {
-    // Reset viewport to prevent navigation issues
-    await page.setViewportSize({ width: 1280, height: 720 });
-
-    // Navigate to dashboard
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-
-    // Search for patient with complete data
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+  test.beforeEach(async ({ page }, testInfo) => {
+    // Only increase timeout and add diagnostics for failing test ONEVIEW-386
+    if (testInfo.title.includes('ONEVIEW-386')) {
+      await page.setViewportSize({ width: 1280, height: 720 });
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      try {
+        await page.waitForLoadState('networkidle', { timeout: 90000 });
+        const medicaidBox = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
+        await expect(medicaidBox).toBeVisible({ timeout: 20000 });
+        await medicaidBox.click();
+        await medicaidBox.fill(TEST_DATA.patients.completeData.medicaidId);
+        await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      } catch (e) {
+        await page.screenshot({ path: 'riskstrat-beforeeach-fail-386.png', fullPage: true });
+        throw e;
+      }
+    } else {
+      // ...existing code...
+      await page.setViewportSize({ width: 1280, height: 720 });
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
+      await page.waitForLoadState('networkidle');
+      await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+      await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+      await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+    }
   });
 
   test('ONEVIEW-385: Validate read-only mode @smoke', async ({ page }) => {

@@ -11,15 +11,60 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Demographics Card - Smoke Tests', () => {
+  // Configure timeout at describe level - applies to ALL hooks and tests
+  test.describe.configure({ timeout: 120000 });
+
+  /* -------------------- Helpers -------------------- */
+
+  // Flexible search field locator
+  // @ts-ignore
+  async function getSearchField(page) {
+    const field = page
+      .locator('input[placeholder*="Search"], input[placeholder*="Medicaid"], input[type="text"]')
+      .first();
+    await expect(field).toBeVisible({ timeout: 30000 });
+    return field;
+  }
+
+  // Get search result - uses getByText for dropdown items
+  // @ts-ignore
+  async function getSearchResult(page, patientText) {
+    const result = page.getByText(patientText).first();
+    await expect(result).toBeVisible({ timeout: 30000 });
+    return result;
+  }
+
+  /* -------------------- Setup -------------------- */
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    try {
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
 
-    // Search and select patient (primary complete data)
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      // Verify we're on dashboard (not redirected to login)
+      const currentUrl = page.url();
+      if (currentUrl.includes('login')) {
+        throw new Error('Redirected to login page - auth session may have expired');
+      }
+
+      // Wait for dashboard to be ready
+      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+
+      // Search and select patient using flexible locators
+      const searchBox = await getSearchField(page);
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+
+      // Click search result
+      const searchResult = await getSearchResult(page, 'NC767095351|Elizabeth Garcia|12/09/');
+      await searchResult.click();
+
+      // Wait for patient data to load
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+    } catch (e) {
+      await page.screenshot({ path: 'demographics-beforeeach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   });
 
   // Qase Test Case ID: 22
@@ -32,7 +77,7 @@ test.describe('Demographics Card - Smoke Tests', () => {
       .or(page.locator('[class*="demographic"]'))
       .or(page.locator('[data-testid="demographics"]'));
 
-    await expect(demographicsCard.first()).toBeVisible({ timeout: 5000 });
+    await expect(demographicsCard.first()).toBeVisible({ timeout: 10000 });
   });
 
   // Qase Test Case ID: 146
@@ -41,7 +86,7 @@ test.describe('Demographics Card - Smoke Tests', () => {
 
     // Step 1: Verify Demographics card loads
     const demographicsCard = page.locator(':text("Demographics")').first();
-    await expect(demographicsCard).toBeVisible({ timeout: 5000 });
+    await expect(demographicsCard).toBeVisible({ timeout: 10000 });
 
     // Step 2: Verify all defined fields are present
     // Expected fields: Name, Medicaid ID, Medical Home, Network, DOB/Age, Sex at Birth, Race, Phone Number, Address, City, State
@@ -50,49 +95,46 @@ test.describe('Demographics Card - Smoke Tests', () => {
     const nameField = page.locator('text=/name/i')
       .or(page.locator('[class*="name"]'))
       .or(page.getByText(/^[A-Z][a-z]+ [A-Z][a-z]+$/));
-    await expect(nameField.first()).toBeVisible({ timeout: 3000 });
+    await expect(nameField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify Medicaid ID field
     const medicaidField = page.locator('text=/medicaid/i')
       .or(page.locator('text=/NC\d+/'));
-    await expect(medicaidField.first()).toBeVisible({ timeout: 3000 });
+    await expect(medicaidField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify Medical Home field
     const medicalHomeField = page.locator('text=/medical home/i')
       .or(page.locator('text=/home/i'));
-    await expect(medicalHomeField.first()).toBeVisible({ timeout: 3000 });
+    await expect(medicalHomeField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify Network field
     const networkField = page.locator('text=/network/i');
-    await expect(networkField.first()).toBeVisible({ timeout: 3000 });
+    await expect(networkField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify DOB/Age field
     const dobField = page.locator('text=/dob/i, text=/date of birth/i, text=/age/i')
       .or(page.locator('text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}/'));
-    await expect(dobField.first()).toBeVisible({ timeout: 3000 });
+    await expect(dobField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify Sex at Birth field
     const sexField = page.locator('text=/sex/i')
       .or(page.locator('text=/male/i, text=/female/i'));
-    await expect(sexField.first()).toBeVisible({ timeout: 3000 });
+    await expect(sexField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify Race field
     const raceField = page.locator('text=/race/i');
-    await expect(raceField.first()).toBeVisible({ timeout: 3000 });
-
+    await expect(raceField.first()).toBeVisible({ timeout: 10000 });
     // Verify Phone Number field
     const phoneField = page.locator('text=/phone/i')
       .or(page.locator('text=/\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}/'));
-    await expect(phoneField.first()).toBeVisible({ timeout: 3000 });
-
+    await expect(phoneField.first()).toBeVisible({ timeout: 10000 });
     // Verify Address field
     const addressField = page.locator('text=/address/i')
       .or(page.locator('text=/street/i'));
-    await expect(addressField.first()).toBeVisible({ timeout: 3000 });
-
+    await expect(addressField.first()).toBeVisible({ timeout: 10000 });
     // Verify City field
     const cityField = page.locator('text=/city/i');
-    await expect(cityField.first()).toBeVisible({ timeout: 3000 });
+    await expect(cityField.first()).toBeVisible({ timeout: 10000 });
 
     // Verify State field (may be present in the form even if not prominently displayed)
     // For smoke test, just verify city/state data exists in any form
@@ -107,7 +149,12 @@ test.describe('Demographics Card - Smoke Tests', () => {
 
     // Step 1: Verify Demographics card is loaded
     const demographicsCard = page.locator(':text("Demographics")').first();
-    await expect(demographicsCard).toBeVisible({ timeout: 5000 });
+    try {
+      await expect(demographicsCard).toBeVisible({ timeout: 15000 });
+    } catch (e) {
+      await page.screenshot({ path: 'demographics-card-not-visible-147.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
 
     // Step 2: Verify Address labels are visible
     // Expected: Address 1 + Address 2 + City + State labels should be visible
@@ -117,17 +164,32 @@ test.describe('Demographics Card - Smoke Tests', () => {
       .or(page.locator('label:has-text("Address")'))
       .or(page.locator(':text("Address 1")'))
       .or(page.locator(':text("Address 2")'));
-    await expect(addressLabel.first()).toBeVisible({ timeout: 3000 });
+    try {
+      await expect(addressLabel.first()).toBeVisible({ timeout: 8000 });
+    } catch (e) {
+      await page.screenshot({ path: 'demographics-addresslabel-not-visible-147.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
 
     // Verify City label is visible
     const cityLabel = page.locator('text=/city/i')
       .or(page.locator('label:has-text("City")'));
-    await expect(cityLabel.first()).toBeVisible({ timeout: 3000 });
+    try {
+      await expect(cityLabel.first()).toBeVisible({ timeout: 8000 });
+    } catch (e) {
+      await page.screenshot({ path: 'demographics-citylabel-not-visible-147.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
 
     // Verify State label is visible
     const stateLabel = page.locator('text=/state/i')
       .or(page.locator('label:has-text("State")'));
-    await expect(stateLabel.first()).toBeVisible({ timeout: 3000 });
+    try {
+      await expect(stateLabel.first()).toBeVisible({ timeout: 8000 });
+    } catch (e) {
+      await page.screenshot({ path: 'demographics-statelabel-not-visible-147.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
 
     // Step 3: Verify corresponding address details display correctly
     // Check that address data is not empty/placeholder

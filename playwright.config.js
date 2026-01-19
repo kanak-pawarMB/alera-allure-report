@@ -70,6 +70,7 @@ export default defineConfig({
       testIgnore: /tests\/api\/.*\.spec\.js/, // Exclude API tests
       use: { ...devices['Desktop Chrome'] },
       retries: 0, // Smoke tests should not retry - they must be stable
+      fullyParallel: false, // Run smoke tests sequentially to avoid resource contention
     },
 
     // API Smoke Tests - Fast critical API endpoint tests

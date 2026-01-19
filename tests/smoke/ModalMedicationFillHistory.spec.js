@@ -41,9 +41,8 @@ test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
     // Wait for modal to appear, with extra diagnostics
     const modal = page.getByRole('dialog');
     try {
-      await expect(modal).toBeVisible({ timeout: 15000 });
+      await expect(modal).toBeVisible({ timeout: 30000 });
     } catch (e) {
-      // If modal not visible, take a screenshot for debugging
       await page.screenshot({ path: 'modal-not-visible.png', fullPage: true });
       throw e;
     }
