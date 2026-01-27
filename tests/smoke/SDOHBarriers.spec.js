@@ -48,13 +48,13 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
 
     // Verify no editable fields exist (read-only)
     const editableInputs = page.locator('input:not([readonly]):not([disabled])').filter({ 
-      has: page.locator('text=/Health Related Social Needs|Barriers/i') 
+      has: page.locator('text=/Health Related Social Needs/i') 
     });
     const count = await editableInputs.count();
     expect(count).toBe(0);
 
     // Verify badges/items are not clickable for editing
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs|Barriers/i }).first();
+    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
     const contentEditable = await cardContainer.locator('[contenteditable="true"]').count();
     expect(contentEditable).toBe(0);
   });
@@ -67,7 +67,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
     await expect(sdohCard).toBeVisible({ timeout: 10000 });
 
     // Get initial barrier count
-    const initialBarriers = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs|Barriers/i }).first();
+    const initialBarriers = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
     const initialText = await initialBarriers.textContent() || '';
     expect(initialText.length).toBeGreaterThan(0);
 
@@ -93,7 +93,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
     const cardExists = await sdohCard.isVisible({ timeout: 3000 }).catch(() => false);
     
     // Attempt to find card container - it may or may not have data
-    const cardElement = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs|Barriers/i }).first();
+    const cardElement = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
     const cardContainerExists = await cardElement.isVisible({ timeout: 3000 }).catch(() => false);
 
     // Test passes if:
@@ -124,7 +124,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
     await page.waitForTimeout(500);
 
     // Verify card remains accessible on mobile
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs|Barriers/i }).first();
+    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
     const isVisible = await cardContainer.isVisible().catch(() => false);
     expect(isVisible).toBeTruthy();
 
@@ -149,7 +149,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
     await expect(sdohCard).toBeVisible({ timeout: 10000 });
 
     // Verify no PHI is editable
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs|Barriers/i }).first();
+    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
     
     // Check for form inputs that might allow editing
     const inputs = cardContainer.locator('input, textarea, [contenteditable="true"], button[onclick*="edit"]');

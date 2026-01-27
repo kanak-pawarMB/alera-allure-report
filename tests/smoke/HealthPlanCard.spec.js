@@ -17,6 +17,7 @@ test.describe('Health Plan Card - Smoke Tests', () => {
   /* -------------------- Helpers -------------------- */
 
   // Flexible search field locator
+  // @ts-ignore
   async function getSearchField(page) {
     const field = page
       .locator('input[placeholder*="Search"], input[placeholder*="Medicaid"], input[type="text"]')
@@ -26,6 +27,7 @@ test.describe('Health Plan Card - Smoke Tests', () => {
   }
 
   // Get search result - uses getByText for dropdown items
+  // @ts-ignore
   async function getSearchResult(page, patientText) {
     const result = page.getByText(patientText).first();
     await expect(result).toBeVisible({ timeout: 30000 });

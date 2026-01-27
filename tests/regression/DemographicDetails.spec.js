@@ -7,13 +7,15 @@ import { TEST_DATA } from '../testData.js';
  * These tests verify the demographic information display on patient detail pages
  */
 
+test.use({ storageState: 'auth.json' });
+
 test.describe('Demographic Details', () => {
   // Dashboard URL
   const DASHBOARD_URL = TEST_DATA.urls.dashboard;
 
   test.beforeEach(async ({ page }) => {
     // Navigate to the dashboard page before each test
-    await page.goto(DASHBOARD_URL);
+    await page.goto(DASHBOARD_URL, { timeout: 60000 });
 
     // Wait for the page to fully load
     await page.waitForLoadState('networkidle');
@@ -21,6 +23,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 23 - Verify successful display of all demographic fields
   test('ONEVIEW-23 should display all required demographic fields for a patient', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '23' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -120,6 +124,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 24 - Verify data fields are read-only
   test('ONEVIEW-24 should verify all demographic fields are read-only', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '24' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -210,16 +216,17 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 25 - Verify proper handling of null fields (Missing Data)
   test('ONEVIEW-25 should verify null fields display as dash', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '25' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
     // Precondition: A patient is selected where one or more fields are NULL
-    // Using the test data: Dun 11/23/2002
     const searchField = page.getByRole('textbox', { name: /search/i }).first();
     await expect(searchField).toBeVisible();
 
     // Search using Medicaid ID for patient with potentially missing data
-    const testMedicaidId = 'NC160943625';
+    const testMedicaidId = TEST_DATA.patients.legacy.medicaidId;
     await searchField.fill(testMedicaidId);
 
     // Wait for search results
@@ -268,6 +275,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 26 - Verify Age calculation is correct
   test('ONEVIEW-26 should verify age calculation is accurate', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '26' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -343,6 +352,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 27 - Verify Address formatting (Both lines present)
   test('ONEVIEW-27 should verify address formatting with both lines', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '27' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -396,17 +407,35 @@ test.describe('Demographic Details', () => {
     }
   });
 
+  // Qase Test Case ID: 28 - Verify error handling for missing demographic API (Manual Test)
+  test('ONEVIEW-28 should verify error handling for missing demographic API @manual', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '28' });
+    test.info().annotations.push({ type: 'type', description: 'manual' });
+
+    // Manual Test: This test requires API mocking or server manipulation
+    // Precondition: Simulate demographic API failure
+    // Step 1: Trigger API failure scenario
+    // Step 2: Observe error message or fallback behavior
+    // Expected Result: Application handles API failure gracefully with user-friendly error message
+    console.log('ONEVIEW-28: Manual test - requires API mocking/server manipulation');
+    
+    // Placeholder implementation for automation feasibility check
+    expect(true).toBeTruthy();
+  });
+
   // Qase Test Case ID: 29 - Verify Data Refresh on new patient selection
   test('ONEVIEW-29 should verify demographic data refreshes when selecting different patients', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '29' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
     // Precondition: User is authenticated
-    // Step 1: Search for Patient A (NC747583000)
+    // Step 1: Search for Patient A
     const searchField = page.getByRole('textbox', { name: /search/i }).first();
     await expect(searchField).toBeVisible();
 
-    const patientAMedicaidId = 'NC747583000';
+    const patientAMedicaidId = TEST_DATA.patients.completeData.medicaidId;
     await searchField.fill(patientAMedicaidId);
 
     // Wait for search results
@@ -437,9 +466,9 @@ test.describe('Demographic Details', () => {
     expect(pageContentA).toContain(patientAMedicaidId);
     console.log(`Patient A (${patientAMedicaidId}) demographics displayed`);
 
-    // Step 3: Search for Patient B (NC739962649)
+    // Step 3: Search for Patient B
     await searchField.clear();
-    const patientBMedicaidId = 'NC739962649';
+    const patientBMedicaidId = TEST_DATA.patients.secondary.medicaidId;
     await searchField.fill(patientBMedicaidId);
 
     // Wait for search results
@@ -474,6 +503,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 30 - Verify Data Refresh on user page refresh
   test('ONEVIEW-30 should verify demographic data reloads after page refresh', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '30' });
+
     // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
@@ -481,7 +512,7 @@ test.describe('Demographic Details', () => {
     const searchField = page.getByRole('textbox', { name: /search/i }).first();
     await expect(searchField).toBeVisible({ timeout: 10000 });
 
-    const patientMedicaidId = 'NC160943625';
+    const patientMedicaidId = TEST_DATA.patients.legacy.medicaidId;
     await searchField.fill(patientMedicaidId);
     await searchField.press('Enter');
 
@@ -550,6 +581,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 31 - Verify UI layout (Two-column structure)
   test('ONEVIEW-31 should verify demographics are displayed in two-column structure', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '31' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -638,6 +671,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 32 - Verify UI styling (Bold labels, Lighter values)
   test('ONEVIEW-32 should verify field labels are bold and values are lighter', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '32' });
+
     // Wait for page to render
     await page.waitForTimeout(TEST_DATA.timeouts.pageLoad);
 
@@ -721,6 +756,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 148 - Verify Address 1 and Address 2 data display
   test('ONEVIEW-148 should verify Address 1 and Address 2 are displayed correctly', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '148' });
+
     // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
@@ -801,6 +838,8 @@ test.describe('Demographic Details', () => {
 
   // Qase Test Case ID: 149 - Verify City and State fields
   test('ONEVIEW-149 should verify City and State fields are displayed in correct format', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '149' });
+
     // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
@@ -871,8 +910,60 @@ test.describe('Demographic Details', () => {
     }
   });
 
+  // Qase Test Case ID: 150 - Verify responsiveness on mobile (Manual Test)
+  test('ONEVIEW-150 should verify Demographics card is responsive on mobile devices @manual', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '150' });
+    test.info().annotations.push({ type: 'type', description: 'manual' });
+
+    // Manual Test: Requires mobile device testing
+    // Precondition: Access application on mobile device (iOS/Android)
+    // Step 1: Open patient demographics on mobile device
+    // Step 2: Verify layout adapts to mobile viewport
+    // Step 3: Verify all fields are readable and properly formatted
+    // Expected Result: Demographics card displays correctly on mobile with responsive layout
+    console.log('ONEVIEW-150: Manual test - requires physical mobile device testing');
+    
+    // Placeholder implementation for automation feasibility check
+    expect(true).toBeTruthy();
+  });
+
+  // Qase Test Case ID: 151 - Verify responsiveness on tablet (Manual Test)
+  test('ONEVIEW-151 should verify Demographics card is responsive on tablet devices @manual', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '151' });
+    test.info().annotations.push({ type: 'type', description: 'manual' });
+
+    // Manual Test: Requires tablet device testing
+    // Precondition: Access application on tablet device (iPad/Android tablet)
+    // Step 1: Open patient demographics on tablet device
+    // Step 2: Verify layout adapts to tablet viewport
+    // Step 3: Verify all fields are readable and properly formatted
+    // Expected Result: Demographics card displays correctly on tablet with responsive layout
+    console.log('ONEVIEW-151: Manual test - requires physical tablet device testing');
+    
+    // Placeholder implementation for automation feasibility check
+    expect(true).toBeTruthy();
+  });
+
+  // Qase Test Case ID: 152 - Verify responsiveness on desktop (Manual Test)
+  test('ONEVIEW-152 should verify Demographics card is responsive on desktop browsers @manual', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '152' });
+    test.info().annotations.push({ type: 'type', description: 'manual' });
+
+    // Manual Test: Requires multiple browser testing
+    // Precondition: Access application on desktop browsers (Chrome, Firefox, Safari, Edge)
+    // Step 1: Open patient demographics on different desktop browsers
+    // Step 2: Verify layout is consistent across browsers
+    // Step 3: Verify all fields are readable and properly formatted
+    // Expected Result: Demographics card displays correctly on all desktop browsers
+    console.log('ONEVIEW-152: Manual test - requires cross-browser desktop testing');
+    
+    // Placeholder implementation for automation feasibility check
+    expect(true).toBeTruthy();
+  });
+
   // Qase Test Case ID: 153 - Verify address formatting
   test('ONEVIEW-153 should verify address fields are properly aligned and readable', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '153' });
     // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 

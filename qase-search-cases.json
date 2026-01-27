@@ -1,0 +1,722 @@
+﻿[
+    {
+        "id":  12,
+        "title":  "Verify default selected search mode (Medicaid ID).",
+        "description":  "Ensure that the default selected search mode is âMedicaid ID.â",
+        "preconditions":  "Practitioner is logged in.",
+        "steps":  [
+                      {
+                          "hash":  "5f6857970cfebce3087e2ed52491f3de129895b5",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Open the Dashboard screen.",
+                          "expected_result":  "âMedicaid IDâ button is selected (highlighted).",
+                          "data":  "",
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "fbd471cc9be80190030e38d71f873dbc2fea50bc",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe which search mode is selected by default.",
+                          "expected_result":  "Search placeholder text shows: âSearch by Patient Medicaid ID (e.g., 9XXXXXXXXDD).â",
+                          "data":  "",
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  16,
+        "title":  "Verify placeholder text updates with selected mode.",
+        "description":  "Check that placeholder text changes based on selected search mode.",
+        "preconditions":  "Dashboard loaded.",
+        "steps":  [
+                      {
+                          "hash":  "e951f5c118919aca4cd55bd2f29e0a22948eadd0",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe placeholder in Medicaid ID mode.",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "d5c6a61b01e0c853ad9c809e587dd9f8b4fd5032",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Switch to DOB + Last name mode.",
+                          "expected_result":  "Placeholder text correctly changes for each mode.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  17,
+        "title":  "Verify no results message.",
+        "description":  "Validate message when no patient matches entered input.",
+        "preconditions":  "No record exists for given input.",
+        "steps":  [
+                      {
+                          "hash":  "162b5e8b76fd05bbd3f100ffbf613c6efbfead47",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Search using random Medicaid ID or DOB + Last name (min. 3 characters).",
+                          "expected_result":  "Message âNo patient(s) found matching the search criteriaâ or âNo patient found matching the search criteriaâ displayed.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "9144b350f98ad2654fd71007d132e58e53721c42",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Wait for API response.",
+                          "expected_result":  "No dropdown results shown.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  18,
+        "title":  "Verify loading indicator display.",
+        "description":  "Ensure spinner or loader shows during search API calls.",
+        "preconditions":  "System connected to backend.",
+        "steps":  [
+                      {
+                          "hash":  "9245818d64ac2e60f816b86905e234d6ff142997",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "* Select the Medicaid ID from toggel.\n* Enter valid input.",
+                          "expected_result":  "Loader visible until response received.",
+                          "data":  "Medicaid Id - NC160943625",
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "a80cfbf1456a3ed4d459dbb6456b49a648fe7a9b",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Press Enter and observe.",
+                          "expected_result":  "Results display after Skeleton loading ends.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  19,
+        "title":  "Verify keyboard navigation in dropdown.",
+        "description":  "Check arrow key and Enter key support in dropdown results.",
+        "preconditions":  "Multiple search results exist.",
+        "steps":  [
+                      {
+                          "hash":  "3051ae258c57a5c7ddc5ac246001f6e3b185d8be",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter search criteria with multiple matches.",
+                          "expected_result":  null,
+                          "data":  "rob 07/19/1981",
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "b616ad31ea2c131686b7ed4ae0ebede21aeb29bc",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Press (â/â) buttons to move selection.",
+                          "expected_result":  "Navigation work properly.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "9a72540807d576f2064384b4b028bdea101c667f",
+                          "position":  3,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Press Enter to open record.\nfrom Search result select first one result.",
+                          "expected_result":  "* The selection works properly.\n* Patient details should preview with Demographics, PCP and Care Management card in search result.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  20,
+        "title":  "Verify DOB input validation.",
+        "description":  "Ensure only valid DOB format (MM/DD/YYYY) accepted.",
+        "preconditions":  "DOB + Last Name mode selected.",
+        "steps":  [
+                      {
+                          "hash":  "241f59b8c048b655fcd9139b5a76f70a09f22c33",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter invalid MM (e.g., â19â).",
+                          "expected_result":  "Validation message should be preview as \"Please enter correct MM.\"",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "e2b0b062f7a171f62c1aa7777fc7ae4b17770e8f",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter invalid DD (e.g., \"35\").",
+                          "expected_result":  "Validation message should be preview as \"Please enter correct DD.\"",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "709fc331bbeca13cb8bf2c203881b59f06ce8f18",
+                          "position":  3,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter invalid YYYY (e.g., \"3004\")",
+                          "expected_result":  "Validation message should be preview as \"Please enter correct YYYY.\"",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "40ffe265c0091d75c5cb9d10b474b9ca75af844b",
+                          "position":  4,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter future dates (e.g., \"12/31/2026\")",
+                          "expected_result":  "Validation message should be preview as \"Date of birth cannot be in the future. Please enter a valid date.\"",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  21,
+        "title":  "Verify UI alignment and consistency (Figma match).",
+        "description":  "Ensure search bar, toggle buttons, and icons align per Figma design.",
+        "preconditions":  "UI loaded on dashboard.",
+        "steps":  [
+                      {
+                          "hash":  "43d5ef1c8fdb719f569dc89ca807f18d9997d2cd",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe top navigation layout.",
+                          "expected_result":  "Matches Figma layout and typography.",
+                          "data":  "",
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "361c91b65c9971cd2e945083500645e8dea50afa",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Compare alignment, spacing, and color scheme with Figma specs.",
+                          "expected_result":  "Toggle buttons aligned to right of search field.",
+                          "data":  "",
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  64,
+        "title":  "Verify that toggle button color changes when switching between search options.",
+        "description":  "To ensure that the toggle button visually indicates which search option (Last Name + DOB or Medicaid ID) is selected through color changes.",
+        "preconditions":  "1\\. User is logged in successfully\\.\n2\\. Search bar with toggle control is displayed on the top navigation bar\\.",
+        "steps":  [
+                      {
+                          "hash":  "1b84a4de31b1ff40897b287f1f2423b954d86373",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe the toggle button on the search bar.",
+                          "expected_result":  "The toggle button color should change to indicate the currently selected option.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "12daf6b108611a6e906443a2e5f808f93b4f6460",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Click on âSearch by Last Name + DOBâ option.",
+                          "expected_result":  "Example:\nWhen âLast Name + DOBâ is selected â toggle background becomes blue (active color).\nWhen âMedicaid IDâ is selected â toggle background becomes blue (active color).",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "fcd0e1f070af737521b44b1a47d6cc7b97a2331e",
+                          "position":  3,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Click back on âSearch by Medicaid IDâ option.",
+                          "expected_result":  "The inactive option remains in default/white color.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  65,
+        "title":  "Verify that toggle dot moves correctly as per selected search option.",
+        "description":  "To validate that the small dot or indicator within the toggle button moves correctly to the selected option.",
+        "preconditions":  "1\\. User is logged in successfully\\.\n2\\. Search toggle control is visible on the dashboard header\\.",
+        "steps":  [
+                      {
+                          "hash":  "cf83b1f70b17af20994ad8ee5d2b143305c6cc34",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe the position of the toggle dot (default on âMedicaid IDâ).",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "bf9db0473700b9563a94146ace0adfa21c8194d0",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Click on âLast Name + DOBâ.",
+                          "expected_result":  "The dot should move smoothly to the selected option with proper animation.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "d0e4841e6996b8a63b53c89190fc4558df4a2958",
+                          "position":  3,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe the dotâs position and animation.",
+                          "expected_result":  "Dot must remain fixed under the selected option after animation.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "5b7e6f9cbcc8a18572ab753291f66775a654716b",
+                          "position":  4,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Click back on âMedicaid IDâ.",
+                          "expected_result":  "On switching back, the dot returns to the first option smoothly.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  70,
+        "title":  "Verify Invalid Search - Entered First Name.",
+        "description":  "Validate search fails if First Name is entered with DOB provided.",
+        "preconditions":  "User on search screen.",
+        "steps":  [
+                      {
+                          "hash":  "737bfda43a736ebe7a0e2b5dd70ae18b7cbb124d",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter First Name in Last Name input field \u0026 enter DOB in DOB input field.",
+                          "expected_result":  "\"No patient(s) found matching the search criteria\" Error message must be displayed.",
+                          "data":  "Joh, 11/23/2002",
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  71,
+        "title":  "Verify Incomplete Input Handling.",
+        "description":  "Verify that search should not run with incomplete inputs.",
+        "preconditions":  "User on search page.",
+        "steps":  [
+                      {
+                          "hash":  "3658caef99b3437ad1c4b009d49f7e194e33d704",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter Last Name in last name field.",
+                          "expected_result":  "cursor must auto redirect to date field.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "fa25c213fa1144beffefd81a27de5393551f400c",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter partial DOB in date field.",
+                          "expected_result":  "No results must be displayed until complete DOB is entered.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  72,
+        "title":  "Verify search using first 3 letters of first last name.",
+        "description":  "Ensure patient can be searched using the first 3 letters of the first last name when two last names exist.",
+        "preconditions":  "1\\. Patient exists with two last names \\(e\\.g\\.\\, John Clark Smith\\)\\.\n2\\. User is logged in and search API is accessible\\.",
+        "steps":  [
+                      {
+                          "hash":  "3d02cec36534666c18cb894a56343f1bfe51684d",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter first 3 letters of first last name (e.g., âClarkâ â âClaâ).",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "4b0a61e79eb5f14efd17e466df1ef821996ed057",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter DOB in date field in MM/DD/YYYY format.",
+                          "expected_result":  "Matching results must appear with last name \u0026 DOB",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  73,
+        "title":  "Verify second last name does not allow patient search.",
+        "description":  "Ensure search does not return results when searching only using second last name.",
+        "preconditions":  "Patient exists with two last names (e.g., John Clark Smith).",
+        "steps":  [
+                      {
+                          "hash":  "9ee87ab77a501f67dc58e31bb0c257debe5ffaad",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter only first 3 letters of second last name (e.g., Smi for Smith) in search bar.",
+                          "expected_result":  "Cursor must be auto-redirected to DOB input field",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "3fc245553a0b8224e587be80b2ef8559513e3d08",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter valid DOB",
+                          "expected_result":  "\"No patient(s) found matching the search criteria\" Error message must be displayed.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  74,
+        "title":  "Verify search result formatting for Medicaid ID \u0026 Last name + DOB search.",
+        "description":  "Validate that each search result appears in the format âMedicaid ID + First Name , Last Name + DOBâ applicable for both Medicaid ID and Last Name + DOB search.",
+        "preconditions":  "1\\. User is logged in\\.\n2\\. Search API returns valid patient data\\.\n3\\. At least one patient record exists\\.",
+        "steps":  [
+                      {
+                          "hash":  "348aee983243a588bc3220879e87109af6657e6c",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Make sure search toggle is on Medicaid Id.",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "6f26e45d4e23c2630b2e40fd3eb48cbce911b9a5",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter valid Medicaid ID to fetch results.",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "1faa0bcfe7563ae3b9ba1379a8a5c27e2f207eca",
+                          "position":  3,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe result formatting in dropdown.",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "540bca087e9bd0ee973b3cb8db498887eb35632e",
+                          "position":  4,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Switch to Last Name + DOB search field.",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "c50db2b266a7a69d52272c83bf2918df4acd6d8d",
+                          "position":  5,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter first 3 letters of valid Last Name",
+                          "expected_result":  "Cursor redirects to DOB field",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "84b70097d7e1bcd468ed70b8c37515ab4f161e3b",
+                          "position":  6,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Enter valid DOB",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "c876cedf9c63bd43143b10a47bc2b7869ae5c3ab",
+                          "position":  7,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Observe result formatting.",
+                          "expected_result":  "For both search methods, each record should follow the format:\n\\[Medicaid ID\\] \\[First Name\\] \\[Last Name\\] \\[DOB\\] \\(Example: M123456789 John Clark 03/13/2003\\)\\.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    },
+    {
+        "id":  75,
+        "title":  "Verify formatting consistency across multiple results.",
+        "description":  "Ensure all matching patients in dropdown follow the required format.",
+        "preconditions":  "Search returns multiple matching patients.",
+        "steps":  [
+                      {
+                          "hash":  "d8e1c717e5658eba5bd1d900fe909648064f9a3e",
+                          "position":  1,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "Search with common last name (e.g., âClarkâ).",
+                          "expected_result":  null,
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      },
+                      {
+                          "hash":  "e376a16e6b0efef23fe777ee638432e53dbb6af6",
+                          "position":  2,
+                          "shared_step_hash":  null,
+                          "shared_step_nested_hash":  null,
+                          "attachments":  [
+
+                                          ],
+                          "action":  "View dropdown list.",
+                          "expected_result":  "All rows must display consistently as:\nMedicaid ID + First Name , Last Name + DOB.",
+                          "data":  null,
+                          "steps":  [
+
+                                    ]
+                      }
+                  ]
+    }
+]
