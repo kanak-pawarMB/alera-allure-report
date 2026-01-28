@@ -1,0 +1,272 @@
+[
+  {
+    "id": 398,
+    "title": "Verify View All link visibility",
+    "description": "Validate that the \"View All\" link is displayed and clickable in card header",
+    "steps": [
+      {
+        "hash": "291a822b8ac3e746feb341c00e4c0a2b4ce96709",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to dashboard 2. Locate Medication Fill History card",
+        "expected_result": "\"View All\" link is visible, aligned per design & clickable",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 400,
+    "title": "Validate timeline dropdown options",
+    "description": "Ensure timeline dropdown shows all expected options",
+    "steps": [
+      {
+        "hash": "8d88af2027e4e8b5107c4597ff41620dbf28efb7",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Click timeline dropdown",
+        "expected_result": "Options including All Time, 1 Month, 2 Months, 3 Months, 4 Months, 5 Months etc. visible",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 401,
+    "title": "Validate Drug Name search functionality",
+    "description": "Ensure dynamic search works for partial & full match",
+    "steps": [
+      {
+        "hash": "804288a2e5ea751a3677ebf93e098c199c0bbcab",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Enter text in drug search field 2. Observe list",
+        "expected_result": "Drug list filters dynamically based on text search",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 402,
+    "title": "Validate filtering by timeline only",
+    "description": "Ensure list updates when only timeline is applied",
+    "steps": [
+      {
+        "hash": "12df1e5c119d857d6c602308eae65f7476a72968",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Select timeline filter 2. Observe list",
+        "expected_result": "Drugs displayed only from selected timeline window",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 403,
+    "title": "Validate filtering by drug class only",
+    "description": "Ensure list updates when only drug class is applied",
+    "steps": [
+      {
+        "hash": "3b82bfae8d0a25e2851fd2ad2c4b925829be75ec",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Select drug class filter 2. Observe list",
+        "expected_result": "Only drugs belonging to selected class are shown",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 404,
+    "title": "Validate combination filters",
+    "description": "Ensure list updates when timeline + class + drug name applied together",
+    "steps": [
+      {
+        "hash": "4422d32c5f4b463c1c31f2c56b2f8ec6a129ec5c",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Select timeline 2. Select class 3. Enter drug name",
+        "expected_result": "Results reflect all applied filters simultaneously",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 405,
+    "title": "Validate reset of filters on closing modal",
+    "description": "Ensure previously applied filters are cleared on reopen",
+    "steps": [
+      {
+        "hash": "223ca73f8fd13c312f34fc2cc1f4ef99b3adc093",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Apply any filter 2. Close modal 3. Open modal again",
+        "expected_result": "All filters reset to default and full list displays",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 406,
+    "title": "Validate no results message",
+    "description": "Ensure “No records found” appears when filters return zero results",
+    "steps": [
+      {
+        "hash": "9b47913588d6ae22974a2ffac7c07f79755b9162",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Apply search/filter criteria that returns no results",
+        "expected_result": "Show “No records found” centered & styled per design",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 407,
+    "title": "Validate scroll behavior of drug list",
+    "description": "Ensure modal allows vertical scroll when list exceeds view height",
+    "steps": [
+      {
+        "hash": "8b361c4a7153278b7998633224bc4daa9f851175",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Try to scroll drug list",
+        "expected_result": "List scrolls smoothly without breaking UI layout",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 408,
+    "title": "Validate table column alignment",
+    "description": "Ensure columns display in correct order per figma",
+    "steps": [
+      {
+        "hash": "e4f3c21b4e8590a61ac146aea7b2658cca9abf25",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe column order and alignment",
+        "expected_result": "Columns displayed as: Drug",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 409,
+    "title": "Validate date format",
+    "description": "Ensure Fill Date remains in MM/DD/YYYY format",
+    "steps": [
+      {
+        "hash": "65e0dbeb8bc7218a827aa81987a087c93fbb8817",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Inspect Fill Date column",
+        "expected_result": "All dates follow MM/DD/YYYY format",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 411,
+    "title": "Validate no page reload during filter interaction",
+    "description": "Ensure filtering/searching does NOT reload whole UI",
+    "steps": [
+      {
+        "hash": "8918490fff175484c6b79251f7aa09ceb8279f8a",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Apply filters repeatedly",
+        "expected_result": "Page does not reload; only list refreshes dynamically",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 412,
+    "title": "Validate loading indicator",
+    "description": "Ensure loader appears while list is querying backend",
+    "steps": [
+      {
+        "hash": "fcb5abcb5fd4152126cfeb01c29dd8efbc379c6d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Apply filter",
+        "expected_result": "Loader shows & disappears once results load",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 413,
+    "title": "Validate tab/keyboard navigation",
+    "description": "Ensure user can operate inputs using keyboard",
+    "steps": [
+      {
+        "hash": "b480d035d7d8f6b8e052578604dad42175c58bea",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Use Enter, Up/Down keys",
+        "expected_result": "Controls shift properly; Enter selects value",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 415,
+    "title": "Validate All Time default display",
+    "description": "Ensure default drop-down value is All Time",
+    "steps": [
+      {
+        "hash": "6630204a9e0ecb9a37e3beb98738b2bfc484770e",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe default timeline filter",
+        "expected_result": "Default displayed as “All Time”",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,305 @@
+[
+  {
+    "id": 298,
+    "title": "Verify green tick mark for TRUE flags",
+    "description": "Ensure green tick mark appears for conditions where flag = TRUE",
+    "steps": [
+      {
+        "hash": "0197c7c64b116cc213f3d9c52df6597a0ddd937d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe right column of condition grid",
+        "expected_result": "Green tick mark displayed beside condition",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 299,
+    "title": "Verify '-' displayed for FALSE flags",
+    "description": "Ensure “–” appears when condition flag = FALSE",
+    "steps": [
+      {
+        "hash": "128010ef71f839fb4cc7bfee9d604fc7bce8e5de",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open card",
+        "expected_result": "“–” shown for conditions where flag = FALSE",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "4d01a269b41a2ce267759c7fb7c292860bab66e7",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe conditions with FALSE flag",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 300,
+    "title": "Verify alphabetical ordering of conditions",
+    "description": "Ensure conditions sorted alphabetically if >10 TRUE flags",
+    "steps": [
+      {
+        "hash": "94c22aea92164fc4ff9fe65edf52ce31fe3eb393",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open “Medical Diagnoses” card",
+        "expected_result": "Only 10 conditions shown, sorted alphabetically",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "1d01269fd5b362faf6792a7694500c447329ef3a",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe list order",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 301,
+    "title": "Verify 10-condition display limit",
+    "description": "Ensure maximum 10 conditions shown",
+    "steps": [
+      {
+        "hash": "f244865282676cb4bef06a223ea651a94e64e079",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe number of displayed conditions",
+        "expected_result": "Only 10 conditions displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 302,
+    "title": "Verify card title",
+    "description": "Ensure correct card title shown",
+    "steps": [
+      {
+        "hash": "99dce7a2d662afdd63c0b2504f23b050c8e3a6a8",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe top of card",
+        "expected_result": "Card title displayed as “Medical Diagnoses”",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 303,
+    "title": "Verify grid layout of card",
+    "description": "Ensure grid layout matches Figma design",
+    "steps": [
+      {
+        "hash": "4455c5fc11721c9e42c2730ada18c6609b5832c1",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare UI with design reference",
+        "expected_result": "Two-column grid layout visible (Condition Name          Checkmark/Flag)",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 304,
+    "title": "Verify condition name format",
+    "description": "Ensure condition names appear in proper readable format",
+    "steps": [
+      {
+        "hash": "9609b544a88f477f82af4a2d4671d3be4b89cdb6",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe displayed names",
+        "expected_result": "Condition names shown in sentence case (e.g., “Diabetes mellitus”)",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 305,
+    "title": "Verify alignment and spacing",
+    "description": "Ensure alignment matches Figma design",
+    "steps": [
+      {
+        "hash": "866988a7b8f09d3a4c61126efb04e018fbd19de8",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare card layout",
+        "expected_result": "Font, spacing, and alignment consistent with design",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 306,
+    "title": "Verify behavior when all flags = FALSE",
+    "description": "Ensure proper handling when no TRUE flags exist",
+    "steps": [
+      {
+        "hash": "6e1ac7abad528fb7a19cbcb96be22a0a38823bf7",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open “Medical Diagnoses” card",
+        "expected_result": "All conditions show “–” and no tick marks",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 307,
+    "title": "Verify behavior when no data available",
+    "description": "Ensure message displayed when no diagnoses data found",
+    "steps": [
+      {
+        "hash": "2e4e5253c6fe4d0931ce2dbef772968946357d7d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open “Medical Diagnoses” card",
+        "expected_result": "Message “No medical diagnoses available” displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 308,
+    "title": "Verify display when fewer than 10 TRUE flags",
+    "description": "Ensure card adapts dynamically",
+    "steps": [
+      {
+        "hash": "a1c290a98484b47dcc8d24184cc8f4e4fd20ba6d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe displayed list",
+        "expected_result": "Displays only available TRUE conditions, no extra rows",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 311,
+    "title": "Verify data refresh behavior",
+    "description": "Ensure latest data reflects after refresh",
+    "steps": [
+      {
+        "hash": "34c2e4bd086fa0aff6b0f6169aa0d513c987350c",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Refresh page",
+        "expected_result": "Updated data shown correctly",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 312,
+    "title": "Verify color of green tick",
+    "description": "Ensure tick mark color matches brand color per Figma",
+    "steps": [
+      {
+        "hash": "f959cacabfc5ec1f6863ac50ea2b3c3b7b7ac4f1",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe color of tick icon",
+        "expected_result": "Tick mark uses correct shade of green",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "title": "Verify all available classes listed in dropdown.",
+    "description": "Confirm that all drug classes from data source appear in Class filter dropdown.",
+    "steps": [
+      {
+        "hash": "c4849bd19fa3f0a1249e5a218e6efc434a41d47a",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Click on Class dropdown.",
+        "expected_result": "All active drug classes appear and match API response.",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "4088b06c3cbab38d6df9f0040f71505c4488c829",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe all listed options.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 314,
+    "title": "Verify scroll behavior for long condition names",
+    "description": "Ensure long names wrap properly",
+    "steps": [
+      {
+        "hash": "d52e7604f5682052a6cbd5937a12c51882a1540e",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe UI layout",
+        "expected_result": "Text wraps properly without truncation",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]

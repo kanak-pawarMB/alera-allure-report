@@ -1,0 +1,310 @@
+[
+  {
+    "id": 348,
+    "title": "Verify vaccine name display",
+    "description": "Check that Vaccine_Description field is correctly displayed",
+    "preconditions": "Patient has vaccine data",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "83f78e8a814027520837c3d7c0a9aab35a3ba27c",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Immunizations card",
+        "expected_result": "Vaccine names displayed correctly as per Immunizations.Vaccine_Description",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "b42cd99896711c39b3eaee6af189e9348b0b796c",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe Vaccine column",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 349,
+    "title": "Verify Last Dose date display",
+    "description": "Check that Last_Dose_Date field is correctly displayed",
+    "preconditions": "Patient has valid dose data",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "e1da4b90aad0b2ea07f57c67ebd00410f0ccd3f4",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Immunizations card",
+        "expected_result": "Dates match Immunizations.Last_Dose_Date from DB",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "ab7a7608408bf4b284d3ce4659ef32c835347e05",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe Last Dose column",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 350,
+    "title": "Verify sorting by Last Dose Date (descending)",
+    "description": "Ensure vaccines are sorted with latest dose first",
+    "preconditions": "Multiple vaccine records available",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "5ede82319c049bfd5f9ba6f9032856ba8febf641",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Immunizations card",
+        "expected_result": "Vaccines sorted by Last_Dose_Date in descending order",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "4aeb16a20ca632460a442331f0fb10c09e0466ca",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Note order of displayed vaccines",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 351,
+    "title": "Verify 10-record limit",
+    "description": "Ensure only 10 most recent vaccines are shown",
+    "preconditions": "Patient with >10 vaccine records",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "c4da643954c121cb762d3bf1e9c703019300ad5c",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Immunizations card",
+        "expected_result": "Only 10 latest records shown",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 353,
+    "title": "Verify card title",
+    "description": "Ensure card title is displayed correctly",
+    "preconditions": "Immunizations card loaded",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "34d3fe9d1ee513ff1073267d649cce972c47eaeb",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe card header",
+        "expected_result": "Title displayed as “Immunizations”",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 354,
+    "title": "Verify two-column layout",
+    "description": "Ensure data displayed in two-column structure",
+    "preconditions": "Immunizations card visible",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "d62142395371b72e852a569c471bbc3802506f67",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check column headers and layout",
+        "expected_result": "Two columns visible: Vaccine Name and Last Dose Date",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 356,
+    "title": "Handle no immunization data",
+    "description": "Verify response for patient with no immunizations",
+    "preconditions": "Patient without immunizations",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "bb82306d7e4e82723a52098cc1206a9380541d80",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Immunizations card",
+        "expected_result": "“No immunization data available” message shown",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 357,
+    "title": "Verify date format",
+    "description": "Ensure date is displayed in proper format",
+    "preconditions": "Valid date values in DB",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "4f0e3b61ed8da08627d47a2f04393dff4e3baa36",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe Last Dose column",
+        "expected_result": "Dates displayed in standard readable format (e.g., “MM/DD/YYYY”)",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 359,
+    "title": "Verify sorting stability on data update",
+    "description": "Ensure sort order remains after refresh",
+    "preconditions": "Updated immunization data available",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "d714767dd556a28ee1994fad65a3a0318d66545d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Refresh Immunizations card",
+        "expected_result": "List remains sorted by latest dose",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "c28948accfe54dc48e417fa74b9693fcddb89c5c",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe order",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 360,
+    "title": "Validate Last Dose Date format (MM/DD/YYYY)",
+    "description": "Ensure that Last Dose Date for each vaccine is displayed in the correct date format MM/DD/YYYY",
+    "preconditions": "Valid patient has immunization records with Last_Dose_Date values in DB",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "743db1a32fe93c95e7dc26899244812dada1c33f",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to the patient's Immunizations card",
+        "expected_result": "All Last Dose Date values display strictly in MM/DD/YYYY format (e.g., 03/15/2024). No other formats such as YYYY-MM-DD or DD-MM-YYYY appear",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "5b2a5a884def8a455be39a03b4c5dfc2f1de49d0",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe the value under Last Dose Date for each vaccine",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "a19aff023ae9f5ee052049846df8ad84edeec494",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare displayed date format with expected format",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 361,
+    "title": "Validate Last Dose Date alignment in UI",
+    "description": "Ensure Last Dose Date column is visually aligned in a single row/line as per design",
+    "preconditions": "Immunizations card is loaded with at least 1 record",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "8ed9784d5244b923f224ded71df9d0ec430ca1a4",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to the Immunizations card",
+        "expected_result": "Last Dose Date text appears in a single line, properly aligned vertically and horizontally per Figma. No wrapping, overlapping, or misalignment occurs",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "54e4d944324be98b36a3422c4697fb26e1b0804f",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe the alignment of text under Last Dose Date column",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "2b415e099a235d1abb2c590af3fd6b493166c648",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Verify spacing and alignment against Figma reference",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]

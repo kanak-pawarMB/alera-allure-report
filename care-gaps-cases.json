@@ -1,0 +1,360 @@
+[
+  {
+    "id": 362,
+    "title": "Display only Active care gaps",
+    "description": "Ensure only gaps where Metric_Status = Active are shown",
+    "steps": [
+      {
+        "hash": "ad9f280c9420ad0008c940f9517c7c91ea785ca2",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Care Gaps card",
+        "expected_result": "Only entries with Metric_Status = Active appear",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 363,
+    "title": "Verify sorting by Claims_Date",
+    "description": "Ensure gaps are sorted by Claims_Date ascending",
+    "steps": [
+      {
+        "hash": "9a5fdcfd05d9a10bf925b50b26d6ff207e69544d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Care Gaps card",
+        "expected_result": "Gaps sorted ascending (oldest to newest)",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "13df9d6fa37bd6b0ee329b14084ea659a49f50b2",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Inspect order",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 364,
+    "title": "Limit records to 5",
+    "description": "Validate that only max 5 gaps are displayed",
+    "steps": [
+      {
+        "hash": "d95991c0deb406ff5c82da90fc392bd66f262ca9",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Care Gaps card",
+        "expected_result": "Only top 5 active gaps are displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 366,
+    "title": "Verify required fields",
+    "description": "Ensure Metric, Status, Last Updated fields display",
+    "steps": [
+      {
+        "hash": "2eb596dcdd159e7e52fddda0dad305c0a36983dd",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Care Gaps card",
+        "expected_result": "All required fields appear per AC",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 367,
+    "title": "Verify card title",
+    "description": "Validate the card title matches UI requirement",
+    "steps": [
+      {
+        "hash": "d38051e8cea8a0826a394f36c7844f552c164e8f",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View card title",
+        "expected_result": "Title displayed as “Care Gaps”",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 368,
+    "title": "Verify color legend",
+    "description": "Validate colors: Green = Met, Red = Not Met",
+    "steps": [
+      {
+        "hash": "8aafb3e40b3113f5718071c0fe7bdf6aa2647747",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Care Gaps card",
+        "expected_result": "Met = Green, Not Met = Light Red",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 369,
+    "title": "Verify tooltip via Info icon",
+    "description": "Ensure tooltip shows Metric_Description",
+    "steps": [
+      {
+        "hash": "52729fbdaa5ae5f14fd29beb2b76dfe64f81be36",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Hover over Info icon",
+        "expected_result": "Tooltip displays correct Metric_Description",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 370,
+    "title": "Verify layout per Figma",
+    "description": "Validate layout, spacing, alignment",
+    "steps": [
+      {
+        "hash": "8805607712dddca72676146b1442657d62c04282",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Inspect UI",
+        "expected_result": "Layout matches Figma standard",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 371,
+    "title": "Metric text format",
+    "description": "Verify metric names appear correctly",
+    "steps": [
+      {
+        "hash": "5ce9b529bc77b7bb7f394f77d30c21b655ac238f",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View metric names",
+        "expected_result": "Proper sentence-case formatting maintained",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 372,
+    "title": "Less than 5 gaps",
+    "description": "Validate UI when <5 gaps exist",
+    "steps": [
+      {
+        "hash": "60c15677ccf265c18decdc258b086c21de56abbf",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Care Gaps card",
+        "expected_result": "All gaps shown correctly; Card size remains same",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 373,
+    "title": "No care gaps",
+    "description": "Validate behavior when no active gaps exist",
+    "steps": [
+      {
+        "hash": "83669daa88589c9d62687816ab0a081596d5fc05",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Care Gaps card",
+        "expected_result": "Message “No care gaps available” displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 374,
+    "title": "Verify date format",
+    "description": "Validate date formatting per UI standard",
+    "steps": [
+      {
+        "hash": "01fcb30d424c33be504677672f11170e207a9694",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View date column",
+        "expected_result": "Date displayed as MM/DD/YYYY or per design",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 376,
+    "title": "Validate Last Updated date",
+    "description": "Validate that the “Last updated on” field displays date in correct format.",
+    "steps": [
+      {
+        "hash": "e28c33863af3bf05277d040e7d9293b9da0a0913",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to patient profile.",
+        "expected_result": "Last updated date appears in MM/DD/YYYY format.",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "29413714f5acbaa3827101c8648ee488c1eb90d9",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Locate the Care Gaps card.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "059e951da59e3c046b33b359994dbfcbeb9da273",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Note the displayed “Last updated on” date.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 377,
+    "title": "Validate info icon for each metric",
+    "description": "Validate that every metric row shows an info icon as per design.",
+    "steps": [
+      {
+        "hash": "1c6470d530f49d75cee36109baeae6775861dc58",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to Care Gaps card.",
+        "expected_result": "Info icon is visible for every metric, properly aligned and not missing.",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "4e930eecc9627acb2f431601768647b0a5fb272c",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe each metric row under Metric column.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "f7007fe57feb463779a91aeef60a038d1385de49",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check info icon visibility for every row.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 378,
+    "title": "Validate tooltip preview on hover",
+    "description": "Validate that hovering on info icon shows Metric_Description tooltip",
+    "steps": [
+      {
+        "hash": "6233a2357c62cbab2f2c5bd8240953c819dea1ee",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Navigate to Care Gaps card.",
+        "expected_result": "Tooltip displays correct Metric_Description, readable, aligned, and appears on hover.",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "d1dbcf9d067ed119a290881daddf20f823be8eb6",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Hover over info icon of a metric.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "e19d219f5f8ac9c170d903e5912127c033886070",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe tooltip content.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "6014f0c5b7b6f7cd5a6045c60b859b1e262437fc",
+        "position": 4,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Repeat for all metrics.",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]

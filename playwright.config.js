@@ -29,25 +29,27 @@ export default defineConfig({
         'OS': process.platform,
       }
     }],
-    // Qase TestOps configuration
-    ['playwright-qase-reporter', {
-      mode: 'testops',
-      debug: true,
-      testops: {
-        api: {
-          token: process.env.QASE_API_TOKEN,
-        },
-        project: process.env.QASE_PROJECT || 'ONEVIEW',
-        uploadAttachments: true,
-        run: {
-          complete: true,
-        },
-      },
-    }]
+    // Qase TestOps configuration - TEMPORARILY DISABLED
+    // ['playwright-qase-reporter', {
+    //   mode: 'testops',
+    //   debug: true,
+    //   testops: {
+    //     api: {
+    //       token: process.env.QASE_API_TOKEN,
+    //     },
+    //     project: process.env.QASE_PROJECT || 'ONEVIEW',
+    //     uploadAttachments: true,
+    //     run: {
+    //       complete: true,
+    //     },
+    //   },
+    // }]
   ],
 
   use: {
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
+    screenshots: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   projects: [

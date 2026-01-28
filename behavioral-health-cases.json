@@ -1,0 +1,164 @@
+[
+  {
+    "id": 315,
+    "title": "Verify display of TRUE flagged behavioral health conditions",
+    "description": "Ensure that only conditions flagged as TRUE are displayed",
+    "steps": [
+      {
+        "hash": "fa95a001714468b2455effca456fa5574af433d3",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load patient card\n2. Observe displayed list of conditions",
+        "expected_result": "Only TRUE-flagged conditions are displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 316,
+    "title": "Verify display of green tick for TRUE flags",
+    "description": "Validate visual indicator for TRUE conditions",
+    "steps": [
+      {
+        "hash": "0b4497d6e53421a0a16bafe355457bcde9b098f8",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View the Behavioral Health Diagnoses card\n2. Observe flag icons for TRUE conditions",
+        "expected_result": "Green tick mark (✔) appears beside TRUE conditions",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 317,
+    "title": "Verify display of '--' for FALSE flags",
+    "description": "Ensure that conditions with FALSE flag are represented as '-'",
+    "steps": [
+      {
+        "hash": "41ac1d7f96480bc10cfa82d9e2ece71fdbee35cd",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Behavioral Health Diagnoses card\n2. Check flags for FALSE conditions",
+        "expected_result": "--' appears in place of tick mark for FALSE flags",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 318,
+    "title": "Verify alphabetical order when >10 conditions",
+    "description": "Ensure only 10 alphabetically sorted TRUE conditions are displayed",
+    "steps": [
+      {
+        "hash": "2e7429081cab3ef7f411c306525e1e2bb8004490",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Behavioral Health Diagnoses card\n2. Observe list order",
+        "expected_result": "Only 10 conditions shown in alphabetical order",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 319,
+    "title": "Verify handling when <10 TRUE conditions",
+    "description": "Ensure system correctly displays available conditions",
+    "steps": [
+      {
+        "hash": "2bcad39bf0c8a4a9ce98469ff20a25da8a4e78eb",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Behavioral Health Diagnoses card",
+        "expected_result": "All available conditions are displayed (less than 10) without error",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 320,
+    "title": "Verify card title",
+    "description": "Ensure correct title text appears per design",
+    "steps": [
+      {
+        "hash": "6dadb6b0986b15e12cd24b42f3ade9f36849694a",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe title of Behavioral Health Diagnoses card",
+        "expected_result": "Title displays as \"Behavioral Health Diagnoses\"",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 321,
+    "title": "Verify grid layout of card",
+    "description": "Validate grid layout (Condition name left, tick/flag right)",
+    "steps": [
+      {
+        "hash": "6348e8f003f39b0c9f4c329ffb6ca61b13071b57",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe Behavioral Health Diagnoses card layout",
+        "expected_result": "Condition name is left-aligned, tick/flag right-aligned in grid layout",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 322,
+    "title": "Verify font and spacing",
+    "description": "Validate UI style consistency with Figma design",
+    "steps": [
+      {
+        "hash": "626d2372432c0867f2a6dacf8bb87d0bc131dcc1",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare font and spacing with Figma design",
+        "expected_result": "Font size, spacing, and alignment match design standards",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 324,
+    "title": "Verify behavior when no TRUE flags exist",
+    "description": "Ensure proper message or empty state handling",
+    "steps": [
+      {
+        "hash": "b771bbd8f8850493ca390036b78af6af031a4dac",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Behavioral Health Diagnoses card",
+        "expected_result": "No data rows displayed or message “No behavioral health conditions found” shown",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]
