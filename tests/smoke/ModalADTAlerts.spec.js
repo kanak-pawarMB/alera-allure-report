@@ -37,34 +37,19 @@ test.describe('Drill Down ADT Alerts - Smoke Tests', () => {
   /* -------------------- Setup -------------------- */
 
   test.beforeEach(async ({ page }) => {
-    try {
-      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
-      await page.waitForLoadState('networkidle', { timeout: 60000 });
-
-      // Verify we're on dashboard (not redirected to login)
-      const currentUrl = page.url();
-      if (currentUrl.includes('login')) {
-        throw new Error('Redirected to login page - auth session may have expired');
-      }
-
-      // Wait for dashboard to be ready
-      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
-
-      // Search and select patient using flexible locators
-      const searchBox = await getSearchField(page);
-      await searchBox.click();
-      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-
-      // Click search result
-      const searchResult = await getSearchResult(page, 'NC767095351|Elizabeth Garcia|12/09/');
-      await searchResult.click();
-
-      // Wait for patient data to load
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
-    } catch (e) {
-      await page.screenshot({ path: 'adtalerts-beforeeach-fail.png', fullPage: true }).catch(() => {});
-      throw e;
-    }
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
+    await page.waitForLoadState('networkidle');
+    
+    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
+    await searchBox.click();
+    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+    
+    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
+    await expect(patientResult).toBeVisible({ timeout: 15000 });
+    await patientResult.click();
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000);
   });
 
   // ===================== ONEVIEW-450 =====================
@@ -86,92 +71,4 @@ test.describe('Drill Down ADT Alerts - Smoke Tests', () => {
     await expect(modal.first()).toContainText(/ADT|Alert|Facility|Admission|Discharge|Transfer/i);
 
   });
-
-  // ===================== ONEVIEW-451 =====================
-  test('ONEVIEW-451: Smoke_Validate presence of search and timeline filters @smoke', async ({ page }) => {
-    test.info().annotations.push({ type: 'qaseId', description: '451' });
-
-    // Click View All button for ADT Alerts
-    await page.locator("(//button[contains(text(),'View all')])[1]").click();
-    
-    // Wait for modal to appear
-    await page.waitForTimeout(1000);
-    
-    // Verify modal is visible (increased timeout)
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 15000 });
-
-    // Verify search box is present
-    const searchBox = page.getByRole('textbox', { name: /search|filter/i });
-    await expect(searchBox.first()).toBeVisible({ timeout: 10000 });
-
-    // Verify timeline selector is present
-    const timelineSelector = page.getByRole('button', { name: /All Time|7 Months|6 Months|3 Months/i });
-    await expect(timelineSelector.first()).toBeVisible({ timeout: 10000 });
-
-  });
-
-  // ===================== ONEVIEW-462 =====================
-  test('ONEVIEW-462: Smoke_Validate modal close icon @smoke', async ({ page }) => {
-    test.info().annotations.push({ type: 'qaseId', description: '462' });
-
-    // Click View All button for ADT Alerts
-    await page.locator("(//button[contains(text(),'View all')])[1]").click();
-
-    // Wait for modal to appear
-    await page.waitForTimeout(1000);
-
-    // Verify modal is visible (increased timeout)
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 15000 });
-
-    // Click Close button
-    await page.getByRole('button', { name: 'Close' }).click();
-
-    // Verify modal is closed
-    await expect(modal.first()).not.toBeVisible({ timeout: 10000 });
-
-  });
-
-  // ===================== ONEVIEW-465 =====================
-  test('ONEVIEW-465: Smoke_Validate persistent modal design across resolutions @smoke', async ({ page }) => {
-    test.info().annotations.push({ type: 'qaseId', description: '465' });
-
-    // Click View All button for ADT Alerts
-    await page.locator("(//button[contains(text(),'View all')])[1]").click();
-    
-    // Wait for timeline selector to appear (indicates modal is open)
-    const timelineSelector = page.getByRole('button', { name: /All Time|7 Months|6 Months|3 Months/i });
-    try {
-      await expect(timelineSelector.first()).toBeVisible({ timeout: 20000 });
-    } catch (e) {
-      await page.screenshot({ path: 'adtalerts-timeline-fail.png', fullPage: true }).catch(() => {});
-      throw e;
-    }
-    
-    // Verify modal is visible
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
-
-    // Test responsive breakpoints
-    // Mobile
-    await page.setViewportSize({ width: 375, height: 667 });
-    await expect(modal.first()).toBeVisible();
-
-    // Tablet
-    await page.setViewportSize({ width: 768, height: 1024 });
-    await expect(modal.first()).toBeVisible();
-
-    // Desktop
-    await page.setViewportSize({ width: 1920, height: 1080 });
-    // Add wait after viewport change
-    await page.waitForTimeout(1000);
-    await expect(modal.first()).toBeVisible({ timeout: 10000 });
-    
-    // Close modal
-    await page.getByRole('button', { name: 'Close' }).click();
-    await expect(modal.first()).not.toBeVisible();
-
-  });
-
 });

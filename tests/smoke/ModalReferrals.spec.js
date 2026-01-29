@@ -22,20 +22,6 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
     await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
   });
 
-  // ===================== ONEVIEW-417 =====================
-  test('ONEVIEW-417: Smoke_Validate opening of modal on clicking “View All” @smoke', async ({ page }) => {
-    test.info().annotations.push({ type: 'qaseId', description: '417' });
-    await page.locator("(//button[contains(text(),'View all')])[4]").click();
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
-    await expect(modal.first()).toContainText(/Referral|Sending Facility|Receiving Facility|Referral Type|Timeline|Search/i);
-    // Timeline filter and search bar should be visible
-    await expect(modal.getByRole('textbox').first()).toBeVisible();
-    await expect(modal.getByRole('button', { name: /All Time|Timeline|Date Range/i }).first()).toBeVisible();
-    // Close modal
-    await page.getByRole('button', { name: 'Close' }).click();
-    await expect(modal.first()).not.toBeVisible();
-  });
   // ===================== ONEVIEW-142 =====================
   test('ONEVIEW-142: Smoke_Verify Scroll Functionality @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '142' });

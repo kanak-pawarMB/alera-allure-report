@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
+  globalSetup: './global-setup.js',
+  globalTeardown: './global-teardown.js',
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -48,8 +50,8 @@ export default defineConfig({
 
   use: {
     trace: 'retain-on-failure',
-    screenshots: 'only-on-failure',
-    video: 'retain-on-failure',
+    //screenshots: 'only-on-failure',
+    //video: 'retain-on-failure',
   },
 
   projects: [

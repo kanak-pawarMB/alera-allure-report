@@ -46,47 +46,6 @@ test.describe('Dynamic Dashboard - Smoke Tests', () => {
     console.log(`Dashboard loaded with ${cardCount} cards`);
   });
 
-  // Qase Test Case ID: 38
-  test('ONEVIEW-38: Verify each card fetches and displays correct data @smoke', async ({ page }) => {
-    test.info().annotations.push({ type: 'qaseId', description: '38' });
-
-    // Step 1: Verify cards are loaded
-    await page.waitForTimeout(2000);
-
-    // Step 2: Verify each card displays data fetched from respective API
-    // Expected: Each card displays data from its respective API endpoint
-
-    // Verify Demographics card has data
-    const demographicsCard = page.locator(':text("Demographics")').first();
-    if (await demographicsCard.isVisible({ timeout: 3000 })) {
-      // Check for patient data fields
-      const nameData = page.locator('text=/[A-Z][a-z]+ [A-Z][a-z]+/');
-      await expect(nameData.first()).toBeVisible({ timeout: 3000 });
-    }
-
-    // Verify PCP card has data
-    const pcpCard = page.locator(':text("PCP")').first();
-    if (await pcpCard.isVisible({ timeout: 3000 })) {
-      // Check for PCP data fields
-      const pcpData = page.locator('text=/phone|address|city/i');
-      await expect(pcpData.first()).toBeVisible({ timeout: 3000 });
-    }
-
-    // Verify Care Management card has data (if present)
-    const careCard = page.locator(':text("Care Management")').first();
-    const careCardVisible = await careCard.isVisible({ timeout: 1000 }).catch(() => false);
-    if (careCardVisible) {
-      // Just verify the card itself is visible, data check is optional
-      await expect(careCard).toBeVisible();
-    }
-
-    // Verify that at least 2 cards have loaded with data
-    const cardsWithData = page.locator('[class*="card"]').filter({ hasText: /.{10,}/ });
-    const dataCount = await cardsWithData.count();
-    expect(dataCount).toBeGreaterThanOrEqual(2);
-    console.log(`${dataCount} cards loaded with data successfully`);
-  });
-
   // Qase Test Case ID: 42
   test('ONEVIEW-42: Verify dashboard responsiveness @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '42' });

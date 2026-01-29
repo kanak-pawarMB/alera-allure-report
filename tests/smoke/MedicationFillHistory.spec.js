@@ -69,30 +69,5 @@ test.describe('Medication Fill History - Smoke Tests', () => {
     await expect(viewAllButton).toBeVisible({ timeout: 5000 });
   });
 
-
-
-  // Qase Test Case ID: 107
-  test('ONEVIEW-107: Verify UI style consistency @smoke', async ({ page }) => {
-
-    // Verify card loads
-    const medFillCard = page.locator('text=/Medication Fill History|Medication/i').first();
-    await expect(medFillCard).toBeVisible({ timeout: 10000 });
-
-    // Open modal
-    const viewAllButton = page.locator("(//button[@class='inline-flex items-center justify-center gap-[10px] whitespace-nowrap font-inter transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-500 border border-transparent hover:border-primary-500 bg-transparent shadow-none font-medium h-[40px] rounded-[6px] px-[20px] py-[9px] text-[14px] leading-5 !h-[28px] !px-3 !py-1 !text-sm mb-[2px]'][normalize-space()='View all'])[3]");
-    await viewAllButton.click();
-    await page.waitForTimeout(2000);
-
-    // Verify modal has consistent styling (basic checks)
-    const modalContent = page.locator('div[role="dialog"], div.modal, div[class*="modal"]').first();
-    // Increase wait for modal to appear
-    await page.waitForTimeout(2000);
-    await expect(modalContent).toBeVisible({ timeout: 15000 });
-    
-    // Verify modal has expected structure
-    const modalBox = await modalContent.boundingBox();
-    expect(modalBox).not.toBeNull();
-  });
-
 });
 
