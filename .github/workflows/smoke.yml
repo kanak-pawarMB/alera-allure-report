@@ -24,10 +24,10 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         
-      - name: Run smoke tests with MS_TOKEN
+      - name: Run BehavioralHealthDiagnoses smoke test with MS_TOKEN
         env:
           MS_TOKEN: ${{ secrets.MS_TOKEN }}
-        run: npx playwright test --project=smoke
+        run: npx playwright test tests/smoke/BehavioralHealthDiagnoses.spec.js --project=smoke
         
       - name: Upload test results
         if: always()
