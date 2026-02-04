@@ -1,4 +1,4 @@
-import fs from 'fs';
+npx playwright test tests/auth/auth.setup.spec.js --headedimport fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';

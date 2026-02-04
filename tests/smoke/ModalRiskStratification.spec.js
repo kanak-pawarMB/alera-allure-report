@@ -39,6 +39,43 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
     return result;
   }
 
+  /**
+   * Gets the Risk Score clickable element within the Risk Stratification card.
+   * Uses multiple locator strategies with fallback for robustness.
+   * @param {import('@playwright/test').Page} page
+   * @returns {Promise<import('@playwright/test').Locator>}
+   */
+  // @ts-ignore
+  async function getRiskScoreLink(page) {
+    // Wait for skeleton loaders to disappear (indicates data is loaded)
+    await page.waitForFunction(() => {
+      const skeletons = document.querySelectorAll('[class*="skeleton"], [class*="animate-pulse"]');
+      return skeletons.length === 0;
+    }, { timeout: 30000 }).catch(() => {});
+
+    // Use multiple locator strategies with fallback
+    // Primary: Use button role with Risk Score text
+    const byRole = page.getByRole('button', { name: /Risk Score/i });
+
+    // Fallback 1: Badge/button containing "Risk Score:" pattern
+    const byText = page.getByText(/Risk Score:\s*\d+/i);
+
+    // Fallback 2: Within Risk Stratification card, find clickable element
+    const withinCard = page.locator('[class*="card"]')
+      .filter({ hasText: /Risk Stratification/i })
+      .locator('button, [role="button"], a, [class*="badge"]')
+      .filter({ hasText: /Risk Score/i });
+
+    // Use .or() chaining for fallback
+    const riskScoreLink = byRole.or(byText).or(withinCard);
+
+    // Scroll into view and wait for visibility
+    await riskScoreLink.first().scrollIntoViewIfNeeded().catch(() => {});
+    await expect(riskScoreLink.first()).toBeVisible({ timeout: 15000 });
+
+    return riskScoreLink.first();
+  }
+
   /* -------------------- Setup -------------------- */
 
   test.beforeEach(async ({ page }) => {
@@ -76,11 +113,18 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
       } catch {
         await page.waitForTimeout(3000); // Fallback wait
       }
-      
-      // Additional wait to ensure Risk Score card is visible
-      await page.waitForTimeout(2000);
+
+      // Wait for skeleton loaders to disappear (critical for data readiness)
+      await page.waitForFunction(() => {
+        const skeletons = document.querySelectorAll('[class*="skeleton"], [class*="animate-pulse"]');
+        return skeletons.length === 0;
+      }, { timeout: 30000 }).catch(() => {});
+
+      // Verify Risk Stratification card is visible before proceeding
+      const riskStratCard = page.locator('text=/Risk Stratification/i').first();
+      await expect(riskStratCard).toBeVisible({ timeout: 20000 });
     } catch (e) {
-      await page.screenshot({ path: 'riskstrat-beforeeach-fail.png', fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/riskstrat-beforeeach-fail.png', fullPage: true }).catch(() => {});
       throw e;
     }
   });
@@ -89,42 +133,39 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
   test('ONEVIEW-468: Smoke_Open Risk Stratification pop-up @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '468' });
 
-    // Click Risk Score link to open modal
-    const riskScoreLink468 = page.locator("(//p[@class='font-inter font-semibold text-[12px] leading-[21px] tracking-[0px] truncate block w-full'])[1]");
+    // Get Risk Score link using robust locator
+    let riskScoreLink;
     try {
-      await expect(riskScoreLink468).toBeVisible({ timeout: 10000 });
-      await riskScoreLink468.click();
+      riskScoreLink = await getRiskScoreLink(page);
     } catch (e) {
-      await page.screenshot({ path: `debug-riskscorelink-ONEVIEW-468.png`, fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/debug-riskscorelink-ONEVIEW-468.png', fullPage: true }).catch(() => {});
       throw e;
     }
 
-    // Wait for year selector to appear (indicates modal is open)
+    // Click to open modal
+    await riskScoreLink.click({ timeout: 10000 });
+
+    // Wait for modal to appear
+    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
+    await expect(modal.first()).toBeVisible({ timeout: 10000 });
+
+    // Wait for year selector to appear (indicates modal content is loaded)
     const yearSelector = page.getByRole('button', { name: 'Select Years' });
     await expect(yearSelector).toBeVisible({ timeout: 10000 });
 
-    // Verify modal is visible
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
-
     // Verify modal contains Risk Stratification content
     await expect(modal.first()).toContainText(/Risk Score|Risk Stratification|Quarter|Year/i);
-
   });
 
   // ===================== ONEVIEW-390 =====================
   test('ONEVIEW-390: Smoke_Validate yearly filter options @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '390' });
-    
-    // Click Risk Score link to open modal
-    const riskScoreLink = page.locator("(//p[@class='font-inter font-semibold text-[12px] leading-[21px] tracking-[0px] truncate block w-full'])[1]");
-    await expect(riskScoreLink).toBeVisible({ timeout: 10000 });
-    await riskScoreLink.click();
-    
-    // Wait longer for modal to appear after first test
-    await page.waitForTimeout(3000);
 
-    // Verify modal appears first, then look for year selector
+    // Get Risk Score link using robust locator
+    const riskScoreLink = await getRiskScoreLink(page);
+    await riskScoreLink.click({ timeout: 10000 });
+
+    // Wait for modal to appear
     const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
     await expect(modal.first()).toBeVisible({ timeout: 10000 });
 
@@ -134,7 +175,7 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
 
     // Click year selector to open dropdown
     await yearSelector.click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
 
     // Verify modal is still visible
     await expect(modal.first()).toBeVisible({ timeout: 5000 });
@@ -157,18 +198,27 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
   test('ONEVIEW-470: Smoke_Dynamic graph update on year selection @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '470' });
 
-    // Click Risk Score link to open modal
-    const riskScoreLink470 = page.locator("(//p[@class='font-inter font-semibold text-[12px] leading-[21px] tracking-[0px] truncate block w-full'])[1]");
+    // Get Risk Score link using robust locator
+    let riskScoreLink;
     try {
-      await page.screenshot({ path: `debug-ONEVIEW-470-before-risk-score-click.png`, fullPage: true }).catch(() => {});
-      await expect(riskScoreLink470).toBeVisible({ timeout: 30000 });
-      await page.screenshot({ path: `debug-ONEVIEW-470-risk-score-visible.png`, fullPage: true }).catch(() => {});
-      await riskScoreLink470.click();
-      await page.waitForTimeout(2000);
-      await page.screenshot({ path: `debug-ONEVIEW-470-after-risk-score-click.png`, fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/debug-ONEVIEW-470-before-risk-score-click.png', fullPage: true }).catch(() => {});
+      riskScoreLink = await getRiskScoreLink(page);
+      await page.screenshot({ path: 'screenshots/debug-ONEVIEW-470-risk-score-visible.png', fullPage: true }).catch(() => {});
     } catch (e) {
-      await page.screenshot({ path: `debug-riskscorelink-ONEVIEW-470.png`, fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/debug-riskscorelink-ONEVIEW-470.png', fullPage: true }).catch(() => {});
       throw e;
+    }
+
+    await riskScoreLink.click({ timeout: 10000 });
+    await page.screenshot({ path: 'screenshots/debug-ONEVIEW-470-after-risk-score-click.png', fullPage: true }).catch(() => {});
+
+    // Wait for modal to appear
+    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
+    try {
+      await expect(modal.first()).toBeVisible({ timeout: 10000 });
+    } catch {
+      await page.screenshot({ path: 'screenshots/debug-ONEVIEW-470-modal-not-found.png', fullPage: true }).catch(() => {});
+      throw new Error('Modal did not appear after clicking Risk Score link');
     }
 
     // Wait for year selector to appear
@@ -176,71 +226,62 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
     try {
       await expect(yearSelector).toBeVisible({ timeout: 20000 });
     } catch (e) {
-      await page.screenshot({ path: `debug-yearselector-ONEVIEW-470.png`, fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/debug-yearselector-ONEVIEW-470.png', fullPage: true }).catch(() => {});
       throw e;
-    }
-
-    // Verify modal is visible
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    try {
-      await expect(modal.first()).toBeVisible({ timeout: 10000 });
-    } catch {
-      await page.screenshot({ path: `debug-ONEVIEW-470-modal-not-found.png`, fullPage: true }).catch(() => {});
-      throw new Error('Modal did not appear after clicking Risk Score link');
     }
 
     // Open year dropdown
     await yearSelector.click();
-    await page.waitForTimeout(3000); // Increased wait to allow dropdown to fully render
-
-    // Verify modal is visible and year selector is available
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
-
-    // Wait for any child elements to appear in modal (dropdown options)
     await page.waitForTimeout(2000);
 
-    // Click on any visible option in the dropdown (use generic button locator)
-    const anyButton = page.locator('[role="dialog"] button').nth(1); // Get 2nd button (first is year selector)
+    // Verify modal is visible
+    await expect(modal.first()).toBeVisible({ timeout: 5000 });
+
+    // Click on any visible option in the dropdown
+    const anyButton = page.locator('[role="dialog"] button').nth(1);
     try {
       await expect(anyButton).toBeVisible({ timeout: 10000 });
       await anyButton.click();
     } catch {
-      // If specific button not found, just verify modal is still open
       await expect(modal.first()).toBeVisible();
     }
 
-    // Verify graph updates (check that modal still contains content - indicates no page reload)
+    // Verify modal still contains content
     await expect(modal.first()).toBeVisible();
     await expect(modal.first()).toContainText(/Risk Score|Quarter/i);
-
   });
 
   // ===================== ONEVIEW-477 =====================
   test('ONEVIEW-477: Smoke_Close pop-up @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '477' });
 
-    // Click Risk Score link to open modal
-    const riskScoreLink477 = page.locator("(//p[@class='font-inter font-semibold text-[12px] leading-[21px] tracking-[0px] truncate block w-full'])[1]");
+    // Get Risk Score link using robust locator
+    let riskScoreLink;
     try {
-      await page.waitForTimeout(2000);
-      await page.screenshot({ path: `debug-before-riskScore-ONEVIEW-477.png`, fullPage: true }).catch(() => {});
-      await expect(riskScoreLink477).toBeVisible({ timeout: 15000 });
-      await riskScoreLink477.click();
+      await page.screenshot({ path: 'screenshots/debug-before-riskScore-ONEVIEW-477.png', fullPage: true }).catch(() => {});
+      riskScoreLink = await getRiskScoreLink(page);
     } catch (e) {
-      await page.screenshot({ path: `debug-riskscorelink-ONEVIEW-477.png`, fullPage: true }).catch(() => {});
+      await page.screenshot({ path: 'screenshots/debug-riskscorelink-ONEVIEW-477.png', fullPage: true }).catch(() => {});
       throw e;
     }
-    // Wait for year selector to appear
+
+    await riskScoreLink.click({ timeout: 10000 });
+
+    // Wait for modal to appear
+    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
+    await expect(modal.first()).toBeVisible({ timeout: 10000 });
+
+    // Wait for year selector (confirms modal content loaded)
     const yearSelector = page.getByRole('button', { name: 'Select Years' });
     await expect(yearSelector).toBeVisible({ timeout: 10000 });
-    // Verify modal is visible
-    const modal = page.locator('[role="dialog"]').or(page.locator('.modal'));
-    await expect(modal.first()).toBeVisible({ timeout: 5000 });
-    // Close modal using provided close icon XPath
-    const closeIcon477 = page.locator("(//img[@class=' block dark:hidden'])[1]");
-    await expect(closeIcon477).toBeVisible({ timeout: 5000 });
-    await closeIcon477.click();
-    await expect(modal.first()).not.toBeVisible();
 
+    // Close modal using close icon - use more robust locator
+    const closeIcon = page.getByRole('button', { name: /close/i })
+      .or(page.locator('[aria-label="Close"]'))
+      .or(page.locator("(//img[@class=' block dark:hidden'])[1]"));
+    await expect(closeIcon.first()).toBeVisible({ timeout: 5000 });
+    await closeIcon.first().click();
+
+    await expect(modal.first()).not.toBeVisible({ timeout: 5000 });
   });
 });

@@ -50,11 +50,19 @@ export default defineConfig({
 
   use: {
     trace: 'retain-on-failure',
-    //screenshots: 'only-on-failure',
-    //video: 'retain-on-failure',
+    screenshots: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   projects: [
+    // Auth Setup - Chromium only
+    {
+      name: 'auth-setup',
+      testMatch: /tests\/auth\/.*\.spec\.js/,
+      use: { ...devices['Desktop Chrome'] },
+      retries: 0,
+    },
+
     // Smoke UI Tests
     {
       name: 'smoke',
@@ -84,21 +92,21 @@ export default defineConfig({
     // UI Regression (Chromium)
     {
       name: 'chromium',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Chrome'] },
     },
-    
+
     // UI Regression (Firefox)
     {
       name: 'firefox',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Firefox'] },
     },
-    
+
     // UI Regression (Safari)
     {
       name: 'safari',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Safari'] },
     },
   ],
