@@ -2,10 +2,7 @@ name: Smoke Tests
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'tests/smoke/**'
-      - 'tests/auth/**'
-  workflow_dispatch:  # Manual trigger button
+  workflow_dispatch:
 
 jobs:
   smoke:
@@ -13,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -24,17 +21,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         
-      - name: Run BehavioralHealthDiagnoses smoke test with MS_TOKEN
+      # FIXED: Pass MS_TOKEN as ENV to ALL steps
+      - name: Run smoke tests
         env:
-          MS_TOKEN: ${{ secrets.MS_TOKEN }}
+          MS_TOKEN: ${{ vars.MS_TOKEN }}
         run: npx playwright test tests/smoke/BehavioralHealthDiagnoses.spec.js --project=smoke
-        
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: smoke-results
-          path: |
-            playwright-report/
-            test-results/
-            allure-results/
