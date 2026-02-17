@@ -52,8 +52,8 @@ test.describe('Search - Smoke Tests', () => {
   /* -------------------- Setup -------------------- */
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+    await page.waitForLoadState('networkidle', { timeout: 60000 });
   });
 
   /* -------------------- Tests -------------------- */

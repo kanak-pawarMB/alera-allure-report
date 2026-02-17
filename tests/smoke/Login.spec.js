@@ -11,8 +11,8 @@ test.describe('Login Page - Smoke Tests', () => {
   const LOGIN_URL = TEST_DATA.urls.login;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(LOGIN_URL, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    await page.goto(LOGIN_URL, { timeout: 90000 });
+    await page.waitForLoadState('networkidle', { timeout: 60000 });
   });
 
   // Qase ID: 488

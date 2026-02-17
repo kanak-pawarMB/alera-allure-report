@@ -12,7 +12,9 @@
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",
     "allure:serve": "allure serve allure-results",
-    "allure:clean": "rimraf allure-results allure-report"
+    "allure:clean": "rimraf allure-results allure-report",
+    "test:adt-qase": "node qase/run-adt-alerts.js",
+    "test:regression-qase": "node qase/run-regression-all.js"
   },
   "keywords": [],
   "author": "",

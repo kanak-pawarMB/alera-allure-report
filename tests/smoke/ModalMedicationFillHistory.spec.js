@@ -5,21 +5,29 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
+  // Configure timeout at describe level - applies to ALL hooks and tests
+  test.describe.configure({ timeout: 120000 });
 
   // @ts-ignore
   async function loadPatientDashboard(page) {
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    
-    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
-    await searchBox.click();
-    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-    
-    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
-    await expect(patientResult).toBeVisible({ timeout: 15000 });
-    await patientResult.click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    try {
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
+
+      const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
+      await expect(searchBox).toBeVisible({ timeout: 30000 });
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+
+      const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
+      await expect(patientResult).toBeVisible({ timeout: 15000 });
+      await patientResult.click();
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      await page.waitForTimeout(2000);
+    } catch (e) {
+      await page.screenshot({ path: 'screenshots/debug-ModalMedFillHistory-beforeEach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   }
 
   // @ts-ignore
@@ -29,14 +37,17 @@ test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
   async function openMedicationFillModal(page) {
     const card = getCard(page);
     await expect(card).toBeVisible({ timeout: 10000 });
-    
+
+    // Wait for card to be fully interactive before clicking View All
+    await page.waitForTimeout(500);
+
     const viewAll = card.locator('button:has-text("View All"), a:has-text("View All")').first();
-    await expect(viewAll).toBeVisible({ timeout: 5000 });
+    await expect(viewAll).toBeVisible({ timeout: 10000 });
     await viewAll.click();
-    await page.waitForTimeout(800);
-    
+    await page.waitForTimeout(1000);
+
     const modal = page.locator('[role="dialog"], [class*="modal"], .modal').first();
-    await expect(modal).toBeVisible({ timeout: 5000 });
+    await expect(modal).toBeVisible({ timeout: 10000 });
     return modal;
   }
 

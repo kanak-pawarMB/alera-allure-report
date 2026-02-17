@@ -1,6 +1,13 @@
 import { chromium } from 'playwright';
+import fs from 'fs';
 
 (async () => {
+  // Clear previous session to ensure only the current sign-in is stored
+  if (fs.existsSync('auth.json')) {
+    fs.unlinkSync('auth.json');
+    console.log('Cleared previous auth.json');
+  }
+
   const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();
   const page = await context.newPage();

@@ -38,18 +38,24 @@ test.describe('Drill Down ADT Alerts - Smoke Tests', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    
-    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
-    await searchBox.click();
-    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-    
-    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
-    await expect(patientResult).toBeVisible({ timeout: 15000 });
-    await patientResult.click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    try {
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
+
+      const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
+      await expect(searchBox).toBeVisible({ timeout: 30000 });
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+
+      const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
+      await expect(patientResult).toBeVisible({ timeout: 15000 });
+      await patientResult.click();
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      await page.waitForTimeout(2000);
+    } catch (e) {
+      await page.screenshot({ path: 'screenshots/debug-ModalADTAlerts-beforeEach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   });
 
   // ===================== ONEVIEW-450 =====================

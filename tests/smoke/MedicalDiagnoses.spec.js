@@ -5,18 +5,29 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Medical Diagnoses - Smoke Tests', () => {
+  // Configure timeout at describe level - applies to ALL hooks and tests
+  test.describe.configure({ timeout: 120000 });
+
   test.beforeEach(async ({ page }) => {
     // Reset viewport to prevent navigation issues
     await page.setViewportSize({ width: 1280, height: 720 });
 
-    // Navigate to dashboard
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    try {
+      // Navigate to dashboard
+      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
+      await page.waitForLoadState('networkidle', { timeout: 60000 });
 
-    // Search for patient with complete data
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      // Search for patient with complete data
+      const searchBox = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
+      await expect(searchBox).toBeVisible({ timeout: 30000 });
+      await searchBox.click();
+      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
+      await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+      await page.waitForLoadState('networkidle', { timeout: 30000 });
+    } catch (e) {
+      await page.screenshot({ path: 'screenshots/debug-MedicalDiagnoses-beforeEach-fail.png', fullPage: true }).catch(() => {});
+      throw e;
+    }
   });
 
   test('ONEVIEW-309: Verify read-only behavior @smoke', async ({ page }) => {

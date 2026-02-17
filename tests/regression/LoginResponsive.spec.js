@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect, devices } from '@playwright/test';
+import { TEST_DATA } from '../testData.js';
 
 /**
  * Login Page Responsive Tests
@@ -7,8 +8,8 @@ import { test, expect, devices } from '@playwright/test';
  * Following WCAG 2.1 AA standards and best practices for responsive design
  */
 
-test.describe('Login Page - Responsive Design Tests', () => {
-  const LOGIN_URL = process.env.LOGIN_URL || 'https://demooneview.z20.web.core.windows.net/login';
+test.describe('Login Page - Responsive Design Tests @regression', () => {
+  const LOGIN_URL = TEST_DATA.urls.login;
 
   /**
    * Mobile Device Tests

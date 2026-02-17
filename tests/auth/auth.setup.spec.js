@@ -1,7 +1,16 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+
 test.describe('Microsoft Login Setup — Save session', () => {
   test('login and save session', async ({ page }) => {
     test.setTimeout(180000);
+
+    // Clear previous session to ensure only the current sign-in is stored
+    if (fs.existsSync('auth.json')) {
+      fs.unlinkSync('auth.json');
+      console.log('>>> Cleared previous auth.json');
+    }
+
     await page.goto('https://qa.oneview.alerahealth.com');
     // Click Microsoft login
     await page.getByRole('button', { name: /login with microsoft/i }).click();
