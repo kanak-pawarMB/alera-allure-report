@@ -17,7 +17,13 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
   test.beforeEach(async ({ page }) => {
     try {
       await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
-      await page.waitForLoadState('networkidle', { timeout: 60000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+      await page.waitForTimeout(2000);
+
+      // Guard: ensure we're not redirected to login
+      if (page.url().includes('login')) {
+        throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+      }
 
       // Search and select patient
       const searchBox = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
@@ -25,7 +31,15 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
       await searchBox.click();
       await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
       await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+      await page.waitForTimeout(3000);
+
+      // Dismiss ADT alert banner if present (it can intercept clicks on "View all" button)
+      const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
+      if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
+        await dismissBtn.click();
+        await page.waitForTimeout(500);
+      }
     } catch (e) {
       await page.screenshot({ path: 'screenshots/debug-ModalReferrals-beforeEach-fail.png', fullPage: true }).catch(() => {});
       throw e;

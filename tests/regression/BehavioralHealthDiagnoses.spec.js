@@ -14,14 +14,21 @@ test.describe('Behavioral Health Diagnoses - Regression @regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
     const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
     await expect(patientResult).toBeVisible({ timeout: 15000 });
     await patientResult.click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(3000);
   });
 
   // @ts-ignore

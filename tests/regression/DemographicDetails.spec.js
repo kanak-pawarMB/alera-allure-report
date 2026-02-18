@@ -18,7 +18,13 @@ test.describe('Demographic Details', () => {
     await page.goto(DASHBOARD_URL, { timeout: 60000 });
 
     // Wait for the page to fully load
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login (auth session expired)
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
   });
 
   // Qase Test Case ID: 23 - Verify successful display of all demographic fields

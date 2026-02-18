@@ -12,7 +12,13 @@ test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
   async function loadPatientDashboard(page) {
     try {
       await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
-      await page.waitForLoadState('networkidle', { timeout: 60000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+      await page.waitForTimeout(2000);
+
+      // Guard: ensure we're not redirected to login
+      if (page.url().includes('login')) {
+        throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+      }
 
       const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
       await expect(searchBox).toBeVisible({ timeout: 30000 });
@@ -22,8 +28,8 @@ test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
       const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
       await expect(patientResult).toBeVisible({ timeout: 15000 });
       await patientResult.click();
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
-      await page.waitForTimeout(2000);
+      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+      await page.waitForTimeout(3000);
     } catch (e) {
       await page.screenshot({ path: 'screenshots/debug-ModalMedFillHistory-beforeEach-fail.png', fullPage: true }).catch(() => {});
       throw e;
@@ -54,6 +60,13 @@ test.describe('Drill Down Medication Fill History - Smoke Tests', () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await loadPatientDashboard(page);
+
+    // Dismiss ADT alert banner if present (it can intercept clicks on "View all" button)
+    const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
+    if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await dismissBtn.click();
+      await page.waitForTimeout(500);
+    }
   });
 
   test('ONEVIEW-101: View All opens modal @smoke', async ({ page }) => {

@@ -51,6 +51,11 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(2000);
 
+    // Guard: ensure we're not redirected to login (auth session expired)
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     // Load patient for tests
     await loadPatient(page, TEST_DATA.patients.completeData.medicaidId);
   });

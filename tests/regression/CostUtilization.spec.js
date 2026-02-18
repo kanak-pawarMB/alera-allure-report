@@ -20,12 +20,19 @@ test.describe('Cost / Utilization - Regression @regression', () => {
     // Use same setup as passing smoke tests
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login (auth session expired)
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
     await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(3000);
   });
 
   /* -------------------- Test Cases -------------------- */

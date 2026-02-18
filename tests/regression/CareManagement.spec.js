@@ -45,8 +45,8 @@ test.describe('Care Management Information - Regression @regression', () => {
     await searchResult.click();
     
     // Wait for dashboard to load
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(3000);
   }
 
   /**
@@ -68,8 +68,14 @@ test.describe('Care Management Information - Regression @regression', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login (auth session expired)
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     // Load patient with complete data
     await loadPatient(page, TEST_DATA.patients.completeData.medicaidId);
   });

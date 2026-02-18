@@ -14,12 +14,19 @@ test.describe('Immunizations - Regression @regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
     await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
     await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(3000);
   });
 
   // @ts-ignore
@@ -139,8 +146,16 @@ test.describe('Immunizations - Regression @regression', () => {
     await page.waitForTimeout(3000);
     const beforeText = await card.textContent() || '';
     await page.reload();
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Re-select patient after reload (reload loses patient context)
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
+    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
+    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
+    await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(3000);
+
     const cardAfter = getImmunizationCard(page);
     await expect(cardAfter).toBeVisible({ timeout: 10000 });
     const afterText = await cardAfter.textContent() || '';

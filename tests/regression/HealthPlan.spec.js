@@ -45,8 +45,8 @@ test.describe('Health Plan Card - Regression @regression', () => {
     await searchResult.click();
     
     // Wait for dashboard to load
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(3000);
   }
 
   /**
@@ -68,8 +68,14 @@ test.describe('Health Plan Card - Regression @regression', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Guard: ensure we're not redirected to login (auth session expired)
+    if (page.url().includes('login')) {
+      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    }
+
     // Load patient with complete data
     await loadPatient(page, TEST_DATA.patients.completeData.medicaidId);
   });
@@ -318,14 +324,16 @@ test.describe('Health Plan Card - Regression @regression', () => {
     // Step 3: Measure Health Plan card load time
     // Expected: Health Plan card loads within acceptable threshold (≤ 3 seconds)
     
-    // Navigate to dashboard to trigger fresh load
+    // Measure Health Plan card load time (patient already loaded in beforeEach)
+    // Reload page and re-select patient to measure fresh load
     const startTime = Date.now();
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    
-    // Load patient
+    await page.reload({ timeout: 60000 });
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+
+    // Re-select patient after reload
     await loadPatient(page, TEST_DATA.patients.completeData.medicaidId);
-    
+
     // Wait for Health Plan card to appear
     const healthPlanCard = await getHealthPlanCard(page);
     await expect(healthPlanCard).toBeVisible({ timeout: 10000 });
