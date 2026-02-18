@@ -1,0 +1,3 @@
+Patient (NC160943625) demographics displayed before refresh
+Patient (NC160943625) demographics re-fetched and displayed after page refresh
+ONEVIEW-30: Demographic data successfully reloads after page refresh

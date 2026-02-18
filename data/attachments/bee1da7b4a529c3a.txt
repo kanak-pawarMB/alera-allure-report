@@ -1,0 +1,1 @@
+ONEVIEW-151: Manual test - requires physical tablet device testing

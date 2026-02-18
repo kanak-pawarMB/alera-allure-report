@@ -1,0 +1,1 @@
+ONEVIEW-169: Last contact date field present: false

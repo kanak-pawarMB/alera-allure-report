@@ -1,0 +1,2 @@
+ONEVIEW-178: Found 0 column elements in card
+ONEVIEW-178: Card display: block, Grid columns: none

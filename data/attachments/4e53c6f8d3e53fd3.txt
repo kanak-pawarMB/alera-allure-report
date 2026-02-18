@@ -1,0 +1,9 @@
+Demographics card layout: {
+  display: 'flex',
+  gridTemplateColumns: 'none',
+  gridTemplateRows: 'none',
+  flexDirection: 'row',
+  columnCount: 'auto'
+}
+ONEVIEW-31: Demographics card uses a column-based layout structure
+ONEVIEW-31: Demographics layout verified - fields are organized in a structured format

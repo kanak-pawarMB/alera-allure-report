@@ -1,0 +1,1 @@
+ONEVIEW-32: Field labels are bold and data values are lighter - styling verified

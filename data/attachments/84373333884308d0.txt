@@ -1,0 +1,2 @@
+Demographics are displayed as read-only text elements (no input fields found)
+ONEVIEW-24: All demographic fields are verified as read-only - user CANNOT enter data
