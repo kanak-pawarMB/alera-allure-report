@@ -1,6 +1,8 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { MedicationFillHistoryCard } from '../pages/cards/MedicationFillHistoryCard.js';
+import { MedicationFillHistoryModal } from '../pages/modals/MedicationFillHistoryModal.js';
 
 /**
  * Modal Medication Fill History - Regression Tests
@@ -10,27 +12,31 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Modal Medication Fill History - Regression @regression', () => {
+  test.describe.configure({ timeout: 120000 });
+
+  let dashboard;
+  let medCard;
+  let medModal;
+  const dateRegex = /\b\d{2}\/\d{2}\/\d{4}\b/;
+
   test.beforeEach(async ({ page }) => {
+    dashboard = new DashboardPage(page);
+    medCard = new MedicationFillHistoryCard(page);
+    medModal = new MedicationFillHistoryModal(page);
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
-    await searchBox.click();
-    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
-    await expect(patientResult).toBeVisible({ timeout: 15000 });
-    await patientResult.click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
+    try {
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
+    } catch (e) {
+      await dashboard.screenshotOnFailure('screenshots/debug-ModalMedicationFillHistory-regression-beforeEach-fail.png');
+      throw e;
+    }
   });
 
-  // @ts-ignore
-  const getCard = (page) => page.locator('[class*="card"]').filter({ hasText: /Medication Fill History/i }).first();
-  // @ts-ignore
+  // Helper to open the Medication Fill History modal
   const openModal = async (page) => {
-    const card = getCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All")').first();
+    await medCard.assertVisible();
+    const viewAll = medCard.card.locator('button:has-text("View All"), a:has-text("View All")').first();
     await expect(viewAll).toBeVisible({ timeout: 5000 });
     await viewAll.click();
     await page.waitForTimeout(800);
@@ -38,14 +44,12 @@ test.describe('Modal Medication Fill History - Regression @regression', () => {
     await expect(modal).toBeVisible({ timeout: 5000 });
     return modal;
   };
-  const dateRegex = /\b\d{2}\/\d{2}\/\d{4}\b/;
 
   // 398 - Verify View All link visibility
   test('ONEVIEW-398: Verify View All link visibility @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '398' });
-    const card = getCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All")').first();
+    await medCard.assertVisible();
+    const viewAll = medCard.card.locator('button:has-text("View All"), a:has-text("View All")').first();
     await expect(viewAll).toBeVisible({ timeout: 5000 });
     await viewAll.click();
     const modal = page.locator('[role="dialog"], [class*="modal"], .modal').first();

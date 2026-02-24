@@ -68,7 +68,6 @@ export default defineConfig({
       name: 'smoke',
       testMatch: /tests\/smoke\/.*\.spec\.js/,
       testIgnore: /tests\/api\/.*\.spec\.js/,
-      dependencies: ['auth-setup'],
       use: { ...devices['Desktop Chrome'] },
       retries: 0,
       fullyParallel: false,
@@ -94,7 +93,6 @@ export default defineConfig({
     {
       name: 'chromium',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
-      dependencies: ['auth-setup'],
       use: { ...devices['Desktop Chrome'] },
     },
 
@@ -102,7 +100,6 @@ export default defineConfig({
     {
       name: 'firefox',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
-      dependencies: ['auth-setup'],
       use: { ...devices['Desktop Firefox'] },
     },
 
@@ -110,7 +107,6 @@ export default defineConfig({
     {
       name: 'safari',
       testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
-      dependencies: ['auth-setup'],
       use: { ...devices['Desktop Safari'] },
     },
   ],

@@ -1,6 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { RiskStratificationCard } from '../pages/cards/RiskStratificationCard.js';
 
 /**
  * Risk Stratification Card - Regression Tests
@@ -11,31 +12,32 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Risk Stratification - Regression @regression', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('networkidle');
-    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
-    await searchBox.click();
-    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
-    await expect(patientResult).toBeVisible({ timeout: 15000 });
-    await patientResult.click();
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(2000);
-  });
+  test.describe.configure({ timeout: 120000 });
 
-  // @ts-ignore
-  const getRiskCard = (page) => page.locator('[class*="card"]').filter({ hasText: /Risk Stratification/i }).first();
+  let dashboard;
+  let riskCard;
+
   const dateRegex = /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/;
+
+  test.beforeEach(async ({ page }) => {
+    dashboard = new DashboardPage(page);
+    riskCard = new RiskStratificationCard(page);
+    await page.setViewportSize({ width: 1280, height: 720 });
+    try {
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
+    } catch (e) {
+      await dashboard.screenshotOnFailure('screenshots/debug-RiskStratification-regression-beforeEach-fail.png');
+      throw e;
+    }
+  });
 
   // 379 - Validate latest risk score record
   test('ONEVIEW-379: Validate latest risk score record @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '379' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const dateCells = card.locator('text=/\d{1,2}\/\d{1,2}\/\d{2,4}/');
+    const dateCells = riskCard.card.locator('text=/\d{1,2}\/\d{1,2}\/\d{2,4}/');
     const count = await dateCells.count();
     if (count > 1) {
       const dates = [];
@@ -47,7 +49,6 @@ test.describe('Risk Stratification - Regression @regression', () => {
           dates.push(new Date(normalizedYear, m - 1, d));
         }
       }
-      // Latest should be first (descending)
       for (let i = 0; i < dates.length - 1; i++) {
         expect(dates[i].getTime()).toBeGreaterThanOrEqual(dates[i + 1].getTime());
       }
@@ -57,10 +58,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 380 - Validate central risk score display
   test('ONEVIEW-380: Validate central risk score display @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '380' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const score = card.locator('text=/^\d+$/').first();
+    const score = riskCard.card.locator('text=/^\d+$/').first();
     const text = await score.textContent();
     expect(text && text.trim().length > 0).toBeTruthy();
   });
@@ -68,10 +68,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 381 - Validate Last Updated Date
   test('ONEVIEW-381: Validate Last Updated Date @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '381' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const lastUpdated = card.getByText(/Last updated/i).first();
+    const lastUpdated = riskCard.card.getByText(/Last updated/i).first();
     await expect(lastUpdated).toBeVisible();
     const text = await lastUpdated.textContent() || '';
     const hasDate = dateRegex.test(text);
@@ -81,10 +80,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 382 - Validate display of 5 factorial bullet points
   test('ONEVIEW-382: Validate display of 5 factorial bullet points @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '382' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const bullets = card.locator('li, [role="listitem"]');
+    const bullets = riskCard.card.locator('li, [role="listitem"]');
     const count = await bullets.count();
     expect(count).toBeGreaterThanOrEqual(5);
   });
@@ -92,30 +90,27 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 383 - Validate trend image mapping
   test('ONEVIEW-383: Validate trend image mapping @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '383' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const images = card.locator('img, svg');
+    const images = riskCard.card.locator('img, svg');
     expect(await images.count()).toBeGreaterThanOrEqual(1);
   });
 
   // 384 - Validate card title
   test('ONEVIEW-384: Validate card title @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '384' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const header = card.locator('text=/Risk Stratification/i').first();
+    const header = riskCard.card.locator('text=/Risk Stratification/i').first();
     await expect(header).toBeVisible();
   });
 
   // 388 - Validate modal close via X icon
   test('ONEVIEW-388: Validate modal close via X icon @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '388' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All")').first();
+    const viewAll = riskCard.card.locator('button:has-text("View All"), a:has-text("View All")').first();
     if (await viewAll.isVisible().catch(() => false)) {
       await viewAll.click();
       await page.waitForTimeout(1000);
@@ -132,10 +127,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 391 - Validate dynamic update of graph
   test('ONEVIEW-391: Validate dynamic update of graph @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '391' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
+    const viewAll = riskCard.card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
     if (await viewAll.isVisible().catch(() => false)) {
       await viewAll.click();
       await page.waitForTimeout(1000);
@@ -158,10 +152,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 392 - Validate graph correctness for timeline
   test('ONEVIEW-392: Validate graph correctness for timeline @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '392' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
+    const viewAll = riskCard.card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
     if (await viewAll.isVisible().catch(() => false)) {
       await viewAll.click();
       await page.waitForTimeout(1000);
@@ -181,10 +174,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 393 - Validate no records found message
   test('ONEVIEW-393: Validate no records found message @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '393' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const viewAll = card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
+    const viewAll = riskCard.card.locator('button:has-text("View All"), a:has-text("View All"), button:has-text("View Details")').first();
     if (await viewAll.isVisible().catch(() => false)) {
       await viewAll.click();
       await page.waitForTimeout(1000);
@@ -207,10 +199,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 395 - Validate wrapping of risk drivers
   test('ONEVIEW-395: Validate wrapping of risk drivers @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '395' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const bullets = card.locator('li, [role="listitem"]');
+    const bullets = riskCard.card.locator('li, [role="listitem"]');
     const first = bullets.first();
     await expect(first).toBeVisible();
     const text = await first.textContent();
@@ -220,10 +211,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 396 - Validate score alignment & formatting
   test('ONEVIEW-396: Validate score alignment & formatting @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '396' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const score = card.locator('text=/^\d+$/').first();
+    const score = riskCard.card.locator('text=/^\d+$/').first();
     const box = await score.boundingBox();
     expect(box && box.width > 0 && box.height > 0).toBeTruthy();
   });
@@ -231,10 +221,9 @@ test.describe('Risk Stratification - Regression @regression', () => {
   // 397 - Validate design spacing & padding
   test('ONEVIEW-397: Validate design spacing & padding @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '397' });
-    const card = getRiskCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await riskCard.assertVisible();
 
-    const box = await card.boundingBox();
+    const box = await riskCard.card.boundingBox();
     expect(box && box.width > 0 && box.height > 0).toBeTruthy();
   });
 });

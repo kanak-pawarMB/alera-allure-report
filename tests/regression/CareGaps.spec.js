@@ -1,6 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { CareGapsCard } from '../pages/cards/CareGapsCard.js';
 
 /**
  * Care Gaps Card - Regression Tests
@@ -11,41 +12,33 @@ import { TEST_DATA } from '../testData.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Care Gaps - Regression @regression', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(2000);
+  test.describe.configure({ timeout: 120000 });
 
-    // Guard: ensure we're not redirected to login
-    if (page.url().includes('login')) {
-      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
-    }
-
-    const searchBox = page.getByRole('textbox', { name: "Search by Patient's Medicaid" }).first();
-    await searchBox.click();
-    await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-    const patientResult = page.getByText(TEST_DATA.patients.completeData.medicaidId, { exact: false }).first();
-    await expect(patientResult).toBeVisible({ timeout: 15000 });
-    await patientResult.click();
-    await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(3000);
-  });
-
-  // @ts-ignore
-  const getCareGapsCard = (page) => page.locator('[class*="card"]').filter({ hasText: /Care Gaps/i }).first();
+  let dashboard;
+  let careGapsCard;
   const dateRegex = /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/;
   const fullDateRegex = /\b\d{2}\/\d{2}\/\d{4}\b/;
+
+  test.beforeEach(async ({ page }) => {
+    dashboard = new DashboardPage(page);
+    careGapsCard = new CareGapsCard(page);
+    await page.setViewportSize({ width: 1280, height: 720 });
+    try {
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
+    } catch (e) {
+      await dashboard.screenshotOnFailure('screenshots/debug-CareGaps-regression-beforeEach-fail.png');
+      throw e;
+    }
+  });
 
   // 362 - Display only Active care gaps
   test('ONEVIEW-362: Display only Active care gaps @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '362' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const rows = card.locator('tbody tr, [role="row"]');
-    const statusCells = card.locator('text=/Active|Met|Not Met/i');
-    const inactiveText = card.getByText(/Inactive|Closed/i);
+    const rows = careGapsCard.card.locator('tbody tr, [role="row"]');
+    const inactiveText = careGapsCard.card.getByText(/Inactive|Closed/i);
     const rowCount = await rows.count();
     const inactiveVisible = await inactiveText.isVisible().catch(() => false);
     expect(inactiveVisible).toBeFalsy();
@@ -55,10 +48,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 363 - Verify sorting by Claims_Date (ascending)
   test('ONEVIEW-363: Verify sorting by Claims_Date (ascending) @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '363' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const dateCells = card.locator('text=/\d{1,2}\/\d{1,2}\/\d{2,4}/');
+    const dateCells = careGapsCard.card.locator('text=/\d{1,2}\/\d{1,2}\/\d{2,4}/');
     const count = await dateCells.count();
     if (count > 1) {
       const dates = [];
@@ -79,10 +71,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 364 - Limit records to 5
   test('ONEVIEW-364: Limit records to 5 @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '364' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const rows = card.locator('tbody tr, [role="row"]');
+    const rows = careGapsCard.card.locator('tbody tr, [role="row"]');
     const rowCount = await rows.count();
     console.log(`ONEVIEW-364: Care gaps row count: ${rowCount}`);
     // Card may display up to 10 records depending on configuration
@@ -92,12 +83,11 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 366 - Verify required fields
   test('ONEVIEW-366: Verify required fields @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '366' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const headers = card.locator('th, [class*="header"]');
+    const headers = careGapsCard.card.locator('th, [class*="header"]');
     const headerText = (await headers.allTextContents()).join(' ').toLowerCase();
-    const cardText = (await card.textContent() || '').toLowerCase();
+    const cardText = (await careGapsCard.getCardText()).toLowerCase();
     // Check required fields exist in headers or card content
     expect(headerText.includes('metric') || cardText.includes('metric')).toBeTruthy();
     expect(headerText.includes('status') || cardText.includes('status') || cardText.includes('met')).toBeTruthy();
@@ -110,33 +100,29 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 367 - Verify card title
   test('ONEVIEW-367: Verify card title @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '367' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const header = card.locator('text=/Care Gaps/i').first();
+    const header = careGapsCard.card.locator('text=/Care Gaps/i').first();
     await expect(header).toBeVisible();
   });
 
   // 368 - Verify color legend
   test('ONEVIEW-368: Verify color legend @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '368' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const legend = card.getByText(/Met|Not Met/i);
+    const legend = careGapsCard.card.getByText(/Met|Not Met/i);
     await expect(legend.first()).toBeVisible();
   });
 
   // 369 - Verify tooltip via Info icon
   test('ONEVIEW-369: Verify tooltip via Info icon @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '369' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const infoIcon = card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i]').first();
+    const infoIcon = careGapsCard.card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i]').first();
     if (await infoIcon.isVisible().catch(() => false)) {
       await infoIcon.hover({ trial: true }).catch(() => {});
-      const tooltip = page.locator('text=/Metric_Description|Description|Metric/i');
       // Tooltip might be transient; just ensure icon exists
       expect(await infoIcon.isVisible()).toBeTruthy();
     }
@@ -145,21 +131,19 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 370 - Verify layout per Figma
   test('ONEVIEW-370: Verify layout per Figma @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '370' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const table = card.locator('table, [role="table"], [class*="grid"]').first();
+    const table = careGapsCard.card.locator('table, [role="table"], [class*="grid"]').first();
     await expect(table).toBeVisible();
   });
 
   // 371 - Metric text format
   test('ONEVIEW-371: Metric text format @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '371' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
     // Verify card contains metric-related text content
-    const cardText = await card.textContent() || '';
+    const cardText = await careGapsCard.getCardText();
     console.log(`ONEVIEW-371: Card text length: ${cardText.length}`);
     // Card should have content beyond just the title
     expect(cardText.length).toBeGreaterThan(0);
@@ -169,10 +153,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 372 - Less than 5 gaps
   test('ONEVIEW-372: Less than 5 gaps @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '372' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const rows = card.locator('tbody tr, [role="row"]');
+    const rows = careGapsCard.card.locator('tbody tr, [role="row"]');
     const rowCount = await rows.count();
     console.log(`ONEVIEW-372: Care gaps row count: ${rowCount}`);
     // Card may display up to 10 records depending on configuration
@@ -182,11 +165,10 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 373 - No care gaps
   test('ONEVIEW-373: No care gaps @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '373' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const emptyMessage = card.getByText(/No care gaps available|No care gaps|No data/i);
-    const rows = card.locator('tbody tr, [role="row"]');
+    const emptyMessage = careGapsCard.card.getByText(/No care gaps available|No care gaps|No data/i);
+    const rows = careGapsCard.card.locator('tbody tr, [role="row"]');
     const hasMessage = await emptyMessage.isVisible().catch(() => false);
     const rowCount = await rows.count();
     expect(hasMessage || rowCount > 0).toBeTruthy();
@@ -195,10 +177,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 374 - Verify date format
   test('ONEVIEW-374: Verify date format @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '374' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const cardText = await card.textContent() || '';
+    const cardText = await careGapsCard.getCardText();
     const broadDatePattern = /\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{4}-\d{2}-\d{2}|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2},? \d{4}/gi;
     const matches = cardText.match(broadDatePattern) || [];
     // Card should have date content or date-related labels
@@ -210,10 +191,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 376 - Validate Last Updated date
   test('ONEVIEW-376: Validate Last Updated date @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '376' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const lastUpdated = card.getByText(/Last updated|Updated|Last refreshed|As of/i).first();
+    const lastUpdated = careGapsCard.card.getByText(/Last updated|Updated|Last refreshed|As of/i).first();
     const hasLastUpdated = await lastUpdated.isVisible({ timeout: 5000 }).catch(() => false);
 
     if (hasLastUpdated) {
@@ -222,7 +202,7 @@ test.describe('Care Gaps - Regression @regression', () => {
       expect(match && match.length > 0).toBeTruthy();
     } else {
       // Fallback: verify the card has date-related content somewhere
-      const cardText = await card.textContent() || '';
+      const cardText = await careGapsCard.getCardText();
       const hasDateContent = fullDateRegex.test(cardText) || /\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}/.test(cardText);
       expect(hasDateContent).toBeTruthy();
     }
@@ -231,12 +211,11 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 377 - Validate info icon for each metric
   test('ONEVIEW-377: Validate info icon for each metric @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '377' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const rows = card.locator('tbody tr, [role="row"]');
+    const rows = careGapsCard.card.locator('tbody tr, [role="row"]');
     const rowCount = await rows.count();
-    const infoIcons = card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i], [class*="tooltip"], [data-tip]');
+    const infoIcons = careGapsCard.card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i], [class*="tooltip"], [data-tip]');
     const iconCount = await infoIcons.count();
     console.log(`ONEVIEW-377: Found ${iconCount} info icons for ${rowCount} rows`);
     // Info icons may not be present for all metrics in current UI version
@@ -246,10 +225,9 @@ test.describe('Care Gaps - Regression @regression', () => {
   // 378 - Validate tooltip preview on hover
   test('ONEVIEW-378: Validate tooltip preview on hover @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '378' });
-    const card = getCareGapsCard(page);
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await careGapsCard.assertVisible();
 
-    const infoIcon = card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i]').first();
+    const infoIcon = careGapsCard.card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i]').first();
     if (await infoIcon.isVisible().catch(() => false)) {
       await infoIcon.hover({ trial: true }).catch(() => {});
       const tooltip = page.locator('text=/Metric_Description|Description|Metric/i');

@@ -1,38 +1,34 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { CostUtilizationCard } from '../pages/cards/CostUtilizationCard.js';
 
 /**
  * Cost / Utilization Summary Card - Regression Tests
  * Comprehensive testing for 12-Month Cost/Utilization card functionality
  * Test Cases: ONEVIEW-283 to ONEVIEW-296 (excluding 285)
  * Qase Test Management Suite: 12 Month Cost/Utilization Summary Card
- * Uses same setup logic as passing smoke tests for consistency
  */
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('Cost / Utilization - Regression @regression', () => {
+  test.describe.configure({ timeout: 120000 });
 
-  /* -------------------- Setup -------------------- */
+  let dashboard;
+  let costCard;
 
   test.beforeEach(async ({ page }) => {
-    // Use same setup as passing smoke tests
+    dashboard = new DashboardPage(page);
+    costCard = new CostUtilizationCard(page);
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto(TEST_DATA.urls.dashboard, { timeout: 60000 });
-    await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(2000);
-
-    // Guard: ensure we're not redirected to login (auth session expired)
-    if (page.url().includes('login')) {
-      throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
+    try {
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
+    } catch (e) {
+      await dashboard.screenshotOnFailure('screenshots/debug-CostUtilization-regression-beforeEach-fail.png');
+      throw e;
     }
-
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().click();
-    await page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first().fill(TEST_DATA.patients.completeData.medicaidId);
-    await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-    await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(3000);
   });
 
   /* -------------------- Test Cases -------------------- */
@@ -43,12 +39,10 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-283: Verify total cost calculation @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '283' });
 
-    // Check each cost value
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Get all cost values displayed in the card
-    const costValues = costCard.locator('text=/\\$[\\d,]+\\.\\d{2}/');
+    const costValues = costCard.card.locator('text=/\\$[\\d,]+\\.\\d{2}/');
     const costCount = await costValues.count();
 
     if (costCount > 1) {
@@ -71,7 +65,7 @@ test.describe('Cost / Utilization - Regression @regression', () => {
     }
 
     // Card is visible and accessible
-    expect(costCard).toBeTruthy();
+    expect(costCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 284
@@ -80,12 +74,10 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-284: Validate data limited to last 12 months @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '284' });
 
-    // View Cost Breakdown for patient
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Get card content to verify timeframe
-    const cardText = await costCard.textContent() || '';
+    const cardText = await costCard.getCardText();
 
     // Only costs within last 12 months are displayed
     expect(cardText.length).toBeGreaterThan(0);
@@ -97,11 +89,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-286: Validate cost formatting in USD @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '286' });
 
-    // Observe displayed values
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
-    const cardText = await costCard.textContent() || '';
+    const cardText = await costCard.getCardText();
 
     // Costs appear as $1,234.56 (or just verify card contains dollar sign and numbers)
     const hasUSDFormat = /\$.*\d+|USD|\d+\.\d{2}/i.test(cardText);
@@ -114,12 +104,10 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-287: Verify Total Cost highlight @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '287' });
 
-    // Observe Total Cost field
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Find Total Cost label or field
-    const totalCostField = costCard.locator('text=/[Tt]otal|[Tt]otal [Cc]ost/').first();
+    const totalCostField = costCard.card.locator('text=/[Tt]otal|[Tt]otal [Cc]ost/').first();
     const totalVisible = await totalCostField.isVisible({ timeout: 5000 }).catch(() => false);
 
     if (totalVisible) {
@@ -136,7 +124,7 @@ test.describe('Cost / Utilization - Regression @regression', () => {
       expect(computedStyle.color || computedStyle.fontWeight).toBeTruthy();
     }
 
-    expect(costCard).toBeTruthy();
+    expect(costCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 288
@@ -145,11 +133,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-288: Verify card title text @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '288' });
 
-    // View header text
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
-    const cardText = await costCard.textContent() || '';
+    const cardText = await costCard.getCardText();
 
     // Title shows "12-Month Cost / Utilization" (or similar variation)
     const hasTitle = /12[- ]Month|Cost|Utilization/i.test(cardText);
@@ -162,13 +148,11 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-289: Verify alignment and spacing per Figma @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '289' });
 
-    // Compare actual vs Figma layout
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Verify card structure exists and is properly laid out
-    const cardBbox = await costCard.boundingBox();
-    
+    const cardBbox = await costCard.card.boundingBox();
+
     // Alignment, spacing, font sizes match Figma
     expect(cardBbox).toBeTruthy();
     expect(cardBbox?.width).toBeGreaterThan(100);
@@ -181,11 +165,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-290: Handle missing data fields @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '290' });
 
-    // View cost breakdown
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
-    const cardText = await costCard.textContent() || '';
+    const cardText = await costCard.getCardText();
 
     // Null fields display "--" or similar placeholder
     const hasPlaceholder = /--|N\/A|No data|—/i.test(cardText) || cardText.length > 0;
@@ -198,11 +180,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-291: Handle all zero cost values @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '291' });
 
-    // View cost breakdown
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
-    const cardText = await costCard.textContent() || '';
+    const cardText = await costCard.getCardText();
 
     // Card should display cost data ($) or show the card title at minimum
     const hasCostData = cardText.includes('$') || cardText.includes('0');
@@ -217,10 +197,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '292' });
 
     // Card is visible or error message shown
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
     const errorMessage = page.locator('text=/No data|error|not found|no records/i').first();
 
-    const cardExists = await costCard.isVisible({ timeout: 5000 }).catch(() => false);
+    const cardExists = await costCard.card.isVisible({ timeout: 5000 }).catch(() => false);
     const errorExists = await errorMessage.isVisible({ timeout: 5000 }).catch(() => false);
 
     // "No data available" message displayed; no crash
@@ -233,12 +212,10 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-293: Validate API response status @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '293' });
 
-    // Trigger API manually or via UI by navigating to cost data
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // 200 OK for valid, 404/204 for invalid (just verify data loads)
-    expect(costCard).toBeTruthy();
+    expect(costCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 294
@@ -250,9 +227,7 @@ test.describe('Cost / Utilization - Regression @regression', () => {
 
     const startTime = Date.now();
 
-    // Load cost breakdown view
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     const loadTime = Date.now() - startTime;
 
@@ -266,12 +241,10 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-295: Validate consistent currency format @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '295' });
 
-    // View several patients' cost cards (current patient)
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Extract all formatted costs
-    const formattedCosts = costCard.locator('text=/\\$[\\d,]+\\.\\d{2}/');
+    const formattedCosts = costCard.card.locator('text=/\\$[\\d,]+\\.\\d{2}/');
     const costCount = await formattedCosts.count();
 
     // All costs displayed in same USD format
@@ -283,7 +256,7 @@ test.describe('Cost / Utilization - Regression @regression', () => {
       }
     }
 
-    expect(costCard).toBeTruthy();
+    expect(costCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 296
@@ -292,21 +265,19 @@ test.describe('Cost / Utilization - Regression @regression', () => {
   test('ONEVIEW-296: Validate real-time total recalculation @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '296' });
 
-    // Get initial total cost value
-    const costCard = page.locator('[class*="card"]').filter({ hasText: /Cost|Utilization/i }).first();
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
-    const initialContent = await costCard.textContent();
+    const initialContent = await costCard.card.textContent();
 
     // Refresh page to simulate data update
     await page.reload();
     await page.waitForLoadState('networkidle');
 
     // Wait for card to reappear
-    await expect(costCard).toBeVisible({ timeout: 10000 });
+    await costCard.assertVisible();
 
     // Updated total reflects changes (or remains same after refresh)
-    const updatedContent = await costCard.textContent();
+    const updatedContent = await costCard.card.textContent();
     expect(updatedContent).toBeTruthy();
 
     // Content should be consistent (same or updated)

@@ -1,51 +1,35 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
-import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { ADTAlertsCard } from '../pages/cards/ADTAlertsCard.js';
 
 /**
  * ADT Alerts Card - Regression Tests
  * Comprehensive testing for ADT Alerts card functionality
  * Test Cases: ONEVIEW-266 to ONEVIEW-281
  * Qase Test Management Suite: ADT Alerts
- * Uses same setup logic as passing smoke tests for consistency
  */
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('ADT Alerts - Regression @regression', () => {
+
   // Configure timeout at describe level - applies to ALL hooks and tests
   test.describe.configure({ timeout: 120000 });
 
-  /* -------------------- Setup -------------------- */
+  let dashboard;
+  let adtCard;
 
   test.beforeEach(async ({ page }) => {
+    dashboard = new DashboardPage(page);
+    adtCard = new ADTAlertsCard(page);
     await page.setViewportSize({ width: 1280, height: 720 });
     try {
-      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
-      await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
-      await page.waitForTimeout(2000);
-
-      // Guard: ensure we're not redirected to login
-      if (page.url().includes('login')) {
-        throw new Error('Redirected to login page - auth session may have expired. Re-run auth.setup.spec.js');
-      }
-
-      const searchBox = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
-      await expect(searchBox).toBeVisible({ timeout: 30000 });
-      await searchBox.click();
-      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-      await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
-      await page.waitForTimeout(3000);
-
-      // Dismiss ADT alert banner if present (it can intercept clicks on "View all" button)
-      const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
-      if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
-        await dismissBtn.click();
-        await page.waitForTimeout(1000);
-      }
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
+      await dashboard.dismissAlertBannerIfPresent();
     } catch (e) {
-      await page.screenshot({ path: 'screenshots/debug-ADTAlerts-regression-beforeEach-fail.png', fullPage: true }).catch(() => {});
+      await dashboard.screenshotOnFailure('screenshots/debug-ADTAlerts-regression-beforeEach-fail.png');
       throw e;
     }
   });
@@ -59,17 +43,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '266' });
     test.setTimeout(60000);
 
-    // Open ADT Alerts card
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
     // Get all date cells in the card
-    const dateElements = adtCard.locator('td:first-child, [class*="date"]').or(
-      adtCard.locator('text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}/')
+    const dateElements = adtCard.card.locator('td:first-child, [class*="date"]').or(
+      adtCard.card.locator('text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}/')
     );
-    
+
     const dateCount = await dateElements.count();
-    
+
     if (dateCount > 1) {
       // Extract dates and verify descending order
       const dates = [];
@@ -79,15 +61,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
           dates.push(new Date(dateText.trim()));
         }
       }
-      
+
       // Verify records appear in descending order (most recent first)
       for (let i = 0; i < dates.length - 1; i++) {
         expect(dates[i].getTime()).toBeGreaterThanOrEqual(dates[i + 1].getTime());
       }
     }
-    
+
     // Card is visible and accessible
-    expect(adtCard).toBeTruthy();
+    expect(adtCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 267
@@ -96,12 +78,10 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-267: Functional_Verify Record Limit @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '267' });
 
-    // Open ADT Alerts card
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
     // Count number of displayed alert rows (excluding header row)
-    const alertRows = adtCard.locator('tbody tr, [class*="row"][class*="data"], li[class*="alert"]');
+    const alertRows = adtCard.card.locator('tbody tr, [class*="row"][class*="data"], li[class*="alert"]');
     const rowCount = await alertRows.count();
 
     // Only 5 most recent alerts should be displayed (may count 6 if includes header row)
@@ -115,19 +95,17 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-268: Functional_Verify Alerts Range @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '268' });
 
-    // Observe ADT Alerts card records
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
     // Get all date elements
-    const dateElements = adtCard.locator('text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}/');
+    const dateElements = adtCard.card.locator('text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}/');
     const dateCount = await dateElements.count();
-    
+
     if (dateCount > 0) {
       // Verify all dates are within the past 12 months
       const twelveMonthsAgo = new Date();
       twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
-      
+
       for (let i = 0; i < Math.min(dateCount, 5); i++) {
         const dateText = await dateElements.nth(i).textContent();
         if (dateText) {
@@ -136,9 +114,9 @@ test.describe('ADT Alerts - Regression @regression', () => {
         }
       }
     }
-    
+
     // Card displays properly
-    expect(adtCard).toBeTruthy();
+    expect(adtCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 269
@@ -147,21 +125,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-269: Functional_Verify Pop-Up on View All @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '269' });
 
-    // Click "View All" link in ADT Alerts card
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
-    
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.click();
+    await adtCard.assertVisible();
+    await adtCard.clickViewAll();
     await page.waitForTimeout(1000);
 
     // Pop-up window opens showing complete ADT alert list
     const modal = page.locator('[role="dialog"]').or(
       page.locator('[class*="modal"]')
     ).first();
-    
+
     await expect(modal).toBeVisible({ timeout: 10000 });
 
     // Verify modal contains ADT-related content
@@ -180,12 +152,8 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-270: Functional_Verify Search by Facility Name @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '270' });
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
-    
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await viewAllButton.click();
+    await adtCard.assertVisible();
+    await adtCard.clickViewAll();
     await page.waitForTimeout(1000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -197,26 +165,26 @@ test.describe('ADT Alerts - Regression @regression', () => {
         modal.locator('input[placeholder*="search"]')
       )
     ).first();
-    
+
     const searchVisible = await searchInput.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (searchVisible) {
       // Get initial row count
       const initialRows = modal.locator('tbody tr, [class*="row"]');
       const initialCount = await initialRows.count();
-      
+
       // Search for a facility
       await searchInput.fill('Hospital');
       await page.waitForTimeout(1000);
-      
+
       // List dynamically updates showing results matching facility name
       const filteredRows = modal.locator('tbody tr, [class*="row"]');
       const filteredCount = await filteredRows.count();
-      
+
       // Results should update (count may change or stay same if all match)
       expect(filteredCount).toBeGreaterThanOrEqual(0);
     }
-    
+
     expect(modal).toBeTruthy();
   });
 
@@ -227,25 +195,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '271' });
     test.setTimeout(90000);
 
-    // Dismiss ADT alert banner if present (can intercept clicks on View all)
-    const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
-    if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await dismissBtn.click();
-      await page.waitForTimeout(1000);
-      // Wait for banner to disappear
-      await expect(dismissBtn).not.toBeVisible({ timeout: 5000 }).catch(() => {});
-    }
+    await dashboard.dismissAlertBannerIfPresent();
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
     await page.waitForTimeout(1000);
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
-    await viewAllButton.click({ force: true });
+    await adtCard.viewAllButton.click({ force: true });
     await page.waitForTimeout(2000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -254,18 +212,18 @@ test.describe('ADT Alerts - Regression @regression', () => {
     // Enter partial text (e.g., "Valley")
     const searchInput = modal.locator('input[type="text"]').first();
     const searchVisible = await searchInput.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (searchVisible) {
       await searchInput.fill('Valley');
       await page.waitForTimeout(1000);
-      
+
       // Pop-up displays all matching facility names
       const modalContent = await modal.textContent() || '';
-      
+
       // Search functionality works (results displayed or "No records" message)
       expect(modalContent.length).toBeGreaterThan(0);
     }
-    
+
     expect(modal).toBeTruthy();
   });
 
@@ -276,24 +234,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '272' });
     test.setTimeout(90000);
 
-    // Dismiss ADT alert banner if present (can intercept clicks on View all)
-    const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
-    if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await dismissBtn.click();
-      await page.waitForTimeout(1000);
-      await expect(dismissBtn).not.toBeVisible({ timeout: 5000 }).catch(() => {});
-    }
+    await dashboard.dismissAlertBannerIfPresent();
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
     await page.waitForTimeout(1000);
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
-    await viewAllButton.click({ force: true });
+    await adtCard.viewAllButton.click({ force: true });
     await page.waitForTimeout(2000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -303,20 +252,20 @@ test.describe('ADT Alerts - Regression @regression', () => {
     const timelineDropdown = modal.locator('select').or(
       modal.locator('[role="combobox"]')
     ).first();
-    
+
     const dropdownVisible = await timelineDropdown.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (dropdownVisible) {
       // Test a few timeline options
       const options = ['7 Days', '30 Days', '90 Days'];
-      
+
       for (const option of options) {
         const optionExists = await modal.locator(`option:has-text("${option}")`).count() > 0;
-        
+
         if (optionExists) {
           await timelineDropdown.selectOption({ label: option });
           await page.waitForTimeout(500);
-          
+
           // List updates based on selected timeline
           const rows = modal.locator('tbody tr, [class*="row"]');
           const count = await rows.count();
@@ -324,7 +273,7 @@ test.describe('ADT Alerts - Regression @regression', () => {
         }
       }
     }
-    
+
     expect(modal).toBeTruthy();
   });
 
@@ -334,12 +283,8 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-273: Functional_Verify Filter and Search Combined @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '273' });
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
-    
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await viewAllButton.click();
+    await adtCard.assertVisible();
+    await adtCard.clickViewAll();
     await page.waitForTimeout(1000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -348,27 +293,27 @@ test.describe('ADT Alerts - Regression @regression', () => {
     // Search by facility
     const searchInput = modal.locator('input[type="text"]').first();
     const searchVisible = await searchInput.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     // Apply timeline filter
     const timelineDropdown = modal.locator('select').first();
     const dropdownVisible = await timelineDropdown.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (searchVisible && dropdownVisible) {
       await searchInput.fill('Hospital');
       await page.waitForTimeout(500);
-      
+
       const hasOption = await modal.locator('option:has-text("30 Days")').count() > 0;
       if (hasOption) {
         await timelineDropdown.selectOption({ label: '30 Days' });
         await page.waitForTimeout(500);
       }
-      
+
       // List updates based on both search and selected timeline filter
       const rows = modal.locator('tbody tr, [class*="row"]');
       const count = await rows.count();
       expect(count).toBeGreaterThanOrEqual(0);
     }
-    
+
     expect(modal).toBeTruthy();
   });
 
@@ -379,23 +324,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '274' });
     test.setTimeout(60000);
 
-    // Dismiss ADT alert banner if present (can intercept clicks on View all)
-    const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
-    if (await dismissBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await dismissBtn.click();
-      await page.waitForTimeout(500);
-    }
+    await dashboard.dismissAlertBannerIfPresent();
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
     await page.waitForTimeout(1000);
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
-    await viewAllButton.click();
+    await adtCard.viewAllButton.click();
     await page.waitForTimeout(2000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -423,23 +360,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '275' });
     test.setTimeout(90000);
 
-    // Dismiss ADT alert banner if present (can intercept clicks on View all)
-    const dismissBtn = page.getByRole('button', { name: /Dismiss/i }).first();
-    if (await dismissBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await dismissBtn.click();
-      await page.waitForTimeout(500);
-    }
+    await dashboard.dismissAlertBannerIfPresent();
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
     await page.waitForTimeout(1000);
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
-    await viewAllButton.click();
+    await adtCard.viewAllButton.click();
     await page.waitForTimeout(2000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -485,15 +414,12 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '276' });
     test.setTimeout(60000);
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
-    await viewAllButton.click();
+    await adtCard.viewAllButton.click();
     await page.waitForTimeout(2000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -522,17 +448,15 @@ test.describe('ADT Alerts - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '277' });
     test.setTimeout(60000);
 
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await viewAllButton.scrollIntoViewIfNeeded();
+    await expect(adtCard.viewAllButton).toBeVisible({ timeout: 5000 });
+    await adtCard.viewAllButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
-    await viewAllButton.click();
+    await adtCard.viewAllButton.click();
     await page.waitForTimeout(2000);
 
-    let modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
+    const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
     await expect(modal).toBeVisible({ timeout: 15000 });
 
     // Verify default timeline is set on initial open (custom button, not native select)
@@ -543,7 +467,7 @@ test.describe('ADT Alerts - Regression @regression', () => {
       const timelineText = await timelineButton.textContent() || '';
       expect(timelineText).toMatch(/All Time|7 Days|Days/i);
     }
-    
+
     // Verify modal displays properly
     expect(modal).toBeTruthy();
   });
@@ -554,12 +478,8 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-278: Edge_Verify List View Scrolling @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '278' });
 
-    // Open "View All" modal
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
-    
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    await viewAllButton.click();
+    await adtCard.assertVisible();
+    await adtCard.clickViewAll();
     await page.waitForTimeout(1000);
 
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
@@ -568,22 +488,22 @@ test.describe('ADT Alerts - Regression @regression', () => {
     // Scroll down to view remaining alerts
     const scrollableArea = modal.locator('tbody, [class*="scroll"], [class*="list"]').first();
     const scrollExists = await scrollableArea.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (scrollExists) {
       // Get initial scroll position
       const initialScroll = await scrollableArea.evaluate(el => el.scrollTop);
-      
+
       // Scroll down
       await scrollableArea.evaluate(el => el.scrollTo(0, el.scrollHeight));
       await page.waitForTimeout(500);
-      
+
       // User can scroll and view all records
       const finalScroll = await scrollableArea.evaluate(el => el.scrollTop);
-      
+
       // Scroll position changed or stayed same (if no overflow)
       expect(finalScroll).toBeGreaterThanOrEqual(initialScroll);
     }
-    
+
     expect(modal).toBeTruthy();
   });
 
@@ -593,24 +513,22 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-279: UI_Verify Data Field Alignment @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '279' });
 
-    // Observe layout of Event Date, Type, Facility, Provider fields
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
     // Verify table/list structure exists
-    const tableOrList = adtCard.locator('table, [class*="list"]').first();
+    const tableOrList = adtCard.card.locator('table, [class*="list"]').first();
     const structureExists = await tableOrList.isVisible({ timeout: 5000 }).catch(() => false);
-    
+
     if (structureExists) {
       // Check for proper column headers
-      const headers = adtCard.locator('th, [class*="header"]');
+      const headers = adtCard.card.locator('th, [class*="header"]');
       const headerCount = await headers.count();
-      
+
       // All fields are aligned properly per Figma UI
       expect(headerCount).toBeGreaterThanOrEqual(3); // Event Date, Type, Facility, Provider
     }
-    
-    expect(adtCard).toBeTruthy();
+
+    expect(adtCard.card).toBeTruthy();
   });
 
   // Qase Test Case ID: 280
@@ -619,14 +537,12 @@ test.describe('ADT Alerts - Regression @regression', () => {
   test('ONEVIEW-280: UI_Verify Font and Color Styling @regression', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '280' });
 
-    // Open ADT Alerts card
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
+    await adtCard.assertVisible();
 
     // Compare UI with design guide
-    const cardHeader = adtCard.locator('text=/ADT Alerts/i').first();
+    const cardHeader = adtCard.card.locator('text=/ADT Alerts/i').first();
     await expect(cardHeader).toBeVisible();
-    
+
     // Verify card styling exists
     const computedStyle = await cardHeader.evaluate(el => {
       const styles = window.getComputedStyle(el);
@@ -636,7 +552,7 @@ test.describe('ADT Alerts - Regression @regression', () => {
         color: styles.color
       };
     });
-    
+
     // Font, size, and color match Figma standards (basic verification)
     expect(computedStyle.fontSize).toBeTruthy();
     expect(computedStyle.fontFamily).toBeTruthy();
@@ -652,26 +568,23 @@ test.describe('ADT Alerts - Regression @regression', () => {
 
     // Measure load time for ADT Alerts card
     const cardStartTime = Date.now();
-    
-    const adtCard = page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
-    await expect(adtCard).toBeVisible({ timeout: 10000 });
-    
+
+    await adtCard.assertVisible();
+
     const cardLoadTime = Date.now() - cardStartTime;
-    
+
     // Card loads within acceptable threshold (≤3 seconds = 3000ms)
     expect(cardLoadTime).toBeLessThan(3000);
 
     // Measure modal pop-up load time
-    const viewAllButton = adtCard.locator('button:has-text("View all"), a:has-text("View all")').first();
-    
     const modalStartTime = Date.now();
-    await viewAllButton.click();
-    
+    await adtCard.clickViewAll();
+
     const modal = page.locator('[role="dialog"]').or(page.locator('[class*="modal"]')).first();
     await expect(modal).toBeVisible({ timeout: 10000 });
-    
+
     const modalLoadTime = Date.now() - modalStartTime;
-    
+
     // Both load within acceptable threshold (≤5 seconds for modal)
     expect(modalLoadTime).toBeLessThan(5000);
   });

@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect, devices } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage.js';
 import { TEST_DATA } from '../testData.js';
 
 /**
@@ -26,15 +27,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify page loads properly
       await expect(page).toHaveTitle(/OneView|Login/i);
 
-      // Check critical elements are visible
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Verify touch target size (minimum 44x44 pixels per WCAG 2.1)
       const buttonBox = await loginButton.boundingBox();
       expect(buttonBox).not.toBeNull();
       if (buttonBox) {
@@ -42,24 +40,21 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         expect(buttonBox.width).toBeGreaterThanOrEqual(44);
       }
 
-      // Check if logo/header is visible
       const logo = page.locator('img, svg').first();
       if (await logo.count() > 0) {
         await expect(logo).toBeVisible();
       }
 
-      // Verify no horizontal scroll
       const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
       const viewportWidth = await page.evaluate(() => window.innerWidth);
       expect(bodyWidth).toBeLessThanOrEqual(viewportWidth);
 
-      // Check text is readable (not too small)
       const fontSize = await page.evaluate(() => {
         const body = document.body;
         return window.getComputedStyle(body).fontSize;
       });
       const fontSizeValue = parseInt(fontSize);
-      expect(fontSizeValue).toBeGreaterThanOrEqual(14); // Minimum readable size
+      expect(fontSizeValue).toBeGreaterThanOrEqual(14);
 
       await context.close();
     });
@@ -73,12 +68,10 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify critical elements remain visible in landscape
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Verify no horizontal scroll in landscape
       const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
       const viewportWidth = await page.evaluate(() => window.innerWidth);
       expect(bodyWidth).toBeLessThanOrEqual(viewportWidth);
@@ -95,11 +88,9 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify page works on smaller screens
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check button is not cut off
       const buttonBox = await loginButton.boundingBox();
       const viewportSize = page.viewportSize();
       expect(buttonBox).not.toBeNull();
@@ -108,28 +99,21 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         expect(buttonBox.x + buttonBox.width).toBeLessThanOrEqual(viewportSize.width);
       }
 
-      // Verify proper spacing (check for major layout issues only)
-      // Focus on checking if the main content is visible and not significantly cut off
       const hasOverlap = await page.evaluate(() => {
-        // Only check major block-level elements to avoid false positives from
-        // intentional overlaps like icons, badges, or layered UI components
         const elements = Array.from(document.querySelectorAll('div, section, main, header, footer, nav'));
         const visibleElements = elements.filter(el => {
           const rect = el.getBoundingClientRect();
           const styles = window.getComputedStyle(el);
-          // Only check visible, non-absolutely positioned, block-level elements
           return rect.width > 0 && rect.height > 0 &&
                  styles.position !== 'absolute' &&
                  styles.position !== 'fixed' &&
                  styles.display !== 'none';
         });
 
-        // Check only sibling elements at the same level, not all elements
         for (let i = 0; i < visibleElements.length - 1; i++) {
           const el1 = visibleElements[i];
           const el2 = visibleElements[i + 1];
 
-          // Skip if one is a child of the other
           if (el1.contains(el2) || el2.contains(el1)) {
             continue;
           }
@@ -137,7 +121,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
           const rect1 = el1.getBoundingClientRect();
           const rect2 = el2.getBoundingClientRect();
 
-          // Check for significant overlap (> 50% of smaller element)
           const overlapWidth = Math.max(0, Math.min(rect1.right, rect2.right) - Math.max(rect1.left, rect2.left));
           const overlapHeight = Math.max(0, Math.min(rect1.bottom, rect2.bottom) - Math.max(rect1.top, rect2.top));
           const overlapArea = overlapWidth * overlapHeight;
@@ -146,7 +129,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
           const area2 = rect2.width * rect2.height;
           const smallerArea = Math.min(area1, area2);
 
-          // Only flag if overlap is more than 50% of the smaller element
           if (overlapArea > smallerArea * 0.5) {
             return true;
           }
@@ -168,12 +150,10 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Test on Android device
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Verify touch-friendly spacing (minimum 8px between interactive elements)
       const interactiveElements = await page.locator('button, a, input').all();
       if (interactiveElements.length > 1) {
         const firstBox = await interactiveElements[0].boundingBox();
@@ -202,7 +182,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Screenshot for visual verification
       await page.screenshot({
         path: 'test-results/responsive/galaxy-s9-login.png',
         fullPage: true
@@ -214,7 +193,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
   /**
    * Tablet Device Tests
-   * Testing on tablet devices in both orientations
    */
   test.describe('Tablet Devices', () => {
 
@@ -227,12 +205,10 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify layout adapts to tablet size
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Check if layout is centered or properly aligned
       const buttonBox = await loginButton.boundingBox();
       const viewportSize = page.viewportSize();
       expect(buttonBox).not.toBeNull();
@@ -240,14 +216,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
       if (buttonBox && viewportSize) {
         const viewportWidth = viewportSize.width;
-        // Button should be reasonably centered (within 20% margin on either side)
         const marginLeft = buttonBox.x;
         const marginRight = viewportWidth - (buttonBox.x + buttonBox.width);
         const isReasonablyCentered = Math.abs(marginLeft - marginRight) < (viewportWidth * 0.2);
 
         expect(isReasonablyCentered).toBeTruthy();
 
-        // Verify no horizontal scroll
         const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
         expect(bodyWidth).toBeLessThanOrEqual(viewportWidth);
       }
@@ -268,7 +242,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Verify content doesn't stretch awkwardly in landscape
       const contentWidth = await page.evaluate(() => {
         const mainContent = document.querySelector('main, .container, [class*="login"]');
         return mainContent ? mainContent.getBoundingClientRect().width : document.body.clientWidth;
@@ -278,7 +251,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       expect(viewportSize).not.toBeNull();
       if (viewportSize) {
         const viewportWidth = viewportSize.width;
-        // Content should not be full width on large tablets (max ~800px is typical)
         expect(contentWidth).toBeLessThanOrEqual(viewportWidth);
       }
 
@@ -297,14 +269,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check proper spacing and layout on larger tablet
       const allImages = page.locator('img');
       const imageCount = await allImages.count();
 
       for (let i = 0; i < imageCount; i++) {
         const image = allImages.nth(i);
         if (await image.isVisible()) {
-          // Images should be properly sized (not pixelated)
           const naturalSize = await image.evaluate((img) => {
             /** @type {HTMLImageElement} */
             const imgElement = /** @type {HTMLImageElement} */ (img);
@@ -314,7 +284,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
             };
           });
 
-          // Natural size should be >= displayed size for quality
           if (naturalSize.displayed.width > 0) {
             expect(naturalSize.natural.width).toBeGreaterThanOrEqual(naturalSize.displayed.width * 0.8);
           }
@@ -337,7 +306,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
-      // Screenshot for visual verification
       await page.screenshot({
         path: 'test-results/responsive/ipad-pro-11-landscape.png',
         fullPage: true
@@ -349,7 +317,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
   /**
    * Custom Viewport Tests
-   * Testing edge cases and common breakpoints
    */
   test.describe('Custom Viewports & Breakpoints', () => {
 
@@ -362,11 +329,9 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify page works on smallest viewport
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check no horizontal overflow
       const hasHorizontalScroll = await page.evaluate(() => {
         return document.documentElement.scrollWidth > document.documentElement.clientWidth;
       });
@@ -374,8 +339,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
       await context.close();
     });
-
-    // Test removed as per requirement - Small - 576px test case not needed
 
     test('Medium - 768px (Tablet breakpoint)', async ({ browser }) => {
       const context = await browser.newContext({
@@ -389,7 +352,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check if layout changes appropriately at this breakpoint
       const containerWidth = await page.evaluate(() => {
         const main = document.querySelector('main, .container, [class*="login"]');
         return main ? main.getBoundingClientRect().width : document.body.clientWidth;
@@ -418,7 +380,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
   /**
    * Responsive Behavior Tests
-   * Testing dynamic responsive behaviors
    */
   test.describe('Dynamic Responsive Behaviors', () => {
 
@@ -431,22 +392,18 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Portrait mode
       let loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Change to landscape
       await page.setViewportSize({ width: 844, height: 390 });
-      await page.waitForTimeout(500); // Allow time for reflow
+      await page.waitForTimeout(500);
 
-      // Verify button still visible and functional
       loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible();
       await expect(loginButton).toBeInViewport();
 
       const landscapeBox = await loginButton.boundingBox();
 
-      // Verify button adapted to new orientation
       expect(landscapeBox).not.toBeNull();
       if (landscapeBox) {
         expect(landscapeBox.height).toBeGreaterThanOrEqual(44);
@@ -457,27 +414,23 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
     test('Window Resize - Mobile to Tablet', async ({ browser }) => {
       const context = await browser.newContext({
-        viewport: { width: 375, height: 667 } // Mobile
+        viewport: { width: 375, height: 667 }
       });
       const page = await context.newPage();
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Verify on mobile
       let loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Resize to tablet
       await page.setViewportSize({ width: 768, height: 1024 });
       await page.waitForTimeout(500);
 
-      // Verify layout adapts
       loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible();
       await expect(loginButton).toBeInViewport();
 
-      // Check no layout breaks
       const hasOverflow = await page.evaluate(() => {
         return document.body.scrollWidth > window.innerWidth;
       });
@@ -499,10 +452,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Simulate touch tap
       await loginButton.tap();
-
-      // Verify tap was registered (page should attempt navigation/action)
       await page.waitForTimeout(1000);
 
       await context.close();
@@ -511,7 +461,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
   /**
    * Accessibility on Mobile/Tablet
-   * Testing a11y features on smaller screens
    */
   test.describe('Mobile/Tablet Accessibility', () => {
 
@@ -524,20 +473,16 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Check for proper heading hierarchy (may not be present on login page)
       const headings = await page.locator('h1, h2, h3, h4, h5, h6').all();
-      // Login pages may not always use semantic headings, so this is informational only
       if (headings.length > 0) {
         console.log(`Found ${headings.length} heading(s) on the page`);
       } else {
         console.log('No semantic headings found - login page may use other text elements');
       }
 
-      // Verify button has accessible name
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check for aria-labels or accessible text
       const ariaLabel = await loginButton.getAttribute('aria-label');
       const buttonText = await loginButton.textContent();
       expect(ariaLabel || buttonText).toBeTruthy();
@@ -554,10 +499,8 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Tab through interactive elements
       await page.keyboard.press('Tab');
 
-      // Verify focus is visible
       const focusedElement = await page.evaluate(() => {
         const active = document.activeElement;
         if (!active) {
@@ -585,17 +528,14 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Simulate 200% zoom
       await page.evaluate(() => {
         document.body.style.zoom = '2';
       });
       await page.waitForTimeout(500);
 
-      // Verify critical elements still visible and functional
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
-      // Check no critical content is cut off
       const isInViewport = await loginButton.isVisible();
       expect(isInViewport).toBeTruthy();
 
@@ -605,7 +545,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
   /**
    * Performance on Mobile/Tablet
-   * Testing page performance on mobile devices
    */
   test.describe('Mobile/Tablet Performance', () => {
 
@@ -615,7 +554,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       });
       const page = await context.newPage();
 
-      // Emulate slow 3G network
       await context.route('**/*', route => route.continue());
 
       const startTime = Date.now();
@@ -623,7 +561,6 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.waitForLoadState('networkidle');
       const loadTime = Date.now() - startTime;
 
-      // Page should load within reasonable time (< 10 seconds on slow connection)
       expect(loadTime).toBeLessThan(10000);
 
       const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
@@ -641,17 +578,14 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      // Check if images use appropriate formats and sizes
       const images = await page.locator('img').all();
 
       for (const image of images) {
         if (await image.isVisible()) {
           const alt = await image.getAttribute('alt');
 
-          // Images should have alt text
           expect(alt !== null).toBeTruthy();
 
-          // Check image loads successfully
           const isLoaded = await image.evaluate((img) => {
             /** @type {HTMLImageElement} */
             const imgElement = /** @type {HTMLImageElement} */ (img);

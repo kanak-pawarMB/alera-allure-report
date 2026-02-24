@@ -1,165 +1,96 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 import { TEST_DATA } from '../testData.js';
+import { DashboardPage } from '../pages/DashboardPage.js';
+import { SDOHBarriersCard } from '../pages/cards/SDOHBarriersCard.js';
 
 /**
  * SMOKE TEST - SDOH Barriers Card Critical Path
- * These tests verify ONLY the critical happy path for SDOH Barriers card
  * Qase Test Management Suite: Suite 23
  */
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('SDOH Barriers - Smoke Tests', () => {
-  // Configure timeout at describe level - applies to ALL hooks and tests
   test.describe.configure({ timeout: 120000 });
 
+  let dashboard;
+  let sdohCard;
+
   test.beforeEach(async ({ page }) => {
+    dashboard = new DashboardPage(page);
+    sdohCard = new SDOHBarriersCard(page);
     await page.setViewportSize({ width: 1280, height: 720 });
     try {
-      await page.goto(TEST_DATA.urls.dashboard, { timeout: 90000 });
-      await page.waitForLoadState('networkidle', { timeout: 60000 });
-
-      const searchBox = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
-      await expect(searchBox).toBeVisible({ timeout: 30000 });
-      await searchBox.click();
-      await searchBox.fill(TEST_DATA.patients.completeData.medicaidId);
-      await page.getByText('NC767095351|Elizabeth Garcia|12/09/').click();
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      await dashboard.goto();
+      await dashboard.loadDefaultPatient();
     } catch (e) {
-      await page.screenshot({ path: 'screenshots/debug-SDOHBarriers-beforeEach-fail.png', fullPage: true }).catch(() => {});
+      await dashboard.screenshotOnFailure('screenshots/debug-SDOHBarriers-beforeEach-fail.png');
       throw e;
     }
   });
 
   // Qase Test Case ID: 237
   test('ONEVIEW-237: Verify read-only behavior @smoke', async ({ page }) => {
-
-    // Verify card loads
-    const sdohCard = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohCard).toBeVisible({ timeout: 10000 });
-
-    // Verify no editable fields exist (read-only)
-    const editableInputs = page.locator('input:not([readonly]):not([disabled])').filter({ 
-      has: page.locator('text=/Health Related Social Needs/i') 
+    const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
+    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    const editableInputs = page.locator('input:not([readonly]):not([disabled])').filter({
+      has: page.locator('text=/Health Related Social Needs/i')
     });
-    const count = await editableInputs.count();
-    expect(count).toBe(0);
-
-    // Verify badges/items are not clickable for editing
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
-    const contentEditable = await cardContainer.locator('[contenteditable="true"]').count();
-    expect(contentEditable).toBe(0);
+    expect(await editableInputs.count()).toBe(0);
+    expect(await sdohCard.card.locator('[contenteditable="true"]').count()).toBe(0);
   });
 
   // Qase Test Case ID: 238
   test('ONEVIEW-238: Data refresh on patient selection @smoke', async ({ page }) => {
-
-    // Verify current patient data loads
-    const sdohCard = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohCard).toBeVisible({ timeout: 10000 });
-
-    // Get initial barrier count
-    const initialBarriers = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
-    const initialText = await initialBarriers.textContent() || '';
+    const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
+    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    const initialText = await sdohCard.getCardText();
     expect(initialText.length).toBeGreaterThan(0);
 
-    // Perform another patient search to verify data refreshes
-    const searchField = page.getByRole('textbox', { name: 'Search by Patient\'s Medicaid' }).first();
-    await searchField.clear();
-    await searchField.fill(TEST_DATA.patients.completeData.medicaidId);
+    await dashboard.medicaidSearchInput.clear();
+    await dashboard.medicaidSearchInput.fill(TEST_DATA.patients.completeData.medicaidId);
     await page.waitForTimeout(1000);
-    
-    // Verify card is still visible (data refreshed)
-    await expect(sdohCard).toBeVisible({ timeout: 5000 });
+    await expect(sdohTitle).toBeVisible({ timeout: 5000 });
   });
 
   // Qase Test Case ID: 239
   test('ONEVIEW-239: Handle backend unavailability @smoke', async ({ page }) => {
-
-    // Verify page loads without crashing (main goal: no crash)
-    const pageContent = page.locator('body');
-    await expect(pageContent).toBeVisible();
-
-    // Attempt to find card - it may or may not have data depending on patient
-    const sdohCard = page.locator('text=/Health Related Social Needs/i').first();
-    const cardExists = await sdohCard.isVisible({ timeout: 3000 }).catch(() => false);
-    
-    // Attempt to find card container - it may or may not have data
-    const cardElement = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
-    const cardContainerExists = await cardElement.isVisible({ timeout: 3000 }).catch(() => false);
-
-    // Test passes if:
-    // 1. Card is visible with data, OR
-    // 2. Card container exists (even if empty), OR
-    // 3. Page loaded without crashing (page is still responsive)
+    await expect(page.locator('body')).toBeVisible();
+    const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
+    const cardExists = await sdohTitle.isVisible({ timeout: 3000 }).catch(() => false);
+    const cardContainerExists = await sdohCard.card.isVisible({ timeout: 3000 }).catch(() => false);
     const pageLoaded = await page.evaluate(() => document.readyState === 'complete');
-    
     expect(cardExists || cardContainerExists || pageLoaded).toBeTruthy();
   });
 
   // Qase Test Case ID: 241
   test('ONEVIEW-241: Verify accessibility and responsiveness @smoke', async ({ page }) => {
+    const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
+    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
 
-    // Verify card loads at default size
-    const sdohCard = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohCard).toBeVisible({ timeout: 10000 });
-
-    // Test tablet viewport (768px)
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(500);
+    await expect(sdohTitle).toBeVisible();
 
-    // Verify card still visible and readable
-    await expect(sdohCard).toBeVisible();
-
-    // Test mobile viewport (375px)
     await page.setViewportSize({ width: 375, height: 667 });
     await page.waitForTimeout(500);
+    expect(await sdohCard.card.isVisible().catch(() => false)).toBeTruthy();
 
-    // Verify card remains accessible on mobile
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
-    const isVisible = await cardContainer.isVisible().catch(() => false);
-    expect(isVisible).toBeTruthy();
-
-    // Test desktop viewport (1920px)
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.waitForTimeout(500);
-
-    // Verify layout adapts correctly
-    await expect(sdohCard).toBeVisible();
-
-    // Verify no horizontal scrolling
-    const bodyScrollWidth = await page.evaluate(() => document.body.scrollWidth);
-    const bodyClientWidth = await page.evaluate(() => document.body.clientWidth);
-    expect(bodyScrollWidth).toBeLessThanOrEqual(bodyClientWidth + 10);
+    await expect(sdohTitle).toBeVisible();
+    expect(await page.evaluate(() => document.body.scrollWidth)).toBeLessThanOrEqual(await page.evaluate(() => document.body.clientWidth) + 10);
   });
 
   // Qase Test Case ID: 242
-  test('ONEVIEW-242: Verify HIPAA compliance (read-only data) @smoke', async ({ page }) => {
-
-    // Verify card loads with read-only data
-    const sdohCard = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohCard).toBeVisible({ timeout: 10000 });
-
-    // Verify no PHI is editable
-    const cardContainer = page.locator('[class*="card"]').filter({ hasText: /Health Related Social Needs/i }).first();
-    
-    // Check for form inputs that might allow editing
-    const inputs = cardContainer.locator('input, textarea, [contenteditable="true"], button[onclick*="edit"]');
-    const editableCount = await inputs.count();
-    expect(editableCount).toBe(0);
-
-    // Verify data is displayed as read-only badges/text
-    const textContent = await cardContainer.textContent() || '';
+  test('ONEVIEW-242: Verify HIPAA compliance (read-only data) @smoke', async () => {
+    const sdohTitle = sdohCard.page.locator('text=/Health Related Social Needs/i').first();
+    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    const inputs = sdohCard.card.locator('input, textarea, [contenteditable="true"], button[onclick*="edit"]');
+    expect(await inputs.count()).toBe(0);
+    const textContent = await sdohCard.getCardText();
     expect(textContent.length).toBeGreaterThan(0);
-
-    // Verify no copy-paste attacks possible (basic check)
-    const hasProtection = await cardContainer.evaluate((el) => {
-      const style = window.getComputedStyle(el);
-      return style.userSelect === 'none' || el.getAttribute('data-sensitive') !== null;
-    }).catch(() => false);
-    
-    // Either has protection or just verify read-only state
-    expect(editableCount === 0).toBeTruthy();
+    expect(await inputs.count() === 0).toBeTruthy();
   });
 });

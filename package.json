@@ -14,7 +14,8 @@
     "allure:serve": "allure serve allure-results",
     "allure:clean": "rimraf allure-results allure-report",
     "test:adt-qase": "node qase/run-adt-alerts.js",
-    "test:regression-qase": "node qase/run-regression-all.js"
+    "test:regression-qase": "node qase/run-regression-all.js",
+    "test:smoke-qase": "node qase/run-smoke-all.js"
   },
   "keywords": [],
   "author": "",
