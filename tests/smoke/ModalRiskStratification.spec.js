@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { RiskStratificationCard } from '../pages/cards/RiskStratificationCard.js';
 import { RiskStratificationModal } from '../pages/modals/RiskStratificationModal.js';
@@ -12,8 +13,6 @@ import { RiskStratificationModal } from '../pages/modals/RiskStratificationModal
 test.use({ storageState: 'auth.json' });
 
 test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let riskCard;
   let riskModal;
@@ -25,22 +24,22 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
     await page.setViewportSize({ width: 1280, height: 720 });
     try {
       await dashboard.goto();
-      await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: TIMEOUTS.long });
       await page.waitForTimeout(2000);
       try {
-        await page.waitForLoadState('networkidle', { timeout: 60000 });
+        await page.waitForLoadState('networkidle', { timeout: TIMEOUTS.domLoad });
       } catch {
         await page.waitForTimeout(3000);
       }
       await dashboard.assertNotRedirectedToLogin();
       await dashboard.loadDefaultPatient();
       try {
-        await page.waitForLoadState('networkidle', { timeout: 45000 });
+        await page.waitForLoadState('networkidle', { timeout: TIMEOUTS.networkIdle });
       } catch {
         await page.waitForTimeout(3000);
       }
       await riskCard.waitForDataLoaded();
-      await expect(page.locator('text=/Risk Stratification/i').first()).toBeVisible({ timeout: 20000 });
+      await expect(page.locator('text=/Risk Stratification/i').first()).toBeVisible({ timeout: TIMEOUTS.alerts });
     } catch (e) {
       await dashboard.screenshotOnFailure('screenshots/riskstrat-beforeeach-fail.png');
       throw e;
@@ -68,9 +67,9 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
     await riskModal.assertVisible();
     await riskModal.assertYearSelectorVisible();
     await riskModal.openYearDropdown();
-    await riskModal.assertVisible(5000);
+    await riskModal.assertVisible(TIMEOUTS.short);
     await riskModal.closeYearDropdown();
-    await riskModal.assertVisible(5000);
+    await riskModal.assertVisible(TIMEOUTS.short);
     await riskModal.close();
   });
 
@@ -92,17 +91,17 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
       throw new Error('Modal did not appear after clicking Risk Score link');
     }
     try {
-      await riskModal.assertYearSelectorVisible(20000);
+      await riskModal.assertYearSelectorVisible(TIMEOUTS.alerts);
     } catch (e) {
       await dashboard.screenshotOnFailure('screenshots/debug-yearselector-ONEVIEW-470.png');
       throw e;
     }
     await riskModal.openYearDropdown();
-    await riskModal.assertVisible(5000);
+    await riskModal.assertVisible(TIMEOUTS.short);
 
     const anyButton = page.locator('[role="dialog"] button').nth(1);
     try {
-      await expect(anyButton).toBeVisible({ timeout: 10000 });
+      await expect(anyButton).toBeVisible({ timeout: TIMEOUTS.medium });
       await anyButton.click();
     } catch {
       await riskModal.assertVisible();
@@ -124,6 +123,28 @@ test.describe('Drill Down Risk Stratification Card - Smoke Tests', () => {
     }
     await riskModal.assertVisible();
     await riskModal.assertYearSelectorVisible();
+    await riskModal.close();
+  });
+
+  // Qase Test Case ID: 479
+  test('ONEVIEW-479: Smoke_Screen resolution responsiveness @smoke', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '479' });
+    await riskCard.clickRiskScoreLink();
+    await riskModal.assertVisible();
+    await riskModal.assertYearSelectorVisible();
+
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.waitForTimeout(500);
+    await riskModal.assertVisible();
+
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await page.waitForTimeout(500);
+    await riskModal.assertVisible();
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.waitForTimeout(500);
+    await riskModal.assertVisible();
+
     await riskModal.close();
   });
 });

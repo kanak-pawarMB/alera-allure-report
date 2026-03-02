@@ -20,10 +20,11 @@ export class DashboardPage extends BasePage {
 
     // Toggle buttons for switching search mode
     this.lastNameDobToggle = page
-      .getByRole('radio', { name: /Last Name \+ DOB/i })
+      .getByRole('radio', { name: /Last Name|DOB/i })
       .first()
-      .or(page.getByRole('button', { name: /Last Name \+ DOB/i }).first())
-      .or(page.locator('button').filter({ hasText: /Last Name.*DOB/i }).first());
+      .or(page.getByRole('button', { name: /Last Name|DOB/i }).first())
+      .or(page.getByRole('tab', { name: /Last Name|DOB/i }).first())
+      .or(page.locator('button, [role="tab"], [role="radio"]').filter({ hasText: /DOB|Last Name/i }).first());
 
     this.medicaidToggle = page
       .getByRole('radio', { name: /Medicaid ID|Medicaid/i })
@@ -48,6 +49,17 @@ export class DashboardPage extends BasePage {
   async goto() {
     await this.navigate(TEST_DATA.urls.dashboard);
     await this.assertNotRedirectedToLogin();
+
+    // Handle intermediate "Verifying account status..." screen that the app shows
+    // after long-running sessions when it re-validates the auth token.
+    const verifyingText = this.page.getByText('Verifying account status', { exact: false });
+    if (await verifyingText.isVisible({ timeout: 3000 }).catch(() => false)) {
+      // Wait for the screen to clear (app will redirect to dashboard once verified)
+      await verifyingText.waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+      // Give the app a moment to finish rendering the dashboard
+      await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+    }
+
     // Ensure search input is rendered and ready
     await this.medicaidSearchInput
       .waitFor({ state: 'visible', timeout: 30000 })
@@ -64,8 +76,20 @@ export class DashboardPage extends BasePage {
     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });
     await this.medicaidSearchInput.click();
     await this.medicaidSearchInput.fill(medicaidId);
+
+    // The app occasionally shows "Verifying account status..." mid-search (auth token
+    // refresh). Wait for it to clear before expecting the dropdown result.
+    const verifyingText = this.page.getByText('Verifying account status', { exact: false });
+    if (await verifyingText.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await verifyingText.waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+      await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+      // Re-fill search after the auth refresh clears the input
+      await this.medicaidSearchInput.click();
+      await this.medicaidSearchInput.fill(medicaidId);
+    }
+
     const result = this.page.getByText(displayText || medicaidId, { exact: false }).first();
-    await expect(result).toBeVisible({ timeout: 15000 });
+    await expect(result).toBeVisible({ timeout: 30000 });
     await result.click();
     await this.page.waitForLoadState('networkidle', { timeout: 30000 });
   }

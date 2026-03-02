@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { TEST_DATA } from '../testData.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { SDOHBarriersCard } from '../pages/cards/SDOHBarriersCard.js';
@@ -12,8 +13,6 @@ import { SDOHBarriersCard } from '../pages/cards/SDOHBarriersCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('SDOH Barriers - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let sdohCard;
 
@@ -33,7 +32,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
   // Qase Test Case ID: 237
   test('ONEVIEW-237: Verify read-only behavior @smoke', async ({ page }) => {
     const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    await expect(sdohTitle).toBeVisible({ timeout: TIMEOUTS.medium });
     const editableInputs = page.locator('input:not([readonly]):not([disabled])').filter({
       has: page.locator('text=/Health Related Social Needs/i')
     });
@@ -44,22 +43,22 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
   // Qase Test Case ID: 238
   test('ONEVIEW-238: Data refresh on patient selection @smoke', async ({ page }) => {
     const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    await expect(sdohTitle).toBeVisible({ timeout: TIMEOUTS.medium });
     const initialText = await sdohCard.getCardText();
     expect(initialText.length).toBeGreaterThan(0);
 
     await dashboard.medicaidSearchInput.clear();
     await dashboard.medicaidSearchInput.fill(TEST_DATA.patients.completeData.medicaidId);
     await page.waitForTimeout(1000);
-    await expect(sdohTitle).toBeVisible({ timeout: 5000 });
+    await expect(sdohTitle).toBeVisible({ timeout: TIMEOUTS.short });
   });
 
   // Qase Test Case ID: 239
   test('ONEVIEW-239: Handle backend unavailability @smoke', async ({ page }) => {
     await expect(page.locator('body')).toBeVisible();
     const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
-    const cardExists = await sdohTitle.isVisible({ timeout: 3000 }).catch(() => false);
-    const cardContainerExists = await sdohCard.card.isVisible({ timeout: 3000 }).catch(() => false);
+    const cardExists = await sdohTitle.isVisible({ timeout: TIMEOUTS.xs }).catch(() => false);
+    const cardContainerExists = await sdohCard.card.isVisible({ timeout: TIMEOUTS.xs }).catch(() => false);
     const pageLoaded = await page.evaluate(() => document.readyState === 'complete');
     expect(cardExists || cardContainerExists || pageLoaded).toBeTruthy();
   });
@@ -67,7 +66,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
   // Qase Test Case ID: 241
   test('ONEVIEW-241: Verify accessibility and responsiveness @smoke', async ({ page }) => {
     const sdohTitle = page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    await expect(sdohTitle).toBeVisible({ timeout: TIMEOUTS.medium });
 
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(500);
@@ -86,7 +85,7 @@ test.describe('SDOH Barriers - Smoke Tests', () => {
   // Qase Test Case ID: 242
   test('ONEVIEW-242: Verify HIPAA compliance (read-only data) @smoke', async () => {
     const sdohTitle = sdohCard.page.locator('text=/Health Related Social Needs/i').first();
-    await expect(sdohTitle).toBeVisible({ timeout: 10000 });
+    await expect(sdohTitle).toBeVisible({ timeout: TIMEOUTS.medium });
     const inputs = sdohCard.card.locator('input, textarea, [contenteditable="true"], button[onclick*="edit"]');
     expect(await inputs.count()).toBe(0);
     const textContent = await sdohCard.getCardText();

@@ -1,5 +1,6 @@
 // @ts-check
 import { test } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { LoginPage } from '../pages/LoginPage.js';
 
 /**
@@ -27,6 +28,6 @@ test.describe('Login Page - Smoke Tests', () => {
     test.info().annotations.push({ type: 'qaseId', description: '489' });
     await loginPage.assertPageLoaded();
     await loginPage.clickMicrosoftLogin();
-    await page.waitForURL(/(login\.microsoftonline|login\.microsoft|microsoftonline)\./i, { timeout: 15000 });
+    await page.waitForURL(/(login\.microsoftonline|login\.microsoft|microsoftonline)\./i, { timeout: TIMEOUTS.search });
   });
 });

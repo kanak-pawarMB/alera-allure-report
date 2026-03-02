@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { ADTAlertsCard } from '../pages/cards/ADTAlertsCard.js';
 
@@ -11,8 +12,6 @@ import { ADTAlertsCard } from '../pages/cards/ADTAlertsCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('ADT Alerts - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let adtCard;
 
@@ -30,8 +29,8 @@ test.describe('ADT Alerts - Smoke Tests', () => {
 
   // Qase Test Case ID: 263
   test('ONEVIEW-263: Verify ADT Alerts Card Display @smoke', async ({ page }) => {
-    await expect(page.locator('text=/ADT Alerts/i').first()).toBeVisible({ timeout: 20000 });
-    await adtCard.assertVisible(20000);
+    await expect(page.locator('text=/ADT Alerts/i').first()).toBeVisible({ timeout: TIMEOUTS.alerts });
+    await adtCard.assertVisible(TIMEOUTS.alerts);
   });
 
   // Qase Test Case ID: 264

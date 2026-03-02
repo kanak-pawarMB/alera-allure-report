@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { TEST_DATA } from '../testData.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 

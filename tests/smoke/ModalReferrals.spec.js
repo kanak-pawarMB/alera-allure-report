@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { ReferralsCard } from '../pages/cards/ReferralsCard.js';
 import { ReferralsModal } from '../pages/modals/ReferralsModal.js';
@@ -12,8 +13,6 @@ import { ReferralsModal } from '../pages/modals/ReferralsModal.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Drill Down Referrals - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let referralsCard;
   let referralsModal;
@@ -24,7 +23,7 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
     referralsModal = new ReferralsModal(page);
     try {
       await dashboard.goto();
-      await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: TIMEOUTS.domLoad });
       await page.waitForTimeout(2000);
       await dashboard.assertNotRedirectedToLogin();
       await dashboard.loadDefaultPatient();
@@ -39,16 +38,26 @@ test.describe('Drill Down Referrals - Smoke Tests', () => {
   // Qase Test Case ID: 142
   test('ONEVIEW-142: Smoke_Verify Scroll Functionality @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '142' });
-    await referralsCard.assertVisible(15000);
+    await referralsCard.assertVisible(TIMEOUTS.search);
     await page.waitForTimeout(2000);
     await referralsCard.clickViewAll();
-    await referralsModal.assertVisible(15000);
-    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+    await referralsModal.assertVisible(TIMEOUTS.search);
+    await page.waitForLoadState('networkidle', { timeout: TIMEOUTS.search }).catch(() => {});
     await page.waitForTimeout(1000);
 
     // Scroll inside modal
     await referralsModal.modal.evaluate(node => { node.scrollTop = node.scrollHeight; });
     await referralsModal.assertVisible();
     await referralsModal.close();
+  });
+
+  // Qase Test Case ID: 417
+  test('ONEVIEW-417: Smoke_Validate opening of modal on clicking "View All" @smoke', async ({ page }) => {
+    test.info().annotations.push({ type: 'qaseId', description: '417' });
+    await referralsCard.assertVisible(TIMEOUTS.search);
+    await page.waitForTimeout(2000);
+    await referralsCard.clickViewAll();
+    await referralsModal.assertVisible(TIMEOUTS.search);
+    await referralsModal.assertContent();
   });
 });

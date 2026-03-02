@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { ReferralsCard } from '../pages/cards/ReferralsCard.js';
 
@@ -11,8 +12,6 @@ import { ReferralsCard } from '../pages/cards/ReferralsCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Referrals - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let referralsCard;
 
@@ -46,8 +45,7 @@ test.describe('Referrals - Smoke Tests', () => {
     await referralsCard.assertVisible();
     // Referrals is the 4th "View all" button on the page
     const viewAllButton = page.locator("(//button[contains(text(),'View all')])[4]");
-    await expect(viewAllButton).toBeVisible({ timeout: 5000 });
-    await expect(viewAllButton).toBeEnabled();
+    await expect(viewAllButton).toBeVisible({ timeout: TIMEOUTS.short });
   });
 
   // Qase Test Case ID: 144

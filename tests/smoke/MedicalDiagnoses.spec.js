@@ -1,13 +1,12 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { MedicalDiagnosesCard } from '../pages/cards/MedicalDiagnosesCard.js';
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('Medical Diagnoses - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let medDxCard;
 
@@ -26,7 +25,7 @@ test.describe('Medical Diagnoses - Smoke Tests', () => {
 
   test('ONEVIEW-309: Verify read-only behavior @smoke', async ({ page }) => {
     const card = page.locator('text=/Medical Diagnoses|Diagnoses/i').first();
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.medium });
     const cardText = await card.textContent();
     expect(cardText).toBeTruthy();
     // @ts-ignore
@@ -42,16 +41,16 @@ test.describe('Medical Diagnoses - Smoke Tests', () => {
 
   test('ONEVIEW-310: Verify responsiveness @smoke', async ({ page }) => {
     const card = page.locator('text=/Medical Diagnoses|Diagnoses/i').first();
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.medium });
 
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(1000);
-    await expect(card).toBeVisible({ timeout: 5000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.short });
     expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBeFalsy();
 
     await page.setViewportSize({ width: 375, height: 667 });
     await page.waitForTimeout(1000);
-    await expect(card).toBeVisible({ timeout: 5000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.short });
     expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBeFalsy();
 
     const mobileCardText = await card.textContent();

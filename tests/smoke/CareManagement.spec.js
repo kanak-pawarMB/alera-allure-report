@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { TEST_DATA } from '../testData.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { CareManagementCard } from '../pages/cards/CareManagementCard.js';
@@ -12,8 +13,6 @@ import { CareManagementCard } from '../pages/cards/CareManagementCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Care Management - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let careManagementCard;
 
@@ -33,9 +32,9 @@ test.describe('Care Management - Smoke Tests', () => {
   test('ONEVIEW-163: Verify Data Retrieval from Source Tables @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '163' });
     const card = page.locator(':text("Care Management")').first();
-    await expect(card).toBeVisible({ timeout: 5000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.short });
     const cardWithData = page.locator('[class*="card"]').filter({ hasText: /care/i });
-    await expect(cardWithData.first()).toBeVisible({ timeout: 3000 });
+    await expect(cardWithData.first()).toBeVisible({ timeout: TIMEOUTS.xs });
     const dataFields = page.locator('text=/enrollment|care|management|status|program/i');
     const fieldCount = await dataFields.count();
     expect(fieldCount).toBeGreaterThan(0);
@@ -45,7 +44,7 @@ test.describe('Care Management - Smoke Tests', () => {
   // Qase Test Case ID: 175
   test('ONEVIEW-175: Verify All Fields Are Read-Only @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '175' });
-    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: TIMEOUTS.short });
     const editableInputs = page.locator('input[type="text"], textarea').filter({ has: page.locator(':text("Care")') });
     const editableCount = await editableInputs.count();
     if (editableCount > 0) {
@@ -60,23 +59,23 @@ test.describe('Care Management - Smoke Tests', () => {
   // Qase Test Case ID: 176
   test('ONEVIEW-176: Verify Data Refresh on Patient Change @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '176' });
-    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: TIMEOUTS.short });
     await dashboard.medicaidSearchInput.click();
     await dashboard.medicaidSearchInput.fill(TEST_DATA.patients.secondary.medicaidId);
     await page.waitForTimeout(1000);
     const searchResult = page.getByText(new RegExp(TEST_DATA.patients.secondary.medicaidId)).first();
     if (await searchResult.isVisible().catch(() => false)) {
       await searchResult.click();
-      await page.waitForLoadState('networkidle', { timeout: 30000 });
+      await page.waitForLoadState('networkidle', { timeout: TIMEOUTS.long });
     }
-    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: TIMEOUTS.short });
     console.log('Patient change successful - dashboard refreshed');
   });
 
   // Qase Test Case ID: 182
   test('ONEVIEW-182: Verify Data Source Mapping @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '182' });
-    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: TIMEOUTS.short });
     const enrollmentCount = await page.locator('text=/enrollment|member|plan|effective/i').count();
     const careCount = await page.locator('text=/care|management|program|coordinator|status/i').count();
     expect(enrollmentCount + careCount).toBeGreaterThan(0);
@@ -86,7 +85,7 @@ test.describe('Care Management - Smoke Tests', () => {
   // Qase Test Case ID: 184
   test('ONEVIEW-184: Verify HIPAA Compliance (No Edit Access) @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '184' });
-    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: 5000 });
+    await expect(page.locator(':text("Care Management")').first()).toBeVisible({ timeout: TIMEOUTS.short });
     const consentFields = page.locator('text=/consent|authorization|hipaa|privacy/i');
     const consentCount = await consentFields.count();
     if (consentCount > 0) console.log(`Found ${consentCount} HIPAA/consent-related fields`);
@@ -99,7 +98,7 @@ test.describe('Care Management - Smoke Tests', () => {
   test('ONEVIEW-186: Verify Responsive Design @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '186' });
     const card = page.locator(':text("Care Management")').first();
-    await expect(card).toBeVisible({ timeout: 5000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.short });
 
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(500);

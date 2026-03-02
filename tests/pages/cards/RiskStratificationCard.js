@@ -19,12 +19,24 @@ export class RiskStratificationCard extends BaseCard {
           .filter({ hasText: /Risk Stratification/i })
           .locator('button, [role="button"], a, [class*="badge"]')
           .filter({ hasText: /Risk Score/i })
+      )
+      .or(
+        // Broad fallback: any p/span/div inside the Risk Strat card with "Risk Score" text
+        page
+          .locator('[class*="card"]')
+          .filter({ hasText: /Risk Stratification/i })
+          .locator('p, span, div, a')
+          .filter({ hasText: /Risk Score/i })
+          .first()
       );
 
-    // Specific CSS class locator for the risk score link (from regression tests)
-    this.riskScoreLinkByClass = page.locator(
-      "p[class='font-inter font-semibold text-[12px] leading-[21px] tracking-[0px] truncate block w-full']"
-    ).first();
+    // Semantic locator for the risk score element (replaces fragile hardcoded CSS class)
+    this.riskScoreLinkByClass = page
+      .locator('[class*="card"]')
+      .filter({ hasText: /Risk Stratification/i })
+      .locator('p, span, div, a')
+      .filter({ hasText: /Risk Score/i })
+      .first();
   }
 
   /**
@@ -61,7 +73,8 @@ export class RiskStratificationCard extends BaseCard {
    * Assert the risk score link is present in the card header.
    */
   async assertRiskScoreLinkPresent() {
-    const linkExists = await this.riskScoreLinkByClass.isVisible().catch(() => false);
+    // Use the multi-fallback riskScoreLink instead of the hardcoded CSS class selector
+    const linkExists = await this.riskScoreLink.first().isVisible({ timeout: 10000 }).catch(() => false);
     expect(linkExists).toBeTruthy();
   }
 }

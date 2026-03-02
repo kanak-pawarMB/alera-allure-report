@@ -12,6 +12,7 @@ export default defineConfig({
   globalSetup: './global-setup.js',
   globalTeardown: './global-teardown.js',
   testDir: './tests',
+  timeout: parseInt(process.env.TEST_TIMEOUT) || 120000,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

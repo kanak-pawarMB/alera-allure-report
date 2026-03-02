@@ -8,6 +8,15 @@ export class MedicationFillHistoryModal extends BaseModal {
    */
   constructor(page) {
     super(page);
+    // Override modal locator — MedFill modal may use a capital-M class or custom
+    // aria attribute instead of the lowercase [class*="modal"] / [role="dialog"]
+    // that BaseModal relies on.
+    this.modal = page
+      .locator(
+        '[role="dialog"], [class*="modal"], [class*="Modal"],' +
+        ' [aria-modal="true"], [class*="DrillDown"], [class*="drilldown"]'
+      )
+      .first();
   }
 
   /**

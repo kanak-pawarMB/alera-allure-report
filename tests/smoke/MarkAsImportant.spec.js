@@ -1,12 +1,11 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('Mark Cards as Important - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
 
   test.beforeEach(async ({ page }) => {
@@ -16,7 +15,7 @@ test.describe('Mark Cards as Important - Smoke Tests', () => {
       await dashboard.goto();
       // Wait for any initial cards before searching
       const anyCard = page.locator('[role="region"], [class*="card"], [class*="Card"], div[class*="shadow"]').first();
-      await anyCard.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+      await anyCard.waitFor({ state: 'visible', timeout: TIMEOUTS.medium }).catch(() => {});
       await dashboard.loadDefaultPatient();
     } catch (e) {
       await dashboard.screenshotOnFailure('markimportant-beforeeach-fail.png');
@@ -26,7 +25,7 @@ test.describe('Mark Cards as Important - Smoke Tests', () => {
 
   test('ONEVIEW-511: Verify Star Icon Exists @smoke', async ({ page }) => {
     const cards = page.locator('[role="region"], [class*="card"], [class*="Card"], div[class*="shadow"]').filter({ hasText: /[A-Z]/ }).first();
-    await expect(cards).toBeVisible({ timeout: 10000 });
+    await expect(cards).toBeVisible({ timeout: TIMEOUTS.medium });
     const starIcons = page.locator('button[aria-label*="star" i], button[title*="star" i], [class*="star"], svg[class*="star"]');
     const starCount = await starIcons.count();
     expect(starCount).toBeGreaterThan(0);
@@ -47,7 +46,7 @@ test.describe('Mark Cards as Important - Smoke Tests', () => {
       expect(hasFilledClass || hasGlow).toBeTruthy();
     } else {
       const card = page.locator('[role="region"], [class*="card"]').first();
-      await expect(card).toBeVisible({ timeout: 5000 });
+      await expect(card).toBeVisible({ timeout: TIMEOUTS.short });
     }
   });
 });

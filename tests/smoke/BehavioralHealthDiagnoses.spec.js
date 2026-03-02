@@ -1,13 +1,12 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { BehavioralHealthDiagnosesCard } from '../pages/cards/BehavioralHealthDiagnosesCard.js';
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('Behavioral Health Diagnoses - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let bhCard;
 
@@ -26,7 +25,7 @@ test.describe('Behavioral Health Diagnoses - Smoke Tests', () => {
 
   test('ONEVIEW-323: Verify read-only data behavior @smoke', async ({ page }) => {
     const card = page.locator('text=/Behavioral Health Diagnoses|Mental Health|Behavioral/i').first();
-    await expect(card).toBeVisible({ timeout: 30000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.long });
     const cardText = await card.textContent();
     expect(cardText).toBeTruthy();
     // @ts-ignore

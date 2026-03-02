@@ -1,13 +1,12 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { RiskStratificationCard } from '../pages/cards/RiskStratificationCard.js';
 
 test.use({ storageState: 'auth.json' });
 
 test.describe('Risk Stratification - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let riskCard;
 
@@ -26,7 +25,7 @@ test.describe('Risk Stratification - Smoke Tests', () => {
 
   test('ONEVIEW-385: Validate read-only mode @smoke', async ({ page }) => {
     const card = page.locator('text=/Risk Stratification|Risk Score/i').first();
-    await expect(card).toBeVisible({ timeout: 10000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.medium });
     const cardText = await card.textContent();
     expect(cardText).toBeTruthy();
     // @ts-ignore

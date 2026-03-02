@@ -69,11 +69,23 @@ export class RecentVisitsModal extends BaseModal {
   }
 
   /**
-   * Close the modal via the close icon (XPath variant).
+   * Close the modal via the close icon, with multiple selector fallbacks and
+   * an Escape key fallback in case no close button is interactable.
    */
   async closeViaIcon() {
-    await expect(this.closeIcon.first()).toBeVisible({ timeout: 5000 });
-    await this.closeIcon.first().click();
+    const closeBtn = this.page
+      .locator("(//img[@class=' block dark:hidden'])[1]")
+      .or(this.page.locator("(//div[@aria-label='Close'])[1]"))
+      .or(this.page.getByRole('button', { name: /close/i }))
+      .or(this.page.locator('[aria-label="Close"]'))
+      .first();
+
+    const isVisible = await closeBtn.isVisible({ timeout: 10000 }).catch(() => false);
+    if (isVisible) {
+      await closeBtn.click({ force: true });
+    } else {
+      await this.page.keyboard.press('Escape');
+    }
     await this.assertNotVisible();
   }
 }

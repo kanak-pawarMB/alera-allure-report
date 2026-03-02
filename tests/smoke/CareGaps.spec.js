@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { TEST_DATA } from '../testData.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { CareGapsCard } from '../pages/cards/CareGapsCard.js';
@@ -7,8 +8,6 @@ import { CareGapsCard } from '../pages/cards/CareGapsCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Care Gaps - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let careGapsCard;
 
@@ -27,7 +26,7 @@ test.describe('Care Gaps - Smoke Tests', () => {
 
   test('ONEVIEW-365: Verify refresh on patient switch @smoke', async ({ page }) => {
     const card = page.locator('text=/Care Gaps|Gap Analysis/i').first();
-    await expect(card).toBeVisible({ timeout: 30000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.long });
     const initialText = await card.textContent();
     expect(initialText).toBeTruthy();
     // @ts-ignore
@@ -45,19 +44,19 @@ test.describe('Care Gaps - Smoke Tests', () => {
     if (isVisible) {
       await patientOption.click();
       await page.waitForLoadState('networkidle');
-      await expect(card).toBeVisible({ timeout: 10000 });
+      await expect(card).toBeVisible({ timeout: TIMEOUTS.medium });
       const updatedText = await card.textContent();
       expect(updatedText).toBeTruthy();
       // @ts-ignore
       expect(updatedText.length).toBeGreaterThan(0);
     } else {
-      await expect(card).toBeVisible({ timeout: 10000 });
+      await expect(card).toBeVisible({ timeout: TIMEOUTS.medium });
     }
   });
 
   test('ONEVIEW-375: Verify read-only behavior @smoke', async ({ page }) => {
     const card = page.locator('text=/Care Gaps|Gap Analysis/i').first();
-    await expect(card).toBeVisible({ timeout: 30000 });
+    await expect(card).toBeVisible({ timeout: TIMEOUTS.long });
     const cardText = await card.textContent();
     expect(cardText).toBeTruthy();
     // @ts-ignore

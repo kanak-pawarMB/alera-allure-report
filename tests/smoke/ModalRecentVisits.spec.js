@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { RecentVisitsCard } from '../pages/cards/RecentVisitsCard.js';
 import { RecentVisitsModal } from '../pages/modals/RecentVisitsModal.js';
@@ -25,11 +26,11 @@ test.describe('Drill Down Recent Visits - Smoke Tests', () => {
     recentVisitsModal = new RecentVisitsModal(page);
     await dashboard.goto();
     try {
-      await page.waitForLoadState('domcontentloaded', { timeout: 60000 });
+      await page.waitForLoadState('domcontentloaded', { timeout: TIMEOUTS.domLoad });
       await page.waitForTimeout(2000);
       await dashboard.assertNotRedirectedToLogin();
       await dashboard.loadDefaultPatient();
-      await expect(page.locator('div').filter({ hasText: /Recent Visits|Encounters/i }).first()).toBeVisible({ timeout: 30000 });
+      await expect(page.locator('div').filter({ hasText: /Recent Visits|Encounters/i }).first()).toBeVisible({ timeout: TIMEOUTS.long });
       await dashboard.dismissAlertBannerIfPresent();
     } catch (e) {
       await dashboard.screenshotOnFailure(`debug-beforeEach-${testInfo.title.replace(/\s+/g, '_')}.png`);

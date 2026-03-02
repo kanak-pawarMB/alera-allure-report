@@ -11,8 +11,6 @@ import { ImmunizationsCard } from '../pages/cards/ImmunizationsCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Immunizations - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let immunizationsCard;
 

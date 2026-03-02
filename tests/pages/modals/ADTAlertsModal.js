@@ -24,13 +24,55 @@ export class ADTAlertsModal extends BaseModal {
    * which may click an unrelated button at position [1].
    */
   async open() {
+    // Dismiss ADT alert banner first (before networkidle to avoid interference)
+    const dismissBtn = this.page.getByRole('button', { name: /Dismiss/i }).first();
+    if (await dismissBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await dismissBtn.click();
+      await this.page.waitForTimeout(1000);
+    }
+
+    // Wait for page to fully settle
+    await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+    // Extra settling time for cold-start (first modal open in a test run)
+    await this.page.waitForTimeout(2000);
+
     const adtCard = this.page.locator('[class*="card"]').filter({ hasText: /ADT Alerts/i }).first();
+    await expect(adtCard).toBeVisible({ timeout: 15000 });
+    // Wait for card data to finish loading (not just the skeleton/title)
+    // This handles parallel-run slowdowns where the backend takes longer to respond
+    await adtCard.locator('td, [role="cell"], text=/\\d{1,2}\\/\\d{1,2}\\/\\d{4}|Event|Facility|Admission|No ADT/i')
+      .first()
+      .waitFor({ state: 'visible', timeout: 30000 })
+      .catch(() => {}); // proceed even if no data rows (empty state)
     const viewAllBtn = adtCard
       .locator('button:has-text("View all"), button:has-text("View All"), a:has-text("View All")')
       .first();
     await expect(viewAllBtn).toBeVisible({ timeout: 10000 });
-    await viewAllBtn.click();
-    await this.page.waitForTimeout(800);
+    await viewAllBtn.scrollIntoViewIfNeeded();
+    await this.page.waitForTimeout(500);
+
+    // Dismiss banner AGAIN right before clicking — it can appear during the networkidle/card-data wait above
+    const dismissBtnPre = this.page.getByRole('button', { name: /Dismiss/i }).first();
+    if (await dismissBtnPre.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await dismissBtnPre.click();
+      await this.page.waitForTimeout(500);
+    }
+
+    await viewAllBtn.click({ force: true });
+
+    // Retry up to 2 more times if modal doesn't open (cold-start guard)
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const opened = await this.modal.isVisible({ timeout: 3000 }).catch(() => false);
+      if (opened) break;
+      // Dismiss banner before retry
+      if (await dismissBtnPre.isVisible({ timeout: 1000 }).catch(() => false)) {
+        await dismissBtnPre.click();
+        await this.page.waitForTimeout(500);
+      }
+      await this.page.waitForTimeout(3000);
+      await viewAllBtn.click({ force: true });
+    }
+
     await this.assertVisible(15000);
   }
 

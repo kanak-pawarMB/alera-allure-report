@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { CostUtilizationCard } from '../pages/cards/CostUtilizationCard.js';
 
@@ -11,8 +12,6 @@ import { CostUtilizationCard } from '../pages/cards/CostUtilizationCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Cost Utilization - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let costCard;
 
@@ -31,7 +30,7 @@ test.describe('Cost Utilization - Smoke Tests', () => {
   // Qase Test Case ID: 282
   test('ONEVIEW-282: Verify display of all cost categories @smoke', async ({ page }) => {
     const costTitle = page.locator('text=/12-month Cost.*Utilization|12 month Cost.*Utilization/i').first();
-    await expect(costTitle).toBeVisible({ timeout: 10000 });
+    await expect(costTitle).toBeVisible({ timeout: TIMEOUTS.medium });
     await costCard.assertVisible();
     const cardText = await costCard.getCardText();
     expect(cardText.length).toBeGreaterThan(0);
@@ -40,7 +39,7 @@ test.describe('Cost Utilization - Smoke Tests', () => {
   // Qase Test Case ID: 285
   test('ONEVIEW-285: Verify read-only view @smoke', async ({ page }) => {
     const costTitle = page.locator('text=/12 Month Cost|Cost.*Utilization|Utilization Summary/i').first();
-    await expect(costTitle).toBeVisible({ timeout: 10000 });
+    await expect(costTitle).toBeVisible({ timeout: TIMEOUTS.medium });
     const cardContainer = page.locator('[class*="card"]').filter({ hasText: /12 Month Cost|Cost.*Utilization|Utilization Summary/i }).first();
     const editableInputs = cardContainer.locator('input:not([readonly]):not([disabled]), textarea:not([readonly]):not([disabled])');
     expect(await editableInputs.count()).toBe(0);
@@ -51,7 +50,7 @@ test.describe('Cost Utilization - Smoke Tests', () => {
   // Qase Test Case ID: 297
   test('ONEVIEW-297: Verify responsiveness @smoke', async ({ page }) => {
     const costTitle = page.locator('text=/12 Month Cost|Cost.*Utilization|Utilization Summary/i').first();
-    await expect(costTitle).toBeVisible({ timeout: 10000 });
+    await expect(costTitle).toBeVisible({ timeout: TIMEOUTS.medium });
 
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(500);

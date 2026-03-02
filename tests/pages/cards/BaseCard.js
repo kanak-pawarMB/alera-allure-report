@@ -34,10 +34,30 @@ export class BaseCard {
 
   /**
    * Click the "View all" button to open the drill-down modal.
+   * Uses force:true to bypass any overlay (e.g. ADT alert banner) and retries once
+   * if the modal does not appear within 3s.
    */
   async clickViewAll() {
-    await expect(this.viewAllButton).toBeVisible({ timeout: 5000 });
-    await this.viewAllButton.click();
+    await expect(this.viewAllButton).toBeVisible({ timeout: 10000 });
+    // Dismiss alert banner right before clicking to prevent click interception
+    const dismissBtn = this.page.getByRole('button', { name: /Dismiss/i }).first();
+    if (await dismissBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await dismissBtn.click();
+      await this.page.waitForTimeout(500);
+    }
+    await this.viewAllButton.click({ force: true });
+    // Retry up to 2 more times if modal doesn't open
+    const modal = this.page.locator('[role="dialog"], [class*="modal"]').first();
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const opened = await modal.isVisible({ timeout: 3000 }).catch(() => false);
+      if (opened) break;
+      if (await dismissBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
+        await dismissBtn.click();
+        await this.page.waitForTimeout(500);
+      }
+      await this.page.waitForTimeout(2000);
+      await this.viewAllButton.click({ force: true });
+    }
   }
 
   /**

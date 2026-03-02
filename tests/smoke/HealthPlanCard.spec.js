@@ -1,5 +1,6 @@
 // @ts-check
 import { test } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { HealthPlanCard } from '../pages/cards/HealthPlanCard.js';
 
@@ -11,8 +12,6 @@ import { HealthPlanCard } from '../pages/cards/HealthPlanCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Health Plan Card - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let healthPlanCard;
 
@@ -31,7 +30,7 @@ test.describe('Health Plan Card - Smoke Tests', () => {
   // Qase Test Case ID: 81
   test('ONEVIEW-81: Verify Health Plan Card Display @smoke', async ({ page }) => {
     test.info().annotations.push({ type: 'qaseId', description: '81' });
-    await healthPlanCard.assertVisible(5000);
+    await healthPlanCard.assertVisible(TIMEOUTS.short);
     await healthPlanCard.assertPlanDataPresent();
 
     const planDataCount = await page.locator('text=/plan|enrollment|effective|member/i').count();

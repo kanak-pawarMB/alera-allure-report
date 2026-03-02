@@ -1,5 +1,6 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
+import { TIMEOUTS } from '../timeouts.js';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { DemographicsCard } from '../pages/cards/DemographicsCard.js';
 
@@ -11,8 +12,6 @@ import { DemographicsCard } from '../pages/cards/DemographicsCard.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Demographics Card - Smoke Tests', () => {
-  test.describe.configure({ timeout: 120000 });
-
   let dashboard;
   let demographicsCard;
 
@@ -49,7 +48,7 @@ test.describe('Demographics Card - Smoke Tests', () => {
   test('ONEVIEW-147: Verify Address fields display correctly @smoke', async () => {
     test.info().annotations.push({ type: 'qaseId', description: '147' });
     try {
-      await demographicsCard.assertVisible(15000);
+      await demographicsCard.assertVisible(TIMEOUTS.search);
     } catch (e) {
       await dashboard.screenshotOnFailure('demographics-card-not-visible-147.png');
       throw e;
