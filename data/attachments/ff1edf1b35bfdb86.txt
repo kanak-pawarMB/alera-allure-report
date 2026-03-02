@@ -1,1 +1,0 @@
-ONEVIEW-152: Manual test - requires cross-browser desktop testing

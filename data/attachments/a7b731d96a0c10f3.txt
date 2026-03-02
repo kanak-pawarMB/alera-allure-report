@@ -1,1 +1,0 @@
-ONEVIEW-291: Card text: "12-month Cost / UtilizationInpatient$176,462Outpatient$693,937ED$65,172Pharmacy$961,705Lab$868,019Im", Has cost data: true

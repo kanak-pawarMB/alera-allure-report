@@ -1,0 +1,2 @@
+ONEVIEW-143: "View All" cursor on hover: pointer
+ONEVIEW-143: Cursor is pointer: true

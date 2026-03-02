@@ -1,2 +1,0 @@
->>> Cleared previous auth.json
->>> Session stored in auth.json — LOGIN SUCCESS

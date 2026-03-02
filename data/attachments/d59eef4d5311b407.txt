@@ -1,0 +1,1 @@
+ONEVIEW-291: Card text: "12-month Cost / Utilization", Has cost data: false
