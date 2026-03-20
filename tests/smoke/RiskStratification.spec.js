@@ -35,7 +35,7 @@ test.describe('Risk Stratification - Smoke Tests', () => {
 
   test('ONEVIEW-386: Validate presence of Risk Score link in header @smoke', async () => {
     await riskCard.assertRiskScoreLinkPresent();
-    const linkText = await riskCard.riskScoreLinkByClass.textContent();
+    const linkText = await riskCard.riskScoreLink.textContent();
     expect(linkText).toBeTruthy();
   });
 });

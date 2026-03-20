@@ -8,15 +8,8 @@ export class HealthPlanCard extends BaseCard {
    */
   constructor(page) {
     super(page, /Health Plan|Healthplan/i);
-
-    // Health Plan card uses several possible title variants
-    this.card = page
-      .locator(':text("Health Plan")')
-      .or(page.locator(':text("Healthplan")'))
-      .or(page.locator('[class*="health"]'))
-      .or(page.locator('[data-testid="health-plan"]'))
-      .or(page.locator('[class*="card"]').filter({ hasText: /Health Plan|Healthplan/i }))
-      .first();
+    // BaseCard already sets this.card = page.locator('[class*="card"]').filter({ hasText: /Health Plan|Healthplan/i }).first()
+    // Do not override — previous override included [class*="health"] which matched <img> elements (empty textContent)
   }
 
   /**

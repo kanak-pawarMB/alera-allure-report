@@ -2,6 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../pages/DashboardPage.js';
 import { RecentVisitsCard } from '../pages/cards/RecentVisitsCard.js';
+import { RecentVisitsModal } from '../pages/modals/RecentVisitsModal.js';
 
 /**
  * Recent Visits / Encounters Card - Regression Tests
@@ -16,12 +17,14 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
 
   let dashboard;
   let recentVisitsCard;
+  let recentVisitsModal;
 
   const dateRegex = /\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/;
 
   test.beforeEach(async ({ page }) => {
     dashboard = new DashboardPage(page);
     recentVisitsCard = new RecentVisitsCard(page);
+    recentVisitsModal = new RecentVisitsModal(page);
     await page.setViewportSize({ width: 1280, height: 720 });
     try {
       await dashboard.goto();
@@ -94,12 +97,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '332' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All"), a:has-text("View All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       await expect(modal).toBeVisible({ timeout: 5000 });
 
       const modalHeader = modal.locator('h1, h2, h3, [class*="header"], [class*="title"], [class*="heading"], [class*="modal-title"]').first();
@@ -124,12 +127,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '335' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       const searchInput = modal.locator('input[type="search"], input[placeholder*="search" i]').first();
 
       if (await searchInput.isVisible({ timeout: 5000 }).catch(() => false)) {
@@ -150,12 +153,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '336' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       const searchInput = modal.locator('input[type="search"], input[placeholder*="search" i]').first();
 
       if (await searchInput.isVisible({ timeout: 5000 }).catch(() => false)) {
@@ -187,12 +190,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '338' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
 
       const filterDropdown = modal.locator('select, [role="combobox"]').first();
       if (await filterDropdown.isVisible({ timeout: 3000 }).catch(() => false)) {
@@ -219,12 +222,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '339' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       const searchInput = modal.locator('input[type="search"], input[placeholder*="search" i]').first();
 
       if (await searchInput.isVisible({ timeout: 5000 }).catch(() => false)) {
@@ -257,7 +260,7 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
       await recentVisitsCard.clickViewAll();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       await expect(modal).toBeVisible({ timeout: 15000 });
 
       const cancelButton = modal.locator(
@@ -277,12 +280,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
 
     const initialUrl = page.url();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       await expect(modal).toBeVisible({ timeout: 5000 });
 
       const closeButton = modal.locator(
@@ -326,12 +329,12 @@ test.describe('Recent Visits / Encounters - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '346' });
     await recentVisitsCard.assertVisible();
 
-    const viewAllButton = recentVisitsCard.card.locator('button:has-text("View All"), button:has-text("See All")').first();
+    const viewAllButton = recentVisitsCard.viewAllButton;
     if (await viewAllButton.isVisible({ timeout: 5000 }).catch(() => false)) {
       await viewAllButton.click();
       await page.waitForTimeout(1000);
 
-      const modal = page.locator('[role="dialog"], [class*="modal"]').first();
+      const modal = recentVisitsModal.modal;
       await expect(modal).toBeVisible({ timeout: 5000 });
 
       await expect(modal).toBeVisible();

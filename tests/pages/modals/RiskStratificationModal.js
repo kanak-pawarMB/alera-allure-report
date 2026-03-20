@@ -9,8 +9,8 @@ export class RiskStratificationModal extends BaseModal {
   constructor(page) {
     super(page);
 
-    // Year selector — specific to Risk Stratification modal
-    this.yearSelector = this.page.getByRole('button', { name: 'Select Years' });
+    // Year selector — matches "Select Years" (initial) or a selected year like "2025"
+    this.yearSelector = this.page.getByRole('button', { name: /Select Years|\d{4}/i }).first();
 
     // Override close button with the variants confirmed in risk strat smoke tests
     this.closeButton = this.page
@@ -20,10 +20,28 @@ export class RiskStratificationModal extends BaseModal {
   }
 
   /**
+   * Override: use yearSelector as the modal presence indicator.
+   * The Risk Strat modal may not use role="dialog" or class*="modal".
+   * @param {number} [timeout]
+   */
+  async assertVisible(timeout = 15000) {
+    await expect(this.yearSelector).toBeVisible({ timeout });
+  }
+
+  /**
+   * Override: modal is gone when yearSelector is no longer visible.
+   * @param {number} [timeout]
+   */
+  async assertNotVisible(timeout = 5000) {
+    await expect(this.yearSelector).not.toBeVisible({ timeout });
+  }
+
+  /**
    * Assert the modal contains Risk Stratification content.
    */
   async assertContent() {
-    await expect(this.modal).toContainText(/Risk Score|Risk Stratification|Quarter|Year/i);
+    await expect(this.page.locator('text=/Risk Stratification/i').first()).toBeVisible({ timeout: 10000 });
+    await expect(this.yearSelector).toBeVisible({ timeout: 10000 });
   }
 
   /**

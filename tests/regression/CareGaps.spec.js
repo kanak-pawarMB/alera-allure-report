@@ -231,7 +231,7 @@ test.describe('Care Gaps - Regression @regression', () => {
 
     const infoIcon = careGapsCard.card.locator('[aria-label*="info" i], [class*="info"], svg[aria-label*="info" i]').first();
     if (await infoIcon.isVisible().catch(() => false)) {
-      await infoIcon.hover({ trial: true }).catch(() => {});
+      await infoIcon.hover({ trial: true, timeout: 3000 }).catch(() => {});
       const tooltip = page.locator('text=/Metric_Description|Description|Metric/i');
       // Allow either tooltip visible or icon existence if tooltips are delayed
       const hasTooltip = await tooltip.first().isVisible({ timeout: 2000 }).catch(() => false);

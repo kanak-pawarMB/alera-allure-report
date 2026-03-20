@@ -23,13 +23,14 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
       await expect(page).toHaveTitle(/OneView|Login/i);
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -64,11 +65,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12 landscape'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -84,11 +86,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone SE'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const buttonBox = await loginButton.boundingBox();
@@ -146,11 +149,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['Pixel 5'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -175,11 +179,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['Galaxy S9+'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       await page.screenshot({
@@ -201,11 +206,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPad'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -234,11 +240,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPad landscape'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -262,11 +269,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPad Pro 11'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const allImages = page.locator('img');
@@ -298,11 +306,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPad Pro 11 landscape'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
       await expect(loginButton).toBeInViewport();
 
@@ -325,11 +334,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         viewport: { width: 320, height: 568 }
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const hasHorizontalScroll = await page.evaluate(() => {
@@ -345,11 +355,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         viewport: { width: 768, height: 1024 }
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const containerWidth = await page.evaluate(() => {
@@ -367,11 +378,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         viewport: { width: 1024, height: 768 }
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       await context.close();
@@ -388,17 +400,18 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      let loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      let loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       await page.setViewportSize({ width: 844, height: 390 });
       await page.waitForTimeout(500);
 
-      loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible();
       await expect(loginButton).toBeInViewport();
 
@@ -417,17 +430,18 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         viewport: { width: 375, height: 667 }
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      let loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      let loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       await page.setViewportSize({ width: 768, height: 1024 });
       await page.waitForTimeout(500);
 
-      loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible();
       await expect(loginButton).toBeInViewport();
 
@@ -445,11 +459,12 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         hasTouch: true,
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       await loginButton.tap();
@@ -469,6 +484,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
@@ -480,7 +496,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         console.log('No semantic headings found - login page may use other text elements');
       }
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const ariaLabel = await loginButton.getAttribute('aria-label');
@@ -495,6 +511,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPad'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
@@ -524,6 +541,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');
@@ -533,7 +551,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
       });
       await page.waitForTimeout(500);
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 10000 });
 
       const isInViewport = await loginButton.isVisible();
@@ -553,6 +571,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['iPhone 12'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await context.route('**/*', route => route.continue());
 
@@ -563,7 +582,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
 
       expect(loadTime).toBeLessThan(10000);
 
-      const loginButton = page.getByRole('button', { name: /Login with Microsoft/i });
+      const loginButton = loginPage.microsoftLoginButton;
       await expect(loginButton).toBeVisible({ timeout: 15000 });
 
       await context.close();
@@ -574,6 +593,7 @@ test.describe('Login Page - Responsive Design Tests @regression', () => {
         ...devices['Pixel 5'],
       });
       const page = await context.newPage();
+      const loginPage = new LoginPage(page);
 
       await page.goto(LOGIN_URL);
       await page.waitForLoadState('networkidle');

@@ -32,6 +32,12 @@ export class DashboardPage extends BasePage {
       .or(page.getByRole('button', { name: /Medicaid ID|Medicaid/i }).first())
       .or(page.locator('button').filter({ hasText: /Medicaid/i }).first());
 
+    // Dashboard-level locators used across multiple test suites
+    this.allCards = page.locator('[class*="card"], [data-testid*="card"]');
+    this.starIcons = page.locator('[class*="star"], [data-icon="star"]');
+    this.darkModeToggle = page.locator('[aria-label*="dark mode"], [aria-label*="theme"], button:has-text("Dark")').first();
+    this.greetingText = page.locator('text=/hello|hi|welcome/i').first();
+
     // Last Name + DOB search fields
     this.lastNameInput = page
       .locator('input[placeholder*="Last Name"], input[placeholder*="First 3"]')
@@ -101,7 +107,7 @@ export class DashboardPage extends BasePage {
   async loadDefaultPatient() {
     await this.loadPatientByMedicaidId(
       TEST_DATA.patients.completeData.medicaidId,
-      'NC767095351|Elizabeth Garcia|12/09/'
+      TEST_DATA.patients.completeData.medicaidId
     );
   }
 

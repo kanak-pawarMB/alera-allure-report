@@ -1,19 +1,20 @@
 // @ts-check
 import { expect } from '@playwright/test';
+import { BasePage } from '../BasePage.js';
 
-export class BaseCard {
+export class BaseCard extends BasePage {
   /**
    * @param {import('@playwright/test').Page} page
    * @param {RegExp} cardTitlePattern - regex matching the card title (e.g. /ADT Alerts/i)
    */
   constructor(page, cardTitlePattern) {
-    this.page = page;
+    super(page);
     this.card = page
       .locator('[class*="card"]')
       .filter({ hasText: cardTitlePattern })
       .first();
     this.viewAllButton = this.card
-      .locator('button:has-text("View all"), button:has-text("View All"), a:has-text("View All")')
+      .locator('button:has-text("View all"), button:has-text("View All"), button:has-text("See All"), a:has-text("View All")')
       .first();
   }
 
@@ -46,16 +47,18 @@ export class BaseCard {
       await this.page.waitForTimeout(500);
     }
     await this.viewAllButton.click({ force: true });
-    // Retry up to 2 more times if modal doesn't open
-    const modal = this.page.locator('[role="dialog"], [class*="modal"]').first();
-    for (let attempt = 0; attempt < 2; attempt++) {
-      const opened = await modal.isVisible({ timeout: 3000 }).catch(() => false);
-      if (opened) break;
+    // Wait up to 6s for modal to actually appear before deciding to retry.
+    // Use the same broad locator as BaseModal to avoid false "not opened" detection
+    // which would cause a retry-click that toggles (closes) the modal.
+    const modal = this.page.locator('[role="dialog"], [class*="modal"], [class*="Modal"], [aria-modal="true"], [class*="DrillDown"], [class*="drilldown"]').first();
+    const opened = await modal.waitFor({ state: 'visible', timeout: 6000 }).then(() => true).catch(() => false);
+    if (!opened) {
+      // Only re-click if modal genuinely didn't open
       if (await dismissBtn.isVisible({ timeout: 1000 }).catch(() => false)) {
         await dismissBtn.click();
         await this.page.waitForTimeout(500);
       }
-      await this.page.waitForTimeout(2000);
+      await this.page.waitForTimeout(1000);
       await this.viewAllButton.click({ force: true });
     }
   }

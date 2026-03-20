@@ -10,8 +10,8 @@
  *   4. Run Playwright tests file-by-file (--project=smoke)
  *   5. Parse results and map test titles → Qase case IDs
  *   6. Post results to the Qase run
- *   7. Update automation status: passed → 2 (Automated), failed → 0 (Manual)
- *   8. Complete the Qase run
+ *   7. Complete the Qase run
+ *   8. Update automation status: passed → 2 (Automated), failed → 0 (Manual)
  *
  * Usage:
  *   # Run all smoke files (one combined Qase run):
@@ -40,7 +40,7 @@ dotenv.config({ path: resolve(__dirname, '../.env') });
 const QASE_API_TOKEN = process.env.QASE_API_TOKEN;
 const QASE_PROJECT   = process.env.QASE_PROJECT || 'ONEVIEW';
 const QASE_API_BASE  = 'https://api.qase.io/v1';
-const RESULTS_FILE   = resolve(__dirname, 'smoke-results.json');
+const RESULTS_FILE   = resolve(__dirname, 'test-results.json');
 const SMOKE_DIR      = resolve(__dirname, '../tests/smoke');
 
 // ── Automation status codes ───────────────────────────────────────────────────
@@ -161,13 +161,13 @@ async function createTestRun(caseIds, label) {
 function runPlaywrightTests(testPath) {
   console.log(`\n🧪 Running Playwright tests: ${testPath}`);
 
-  const cmd = `npx playwright test ${testPath} --reporter=json --project=smoke`;
+  const cmd = `npx playwright test ${testPath} --project=smoke`;
 
   try {
     execSync(cmd, {
       cwd: resolve(__dirname, '..'),
       encoding: 'utf8',
-      env: { ...process.env, PLAYWRIGHT_JSON_OUTPUT_NAME: RESULTS_FILE },
+      env: { ...process.env, PLAYWRIGHT_JSON_OUTPUT_NAME: RESULTS_FILE, SKIP_ALLURE_CLEAN: '1' },
       stdio: 'inherit',
       timeout: 1_800_000, // 30 min max
     });
@@ -377,11 +377,13 @@ async function main() {
     // 5. Post all results to the single run
     await postResults(runId, allResults);
 
-    // 6. Update automation statuses
-    await updateAutomationStatuses(allResults);
-
-    // 7. Complete run
+    // 6. Complete run BEFORE updating automation statuses
+    // (Qase resets automation to "to-be-automated" on run completion,
+    //  so statuses must be set AFTER the run is completed)
     await completeRun(runId);
+
+    // 7. Update automation statuses (after run is closed so Qase doesn't override them)
+    await updateAutomationStatuses(allResults);
 
     console.log(`\n✨ Done! ${runTitle} Qase integration complete.\n`);
 

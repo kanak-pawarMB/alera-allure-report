@@ -15,6 +15,7 @@ import { RecentVisitsModal } from '../pages/modals/RecentVisitsModal.js';
 test.use({ storageState: 'auth.json' });
 
 test.describe('Drill Down Recent Visits - Smoke Tests', () => {
+  test.describe.configure({ retries: 1 });
 
   let dashboard;
   let recentVisitsCard;

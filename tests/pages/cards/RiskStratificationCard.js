@@ -9,53 +9,27 @@ export class RiskStratificationCard extends BaseCard {
   constructor(page) {
     super(page, /Risk Stratification/i);
 
-    // The clickable Risk Score link — uses multiple fallback strategies
-    this.riskScoreLink = page
-      .getByRole('button', { name: /Risk Score/i })
-      .or(page.getByText(/Risk Score:\s*\d+/i))
-      .or(
-        page
-          .locator('[class*="card"]')
-          .filter({ hasText: /Risk Stratification/i })
-          .locator('button, [role="button"], a, [class*="badge"]')
-          .filter({ hasText: /Risk Score/i })
-      )
-      .or(
-        // Broad fallback: any p/span/div inside the Risk Strat card with "Risk Score" text
-        page
-          .locator('[class*="card"]')
-          .filter({ hasText: /Risk Stratification/i })
-          .locator('p, span, div, a')
-          .filter({ hasText: /Risk Score/i })
-          .first()
-      );
-
-    // Semantic locator for the risk score element (replaces fragile hardcoded CSS class)
-    this.riskScoreLinkByClass = page
-      .locator('[class*="card"]')
-      .filter({ hasText: /Risk Stratification/i })
-      .locator('p, span, div, a')
-      .filter({ hasText: /Risk Score/i })
-      .first();
+    // The clickable Risk Score badge in the card header (e.g. "Risk Score: 22")
+    // Target by exact text pattern — avoids matching outer wrapper elements
+    this.riskScoreLink = page.getByText(/Risk Score:\s*\d+/).first();
   }
 
   /**
    * Wait for skeleton loaders to clear (Risk Strat card loads async).
+   * Delegates to BasePage.waitForSkeletons() inherited via BaseCard.
    */
   async waitForDataLoaded() {
-    await this.page.waitForFunction(
-      () => document.querySelectorAll('[class*="skeleton"],[class*="animate-pulse"]').length === 0,
-      { timeout: 30000 }
-    ).catch(() => {});
+    await this.waitForSkeletons();
   }
 
   /**
    * Scroll to the risk score link and click it to open the modal.
    */
   async clickRiskScoreLink() {
-    await this.riskScoreLink.first().scrollIntoViewIfNeeded().catch(() => {});
-    await expect(this.riskScoreLink.first()).toBeVisible({ timeout: 15000 });
-    await this.riskScoreLink.first().click({ timeout: 10000 });
+    await this.card.scrollIntoViewIfNeeded().catch(() => {});
+    await expect(this.riskScoreLink).toBeVisible({ timeout: 15000 });
+    await this.riskScoreLink.click();
+    await this.page.waitForTimeout(500); // allow modal to begin rendering
   }
 
   /**
@@ -73,7 +47,8 @@ export class RiskStratificationCard extends BaseCard {
    * Assert the risk score link is present in the card header.
    */
   async assertRiskScoreLinkPresent() {
-    // Use the multi-fallback riskScoreLink instead of the hardcoded CSS class selector
+    // Scroll the card into view first — it is below the fold on 1280x720 viewport
+    await this.card.scrollIntoViewIfNeeded().catch(() => {});
     const linkExists = await this.riskScoreLink.first().isVisible({ timeout: 10000 }).catch(() => false);
     expect(linkExists).toBeTruthy();
   }

@@ -8,10 +8,6 @@ export class ADTAlertsCard extends BaseCard {
    */
   constructor(page) {
     super(page, /ADT Alerts/i);
-
-    this.viewAllButton = this.card
-      .locator('button:has-text("View all")')
-      .first();
   }
 
   /**

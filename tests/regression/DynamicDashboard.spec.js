@@ -36,7 +36,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Log in as a user with known card order configuration
     // Step 2: Observe the dashboard card sequence
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
     const cardCount = await cards.count();
 
@@ -57,12 +57,12 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Log in to the dashboard
     // Step 2: Observe UI styling of important cards
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     // Expected: Important cards show a filled star icon and background glow per Figma design
     // Check for star icon elements
-    const starIcons = page.locator('[class*="star"], [data-icon="star"]');
+    const starIcons = dashboard.starIcons;
     const hasStarIcon = await starIcons.count().then(count => count > 0);
 
     // Expected: Non-important cards appear normal with hollow star icon
@@ -92,7 +92,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Wait for cards to load
     await page.waitForTimeout(2000);
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     // Expected: Loader disappears after data successfully loads
@@ -108,7 +108,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Log in with a user having a card with no data
     // Step 2: Observe that specific card
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     // Expected: Card displays the message "No data available"
@@ -132,7 +132,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Log in to the dashboard
     // Step 2: Observe cards where API failed
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     // Expected: Failed card shows appropriate error message (e.g., "Unable to load data")
@@ -157,7 +157,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '43' });
 
     // Step 1: Log in and open the dashboard
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
     const countBefore = await cards.count();
 
@@ -173,7 +173,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     await page.waitForTimeout(3000);
 
     // Expected: Dashboard reloads with the same card order and configuration
-    const cardsAfter = page.locator('[class*="card"], [data-testid*="card"]');
+    const cardsAfter = dashboard.allCards;
     await expect(cardsAfter.first()).toBeVisible({ timeout: 15000 });
     const countAfter = await cardsAfter.count();
 
@@ -191,7 +191,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '44' });
 
     // Step 1: Log in and observe dashboard layout
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
     const countBefore = await cards.count();
 
@@ -220,7 +220,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     await page.reload({ waitUntil: 'domcontentloaded' });
 
     // Wait for cards to appear
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     const endTime = Date.now();
@@ -237,7 +237,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Inspect API response for the user
     // Step 2: Compare with rendered cards on dashboard
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
 
     // Expected: Frontend correctly maps and displays data from API fields
@@ -257,7 +257,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
 
     // Step 1: Log in with valid credentials
     // Step 2: Identify any card and click the star icon to mark it as important
-    const starIcons = page.locator('[class*="star"], [data-icon="star"]');
+    const starIcons = dashboard.starIcons;
 
     // Expected: The previously marked card should still appear as important (highlighted and starred)
     // Expected: User's important card preferences must persist across sessions
@@ -280,7 +280,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '48' });
 
     // Step 1: Move the cursor over the star icon on any dashboard card
-    const starIcon = page.locator('[class*="star"], [data-icon="star"]').first();
+    const starIcon = dashboard.starIcons.first();
     const hasStarIcon = await starIcon.isVisible({ timeout: 3000 }).catch(() => false);
 
     if (hasStarIcon) {
@@ -302,7 +302,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '49' });
 
     // Step 1: Hover over any dashboard card using the mouse cursor
-    const cards = page.locator('[class*="card"], [data-testid*="card"]');
+    const cards = dashboard.allCards;
     await expect(cards.first()).toBeVisible({ timeout: 15000 });
     const firstCard = cards.first();
 
@@ -331,7 +331,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '76' });
 
     // Step 1: Enable dark mode
-    const darkModeToggle = page.locator('[aria-label*="dark mode"], [aria-label*="theme"], button:has-text("Dark")').first();
+    const darkModeToggle = dashboard.darkModeToggle;
     const hasDarkMode = await darkModeToggle.isVisible({ timeout: 3000 }).catch(() => false);
 
     if (hasDarkMode) {
@@ -350,7 +350,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '77' });
 
     // Step 1: Turn Dark Mode ON and refresh the browser
-    const darkModeToggle = page.locator('[aria-label*="dark mode"], [aria-label*="theme"], button:has-text("Dark")').first();
+    const darkModeToggle = dashboard.darkModeToggle;
     const hasDarkMode = await darkModeToggle.isVisible({ timeout: 3000 }).catch(() => false);
 
     if (hasDarkMode) {
@@ -360,7 +360,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
       await page.reload({ waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(2000);
 
-      const darkModeToggleAfter = page.locator('[aria-label*="dark mode"], [aria-label*="theme"], button:has-text("Dark")').first();
+      const darkModeToggleAfter = dashboard.darkModeToggle; // same locator re-evaluates after reload
       const isCheckedAfter = await darkModeToggleAfter.getAttribute('aria-checked').catch(() => 'false');
 
       // Expected: Dark Mode remains active after refresh when selected
@@ -380,7 +380,7 @@ test.describe('Dynamic Dashboard - Regression @regression', () => {
     // Step 1: Login (already done in beforeEach)
     // Step 2: View dashboard
     // Expected: Greeting like "Hello Sarah, search for patient" appears
-    const greeting = page.locator('text=/hello|hi|welcome/i').first();
+    const greeting = dashboard.greetingText;
     const hasGreeting = await greeting.isVisible({ timeout: 5000 }).catch(() => false);
 
     if (hasGreeting) {

@@ -20,8 +20,9 @@ export default defineConfig({
   
   // SINGLE REPORTER CONFIG - Qase + others
   reporter: [
-    ['html'],
+    ['html', { open: 'never' }],
     ['list'],
+    ['json', { outputFile: 'qase/test-results.json' }],
     ['allure-playwright', {
       outputFolder: 'allure-results',
       detail: true,

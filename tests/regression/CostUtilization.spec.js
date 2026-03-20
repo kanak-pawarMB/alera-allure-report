@@ -199,7 +199,9 @@ test.describe('Cost / Utilization - Regression @regression', () => {
     // Card is visible or error message shown
     const errorMessage = page.locator('text=/No data|error|not found|no records/i').first();
 
-    const cardExists = await costCard.card.isVisible({ timeout: 5000 }).catch(() => false);
+    // Scroll card into view before checking — it may be below the fold
+    await costCard.card.scrollIntoViewIfNeeded().catch(() => {});
+    const cardExists = await costCard.card.isVisible({ timeout: 15000 }).catch(() => false);
     const errorExists = await errorMessage.isVisible({ timeout: 5000 }).catch(() => false);
 
     // "No data available" message displayed; no crash

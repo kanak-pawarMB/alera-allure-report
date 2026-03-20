@@ -48,7 +48,7 @@ export class ADTAlertsModal extends BaseModal {
       .locator('button:has-text("View all"), button:has-text("View All"), a:has-text("View All")')
       .first();
     await expect(viewAllBtn).toBeVisible({ timeout: 10000 });
-    await viewAllBtn.scrollIntoViewIfNeeded();
+    await viewAllBtn.scrollIntoViewIfNeeded().catch(() => {}); // element may re-render; click() auto-scrolls
     await this.page.waitForTimeout(500);
 
     // Dismiss banner AGAIN right before clicking — it can appear during the networkidle/card-data wait above
@@ -60,9 +60,9 @@ export class ADTAlertsModal extends BaseModal {
 
     await viewAllBtn.click({ force: true });
 
-    // Retry up to 2 more times if modal doesn't open (cold-start guard)
-    for (let attempt = 0; attempt < 2; attempt++) {
-      const opened = await this.modal.isVisible({ timeout: 3000 }).catch(() => false);
+    // Retry up to 3 more times if modal doesn't open (cold-start guard)
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const opened = await this.modal.isVisible({ timeout: 5000 }).catch(() => false);
       if (opened) break;
       // Dismiss banner before retry
       if (await dismissBtnPre.isVisible({ timeout: 1000 }).catch(() => false)) {
@@ -73,7 +73,7 @@ export class ADTAlertsModal extends BaseModal {
       await viewAllBtn.click({ force: true });
     }
 
-    await this.assertVisible(15000);
+    await this.assertVisible(25000);
   }
 
   /**

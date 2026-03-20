@@ -3,15 +3,15 @@
  * ============================================
  * Supports running a single spec file OR all regression files.
  *
- * Workflow (per file):
+ * Workflow:
  *   1. Scan spec file(s) for ONEVIEW case IDs
  *   2. Reset those case statuses → "to-be-automated" (1)
- *   3. Create a Qase test run for that file
- *   4. Run the Playwright tests (JSON output to file)
+ *   3. Create ONE combined Qase test run with all case IDs
+ *   4. Run Playwright tests FILE-BY-FILE (--project=chromium), accumulate results
  *   5. Parse results and map test titles → Qase case IDs
- *   6. Post results to the Qase run
- *   7. Update automation status: passed → 2 (Automated), failed → 0 (Manual)
- *   8. Complete the Qase run
+ *   6. Post all results to the single Qase run
+ *   7. Complete the Qase run
+ *   8. Update automation status: passed → 2 (Automated), failed → 0 (Manual)
  *
  * Usage:
  *   # Run a single spec file (recommended — one at a time):
@@ -40,7 +40,7 @@ dotenv.config({ path: resolve(__dirname, '../.env') });
 const QASE_API_TOKEN  = process.env.QASE_API_TOKEN;
 const QASE_PROJECT    = process.env.QASE_PROJECT || 'ONEVIEW';
 const QASE_API_BASE   = 'https://api.qase.io/v1';
-const RESULTS_FILE    = resolve(__dirname, 'regression-results.json');
+const RESULTS_FILE    = resolve(__dirname, 'test-results.json');
 const REGRESSION_DIR  = resolve(__dirname, '../tests/regression');
 
 // ── Automation status codes ───────────────────────────────────────────────────
@@ -161,13 +161,13 @@ async function createTestRun(caseIds, label) {
 function runPlaywrightTests(testPath) {
   console.log(`\n🧪 Running Playwright tests: ${testPath}`);
 
-  const cmd = `npx playwright test ${testPath} --reporter=json --project=chromium`;
+  const cmd = `npx playwright test ${testPath} --project=chromium`;
 
   try {
     execSync(cmd, {
       cwd: resolve(__dirname, '..'),
       encoding: 'utf8',
-      env: { ...process.env, PLAYWRIGHT_JSON_OUTPUT_NAME: RESULTS_FILE },
+      env: { ...process.env, PLAYWRIGHT_JSON_OUTPUT_NAME: RESULTS_FILE, SKIP_ALLURE_CLEAN: '1' },
       stdio: 'inherit',
       timeout: 1_800_000, // 30 min max
     });
@@ -312,11 +312,6 @@ async function main() {
     ? targetFiles[0].replace('.spec.js', '') + ' Regression'
     : 'Regression Suite – All Tests';
 
-  // Build the test path to pass to Playwright
-  const testPath = isSingleFile
-    ? `tests/regression/${targetFiles[0]}`
-    : 'tests/regression/';
-
   console.log('═══════════════════════════════════════════════════════');
   console.log(`  Qase Integration: ${label}`);
   console.log(`  Project: ${QASE_PROJECT}`);
@@ -329,7 +324,7 @@ async function main() {
   } else {
     console.log(`\n📂 Scanned ${targetFiles.length} spec file(s):`);
     for (const [file, ids] of Object.entries(specCaseMap)) {
-      console.log(`   ${file.padEnd(42)} ${ids.length} case(s)  [${ids[0]}–${ids[ids.length - 1]}]`);
+      console.log(`   ${file.padEnd(45)} ${ids.length} case(s)  [${ids.join(', ')}]`);
     }
     console.log(`\n📋 Total unique case IDs: ${uniqueIds.length}`);
   }
@@ -340,34 +335,54 @@ async function main() {
   }
 
   let runId;
+  const allResults = [];
 
   try {
     // 1. Reset all cases to "to-be-automated"
     await resetToBeAutomated(uniqueIds);
 
-    // 2. Create test run
+    // 2. Create ONE combined test run
     runId = await createTestRun(uniqueIds, label);
 
-    // 3. Run Playwright tests
-    runPlaywrightTests(testPath);
+    // 3. Run Playwright tests FILE-BY-FILE and accumulate results
+    //    (file-by-file ensures JSON is written after each file completes,
+    //     avoiding the "no JSON output" failure when running all at once)
+    for (const file of targetFiles) {
+      const ids = specCaseMap[file];
+      if (!ids || ids.length === 0) {
+        console.log(`\n⏭️  Skipping ${file} — no ONEVIEW case IDs found`);
+        continue;
+      }
 
-    // 4. Parse results
-    const results = parseResults();
-    const passedCount  = results.filter(r => r.status === 'passed').length;
-    const failedCount  = results.filter(r => r.status === 'failed').length;
-    const skippedCount = results.filter(r => r.status === 'skipped').length;
+      const testPath = `tests/regression/${file}`;
+      runPlaywrightTests(testPath);
 
-    console.log(`\n📊 Results: ${results.length} test(s) with Qase IDs`);
+      // Parse results for this file and merge
+      const fileResults = parseResults();
+      console.log(`\n📊 ${file}: ${fileResults.length} result(s) parsed`);
+      allResults.push(...fileResults);
+
+      // Clean up JSON between files so next file starts fresh
+      cleanup();
+    }
+
+    const passedCount  = allResults.filter(r => r.status === 'passed').length;
+    const failedCount  = allResults.filter(r => r.status === 'failed').length;
+    const skippedCount = allResults.filter(r => r.status === 'skipped').length;
+
+    console.log(`\n📊 Total results: ${allResults.length} test(s) with Qase IDs`);
     console.log(`   Passed: ${passedCount}  |  Failed: ${failedCount}  |  Skipped: ${skippedCount}`);
 
-    // 5. Post results
-    await postResults(runId, results);
+    // 4. Post all results to the single run
+    await postResults(runId, allResults);
 
-    // 6. Update automation statuses
-    await updateAutomationStatuses(results);
-
-    // 7. Complete run
+    // 5. Complete run BEFORE updating automation statuses
+    // (Qase resets automation to "to-be-automated" on run completion,
+    //  so statuses must be set AFTER the run is completed)
     await completeRun(runId);
+
+    // 6. Update automation statuses (after run is closed so Qase doesn't override them)
+    await updateAutomationStatuses(allResults);
 
     console.log(`\n✨ Done! ${label} Qase integration complete.\n`);
 
