@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phase-2 Test Report</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8fafc;color:#1e293b;font-size:14px}
+header{background:#1e293b;color:#fff;padding:24px 32px}
+header h1{font-size:22px;font-weight:700;margin-bottom:4px}
+header p{color:#94a3b8;font-size:13px}
+.summary{display:flex;gap:16px;padding:20px 32px;flex-wrap:wrap}
+.card{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:16px 24px;min-width:140px;flex:1;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.card .value{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px}
+.card .label{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#64748b}
+.card.passed .value{color:#16a34a}.card.failed .value{color:#dc2626}.card.skipped .value{color:#6b7280}.card.total .value{color:#1e293b}
+.pb{margin:0 32px 16px;height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);width:96%}
+.fb{padding:0 32px 12px;display:flex;gap:8px;align-items:center}
+.fb button{border:1px solid #e2e8f0;background:#fff;color:#475569;padding:5px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+.fb button:hover,.fb button.active{background:#1e293b;color:#fff;border-color:#1e293b}
+.fb .srch{margin-left:auto}.fb .srch input{border:1px solid #e2e8f0;border-radius:6px;padding:5px 12px;font-size:13px;width:240px;outline:none}
+.fb .srch input:focus{border-color:#6366f1}
+table{width:calc(100% - 64px);border-collapse:collapse;background:#fff;margin:0 32px 32px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+th{background:#f1f5f9;text-align:left;padding:10px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#64748b;border-bottom:1px solid #e2e8f0}
+td{padding:10px 16px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.suite-header{background:#f8fafc;cursor:pointer;user-select:none}.suite-header:hover{background:#f1f5f9}.suite-header td{font-size:13px;color:#374151}
+.ss{margin-left:12px;font-size:12px}.ss span{margin-right:8px}
+.chev{margin-right:8px;font-size:11px;display:inline-block;transition:transform .2s}
+.tn{max-width:620px;line-height:1.4}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em}
+</style></head><body>
+<header><h1>Phase-2 Test Report — Alera ONEView</h1><p>Generated May 2, 2026 at 11:03 PM &nbsp;|&nbsp; 32m 40s total duration</p></header>
+<div class="summary">
+  <div class="card total"><div class="value">149</div><div class="label">Total</div></div>
+  <div class="card passed"><div class="value">143</div><div class="label">Passed</div></div>
+  <div class="card failed"><div class="value">0</div><div class="label">Failed</div></div>
+  <div class="card skipped"><div class="value">6</div><div class="label">Skipped (Manual)</div></div>
+</div>
+<div class="pb"><div class="pf"></div></div>
+<div class="fb">
+  <button class="active" onclick="filt('all',this)">All 149</button>
+  <button onclick="filt('passed',this)">Passed 143</button>
+  <button onclick="filt('failed',this)">Failed 0</button>
+  <button onclick="filt('skipped',this)">Skipped 6</button>
+  <div class="srch"><input id="sb" type="text" placeholder="Search test name…" oninput="srch(this.value)"></div>
+</div>
+<table id="tbl"><thead><tr><th>Test Name</th><th>Status</th><th style="text-align:right">Duration</th><th></th></tr></thead>
+<tbody>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_AddCards')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_AddCards">▶</span>
+      <strong>regressionPhase-2/AddCards</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 20</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">20 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-765: Verify Add Cards option visibility in Edit Mode only @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-766: Verify Add Cards button styling and label @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-767: Verify card selection panel opens on Add Cards click @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-768: Verify card selection panel is scrollable @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-769: Verify card list item layout with name, description, and action button @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-770: Verify all configurable cards are listed in the panel @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-771: Verify Add button default state styling @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-772: Verify card appears in dashboard layout on Add click @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-773: Verify newly added card appears in leftmost column @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-774: Verify Remove button state styling after Add @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-775: Verify duplicate addition is prevented visually @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-776: Verify multiple cards can be added without restriction @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-777: Verify immediate visual feedback on Add action @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-778: Verify card icons and visual identity in the panel @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-779: Verify panel remains open after adding a card @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-780: Verify visual state of added card matches existing dashboard cards @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-781: Verify added cards persist visually after Save and re-login @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-782: Verify Add Cards panel typography and color consistency @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-783: Verify Add Cards panel responsiveness across supported screen sizes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">31.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-784: Verify fixed cards are excluded from Add Cards panel @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_DragAndDrop')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_DragAndDrop">▶</span>
+      <strong>regressionPhase-2/DragAndDrop</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 0</span> <span style="color:#6b7280">⊘ 5</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">5 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DragAndDrop st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-838: Verify drag handle cursor appears on configurable cards in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">363ms</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DragAndDrop st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-839: Verify card can be dragged and dropped to a different column @regression</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">272ms</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DragAndDrop st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-840: Verify card can be reordered within the same column via drag-and-drop @regression</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">310ms</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DragAndDrop st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-841: Verify drag-and-drop card order persists after Save @regression</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">322ms</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DragAndDrop st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-842: Verify fixed cards (Demographics, Care Management) cannot be dragged or dropped @regression</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">292ms</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_DrawerComponent')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_DrawerComponent">▶</span>
+      <strong>regressionPhase-2/DrawerComponent</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 21</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">21 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-744: Verify Add Cards button visibility in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-745: Verify Card Selection Drawer opens on Add Cards click @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-746: Verify Card Selection Drawer header layout @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-747: Verify search bar display in Card Selection Drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-748: Verify card list item layout in drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-749: Verify all configurable cards are listed in the drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-750: Verify cards are displayed in alphabetical order @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-751: Verify Add button styling for cards not yet added @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-752: Verify Remove button styling for cards already added @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-753: Verify button state toggle on Add action @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-754: Verify button state toggle on Remove action @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-755: Verify drawer reflects real-time layout changes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-756: Verify drawer is scrollable when content exceeds viewport @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-757: Verify drawer close via close (×) icon @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-758: Verify drawer auto-closes on exiting Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-759: Verify drawer is not accessible outside Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-760: Verify fixed cards are excluded from the drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-761: Verify card icons and visual identity in drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-762: Verify drawer open and close animations @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-763: Verify drawer typography and color consistency @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-764: Verify drawer responsiveness across supported screen sizes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">29.4s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_EditLayout')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_EditLayout">▶</span>
+      <strong>regressionPhase-2/EditLayout</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 37</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">37 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-708: Verify Edit Layout option styling and label in Profile menu @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-709: Verify Edit Layout button cursor and focus states @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-710: Verify Edit Mode banner styling and placement @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-711: Verify visual distinction between view mode and Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-712: Verify card grab cursor is visually displayed in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-713: Verify card visual feedback during drag-and-drop @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-714: Verify column dividers visibility in multi-column layouts @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-715: Verify layout option selection visual indicator @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-716: Verify Add Cards side drawer UI @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-717: Verify Add/Remove button visual state toggle @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-718: Verify Restore Layout dropdown UI styling @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-719: Verify confirmation popup visual design @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-720: Verify Save and Cancel button styling in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-721: Verify fixed cards visual treatment in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-722: Verify dashboard layout responsiveness across supported screen sizes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-723: Verify card spacing and alignment in different layouts @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-724: Verify empty column visual state in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-725: Verify scrollbar behavior in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-726: Verify typography and color consistency in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-727: Verify Profile dropdown menu structure and options @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-728: Verify 5 layout toggle icons in Edit Dashboard header @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-729: Verify Edit Mode info banner exact content and close action @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-730: Verify Add Cards drawer search bar UI @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-731: Verify card list item layout in Add Cards drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-732: Verify cards in Add Cards drawer display in alphabetical order @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-733: Verify "Fixed" badge displayed on fixed cards in Edit Mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-734: Verify Restore Default Layout confirmation popup exact content @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-735: Verify Restore Preferred Layout confirmation popup exact content @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">19.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-736: Verify Update Preferred Layout confirmation popup with warning note @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-737: Verify Save button disabled state when no changes made @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-739: Verify Restore Layout dropdown chevron and position @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-740: Verify card icons and visual identity in Add Cards drawer @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-741: Verify star/favorite icon does not display on dashboard cards @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-742: Verify Add Cards drawer close behavior @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-743: Verify empty state before patient search in view mode @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-856: Verify 30/70 two-column layout selection and column structure @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-857: Verify 70/30 two-column layout selection and column structure @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.7s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_PreferredLayout')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_PreferredLayout">▶</span>
+      <strong>regressionPhase-2/PreferredLayout</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 27</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">27 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-813: Verify Save button is disabled when no changes are made @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-814: Verify Save button becomes enabled after layout modification @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-815: Verify Update Preferred Layout confirmation popup content @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-816: Verify layout is saved as Preferred Layout on confirmation @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-817: Verify existing Preferred Layout is overwritten on Save @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">21.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-818: Verify Cancel on Save confirmation retains unsaved changes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-819: Verify close (×) icon on Save confirmation popup dismisses without saving @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-820: Verify Restore Layout dropdown shows only Default Layout when Preferred Layout is active @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">19.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-821: Verify Restore Layout dropdown shows only Preferred Layout when Default Layout is active @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">19.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-822: Verify Restore Default Layout confirmation popup content @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-823: Verify Default Layout is applied on Restore Default confirmation @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">17.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-824: Verify Cancel on Restore Default confirmation retains current layout @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">16.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-825: Verify Restore Preferred Layout confirmation popup content @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">18.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-826: Verify Preferred Layout is restored on Restore Preferred confirmation @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">18.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-827: Verify Cancel on Restore Preferred confirmation retains current layout @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">23.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-828: Verify Revert to Preferred Layout discards unsaved changes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">21.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-829: Verify Restore Layout dropdown toggles based on active layout @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">16.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-830: Verify Preferred Layout persists across login sessions @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-831: Verify Preferred Layout persists across browser refresh @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-832: Verify only one Preferred Layout exists per user @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">23.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-833: Verify Preferred Layout is user-specific @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-834: Verify fixed cards remain unaffected during Save and Restore operations @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">20.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-835: Verify first-time user sees Default Layout with no Preferred Layout saved @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-836: Verify Save after Restore Default creates new Preferred Layout @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">20.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-837: Verify confirmation prompts are closable via close (×) icon for all modals @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">18.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-858: Verify cards selected in Edit Mode appear on real dashboard after Save @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">18.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-859: Verify dashboard cards are visible after Save and patient selection @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">17.3s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('regressionPhase_2_RemoveCards')">
+    <td colspan="3">
+      <span class="chev" id="chev-regressionPhase_2_RemoveCards">▶</span>
+      <strong>regressionPhase-2/RemoveCards</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 19</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">19 tests</td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-786: Verify Remove button visibility for already-added cards @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-787: Verify Remove button styling @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-788: Verify visual distinction between Add and Remove states @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-789: Verify card is removed from dashboard layout on Remove click @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-790: Verify Remove button changes back to Add after removal @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-791: Verify layout reflows correctly after card removal @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-792: Verify removed card remains available for re-adding @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-793: Verify multiple cards can be removed sequentially @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-794: Verify fixed cards do not appear in Remove list @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-795: Verify removed cards persist as hidden after Save and re-login @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">18.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-796: Verify removed card does not appear in any column after layout changes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-797: Verify immediate visual feedback on Remove action @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-798: Verify removing all configurable cards leaves only fixed cards @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">17.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-799: Verify Remove action does not affect other dashboard data @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-800: Verify Cancel preserves the removed state until Save @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.0s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-801: Verify drag handle is removed when card is removed @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">17.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-802: Verify Remove button responsiveness across supported screen sizes @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-803: Verify Remove button typography and color consistency @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.6s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-regressionPhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-804: Verify removing a card does not affect other users @regression</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.6s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('smokePhase_2_AddCards')">
+    <td colspan="3">
+      <span class="chev" id="chev-smokePhase_2_AddCards">▶</span>
+      <strong>smokePhase-2/AddCards</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 3</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">3 tests</td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-850: Verify Add button adds a card to the dashboard layout @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">22.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-851: Verify Add button changes to Remove after adding @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_AddCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-852: Verify drawer remains open after adding a card @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.2s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('smokePhase_2_DrawerComponent')">
+    <td colspan="3">
+      <span class="chev" id="chev-smokePhase_2_DrawerComponent">▶</span>
+      <strong>smokePhase-2/DrawerComponent</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 3</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">3 tests</td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-847: Verify Add Cards drawer opens when Add Cards is clicked @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.1s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-848: Verify drawer displays card list with Add and Remove buttons @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.2s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_DrawerComponent st-passed" style="display:none">
+    <td class="tn">ONEVIEW-849: Verify drawer closes via the X icon @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">16.4s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('smokePhase_2_EditLayout')">
+    <td colspan="3">
+      <span class="chev" id="chev-smokePhase_2_EditLayout">▶</span>
+      <strong>smokePhase-2/EditLayout</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 4</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">4 tests</td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-843: Verify Edit Mode can be entered via Profile menu @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-844: Verify all 5 layout toggle icons are visible in Edit Mode @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.3s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-845: Verify Save and Cancel buttons appear in Edit Mode @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">9.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_EditLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-846: Verify Cancel exits Edit Mode without saving @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.8s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('smokePhase_2_PreferredLayout')">
+    <td colspan="3">
+      <span class="chev" id="chev-smokePhase_2_PreferredLayout">▶</span>
+      <strong>smokePhase-2/PreferredLayout</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 7</span> <span style="color:#6b7280">⊘ 1</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">8 tests</td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-805: Verify Save button is visible in Edit Mode @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">10.9s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-806: Verify Save confirmation prompt appears on Save click @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.7s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-807: Verify layout is saved on confirmation @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">16.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-808: Verify Restore Layout dropdown is visible in Edit Mode @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-809: Verify Restore Default Layout option and confirmation @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">14.4s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-810: Verify Restore Preferred Layout option and confirmation @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">15.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-skipped" style="display:none">
+    <td class="tn">ONEVIEW-811: Verify saved Preferred Layout persists after re-login @smoke</td>
+    <td><span class="badge" style="background:#6b7280">SKIPPED</span></td>
+    <td style="color:#6b7280;text-align:right">10.5s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_PreferredLayout st-passed" style="display:none">
+    <td class="tn">ONEVIEW-812: Verify Cancel on Save confirmation does not save layout @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">12.4s</td>
+    <td></td>
+  </tr>
+  <tr class="suite-header" onclick="toggle('smokePhase_2_RemoveCards')">
+    <td colspan="3">
+      <span class="chev" id="chev-smokePhase_2_RemoveCards">▶</span>
+      <strong>smokePhase-2/RemoveCards</strong>
+      <span class="ss"><span style="color:#16a34a">✓ 2</span></span>
+    </td>
+    <td style="text-align:right;color:#6b7280">2 tests</td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-853: Verify Remove button removes a card from the dashboard layout @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">13.8s</td>
+    <td></td>
+  </tr>
+  <tr class="test-row s-smokePhase_2_RemoveCards st-passed" style="display:none">
+    <td class="tn">ONEVIEW-854: Verify Remove button changes back to Add after removing @smoke</td>
+    <td><span class="badge" style="background:#16a34a">PASSED</span></td>
+    <td style="color:#6b7280;text-align:right">11.2s</td>
+    <td></td>
+  </tr></tbody></table>
+<script>
+var open={},cf='all',cs='';
+function toggle(id){open[id]=!open[id];var c=document.getElementById('chev-'+id);if(c)c.style.transform=open[id]?'rotate(90deg)':'';render()}
+function filt(s,btn){cf=s;document.querySelectorAll('.fb button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');render()}
+function srch(v){cs=v.toLowerCase();render()}
+function render(){document.querySelectorAll('#tbl tbody tr').forEach(function(row){
+  if(row.classList.contains('suite-header'))return;
+  var cls=row.className,sid=(cls.match(/s-([^ ]+)/)||[])[1]||'',st=(cls.match(/st-([^ ]+)/)||[])[1]||'';
+  var nm=(row.querySelector('.tn')||{}).innerText||'';
+  var sok=cf==='all'||st===cf,qok=!cs||nm.toLowerCase().includes(cs);
+  row.style.display=(open[sid]&&sok&&qok)?'':'none'
+})}
+window.onload=function(){document.querySelectorAll('.suite-header').forEach(function(r){var c=r.querySelector('.chev');if(c){var id=c.id.replace('chev-','');open[id]=true;c.style.transform='rotate(90deg)'}});render()};
+</script></body></html>

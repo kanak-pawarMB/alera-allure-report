@@ -55,16 +55,7 @@ export class DashboardPage extends BasePage {
   async goto() {
     await this.navigate(TEST_DATA.urls.dashboard);
     await this.assertNotRedirectedToLogin();
-
-    // Handle intermediate "Verifying account status..." screen that the app shows
-    // after long-running sessions when it re-validates the auth token.
-    const verifyingText = this.page.getByText('Verifying account status', { exact: false });
-    if (await verifyingText.isVisible({ timeout: 3000 }).catch(() => false)) {
-      // Wait for the screen to clear (app will redirect to dashboard once verified)
-      await verifyingText.waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
-      // Give the app a moment to finish rendering the dashboard
-      await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
-    }
+    await this._waitForAuthOverlay();
 
     // Ensure search input is rendered and ready
     await this.medicaidSearchInput
@@ -79,17 +70,16 @@ export class DashboardPage extends BasePage {
    * @param {string} [displayText] - text visible in the dropdown result
    */
   async loadPatientByMedicaidId(medicaidId, displayText) {
+    // Clear any auth overlay before interacting with the search input
+    await this._waitForAuthOverlay();
+
     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });
     await this.medicaidSearchInput.click();
     await this.medicaidSearchInput.fill(medicaidId);
 
-    // The app occasionally shows "Verifying account status..." mid-search (auth token
-    // refresh). Wait for it to clear before expecting the dropdown result.
-    const verifyingText = this.page.getByText('Verifying account status', { exact: false });
-    if (await verifyingText.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await verifyingText.waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
-      await this.page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
-      // Re-fill search after the auth refresh clears the input
+    // Auth token refresh can fire mid-search — handle and re-fill if needed
+    await this._waitForAuthOverlay();
+    if (!(await this.medicaidSearchInput.inputValue().catch(() => ''))) {
       await this.medicaidSearchInput.click();
       await this.medicaidSearchInput.fill(medicaidId);
     }

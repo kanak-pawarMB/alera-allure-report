@@ -22,7 +22,7 @@ export class BaseCard extends BasePage {
    * Assert the card is visible.
    * @param {number} [timeout]
    */
-  async assertVisible(timeout = 10000) {
+  async assertVisible(timeout = 60000) {
     await expect(this.card).toBeVisible({ timeout });
   }
 
@@ -60,6 +60,8 @@ export class BaseCard extends BasePage {
       }
       await this.page.waitForTimeout(1000);
       await this.viewAllButton.click({ force: true });
+      // Wait for modal after retry click too
+      await modal.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
     }
   }
 

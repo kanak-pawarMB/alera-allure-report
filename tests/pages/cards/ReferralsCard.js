@@ -8,9 +8,6 @@ export class ReferralsCard extends BaseCard {
    */
   constructor(page) {
     super(page, /Referrals/i);
-
-    // Positional XPath — Referrals is the 4th "View all" button on the page
-    this.viewAllXPath = page.locator("(//button[contains(text(),'View all')])[4]");
   }
 
   /**

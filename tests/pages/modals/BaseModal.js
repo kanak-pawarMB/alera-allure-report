@@ -10,7 +10,7 @@ export class BaseModal extends BasePage {
     super(page);
 
     this.modal = page
-      .locator('[role="dialog"], [class*="modal"]')
+      .locator('[role="dialog"], [class*="modal"], [class*="Modal"], [aria-modal="true"], [class*="DrillDown"], [class*="drilldown"]')
       .first();
 
     // Close button — covers all modal close patterns seen in tests

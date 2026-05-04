@@ -13,16 +13,18 @@
     "allure:open": "allure open allure-report",
     "allure:serve": "allure serve allure-results",
     "allure:clean": "rimraf allure-results allure-report",
+    "test:phase2": "node qase/run-phase2.js",
     "test:adt-qase": "node qase/run-adt-alerts.js",
     "test:regression-qase": "node qase/run-regression-all.js",
-    "test:smoke-qase": "node qase/run-smoke-all.js"
+    "test:smoke-qase": "node qase/run-smoke-all.js",
+    "report:xlsx": "node qase/generate-xlsx-report.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "End-to-end test automation framework for the Alera ONEView healthcare application, built with Playwright.",
   "devDependencies": {
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^24.10.0",
     "allure-commandline": "^2.34.1",
     "allure-playwright": "^3.4.2",
@@ -30,6 +32,10 @@
     "rimraf": "^6.1.0"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "exceljs": "^4.4.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }

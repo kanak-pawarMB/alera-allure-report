@@ -8,6 +8,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+// playwright-qase-reporter v2 reads QASE_TESTOPS_API_TOKEN and QASE_MODE from env.
+// Bridge the legacy QASE_API_TOKEN name and ensure mode is set so env-schema doesn't
+// return null and override the reporter config in playwright.config.js.
+// playwright-qase-reporter v2 reads its config from env vars via env-schema,
+// which returns null (not undefined) for unset nullable fields — null silently
+// overrides any values passed via playwright.config.js. Bridge the env vars
+// so they are actual strings before the reporter initialises.
+if (!process.env.QASE_TESTOPS_API_TOKEN && process.env.QASE_API_TOKEN) {
+  process.env.QASE_TESTOPS_API_TOKEN = process.env.QASE_API_TOKEN;
+}
+if (!process.env.QASE_TESTOPS_PROJECT) {
+  process.env.QASE_TESTOPS_PROJECT = process.env.QASE_PROJECT || 'ONEVIEW';
+}
+if (!process.env.QASE_MODE) {
+  process.env.QASE_MODE = 'testops';
+}
+
 export default defineConfig({
   globalSetup: './global-setup.js',
   globalTeardown: './global-teardown.js',
@@ -33,21 +50,20 @@ export default defineConfig({
         'OS': process.platform,
       }
     }],
-    // Qase TestOps configuration - TEMPORARILY DISABLED
-    // ['playwright-qase-reporter', {
-    //   mode: 'testops',
-    //   debug: true,
-    //   testops: {
-    //     api: {
-    //       token: process.env.QASE_API_TOKEN,
-    //     },
-    //     project: process.env.QASE_PROJECT || 'ONEVIEW',
-    //     uploadAttachments: true,
-    //     run: {
-    //       complete: true,
-    //     },
-    //   },
-    // }]
+    // Qase TestOps configuration
+    ['playwright-qase-reporter', {
+      mode: 'testops',
+      testops: {
+        api: {
+          token: process.env.QASE_API_TOKEN,
+        },
+        project: process.env.QASE_PROJECT || 'ONEVIEW',
+        uploadAttachments: true,
+        run: {
+          complete: true,
+        },
+      },
+    }]
   ],
 
   use: {
@@ -65,10 +81,10 @@ export default defineConfig({
       retries: 0,
     },
 
-    // Smoke UI Tests
+    // Smoke UI Tests (covers tests/smoke/, tests/smoke Phase-1/, tests/smoke Phase-2/, etc.)
     {
       name: 'smoke',
-      testMatch: /tests\/smoke\/.*\.spec\.js/,
+      testMatch: /tests\/smoke[^/]*\/.+\.spec\.js/,
       testIgnore: /tests\/api\/.*\.spec\.js/,
       use: { ...devices['Desktop Chrome'] },
       retries: 0,
