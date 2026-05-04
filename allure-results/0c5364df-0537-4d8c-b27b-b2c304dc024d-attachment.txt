@@ -1,0 +1,1 @@
+>>> Session stored in auth.json — LOGIN SUCCESS

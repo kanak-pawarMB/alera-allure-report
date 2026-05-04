@@ -1,0 +1,31 @@
+{
+  "uuid": "4e19192f-6cd7-40e0-90c6-7398404eb678",
+  "historyId": "d7389dcd9719041a0f8935594aca347c",
+  "name": "ONEVIEW-763: Verify drawer typography and color consistency @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877090104,
+  "stop": 1777877093104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

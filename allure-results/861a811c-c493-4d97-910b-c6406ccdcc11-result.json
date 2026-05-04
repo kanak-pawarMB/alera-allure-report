@@ -1,0 +1,31 @@
+{
+  "uuid": "861a811c-c493-4d97-910b-c6406ccdcc11",
+  "historyId": "6332b236eaddf4cab9375edca0ab2d6f",
+  "name": "ONEVIEW-844: Verify all 5 layout toggle icons are visible in Edit Mode @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877550104,
+  "stop": 1777877553104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

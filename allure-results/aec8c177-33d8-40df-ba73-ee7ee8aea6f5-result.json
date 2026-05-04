@@ -1,0 +1,31 @@
+{
+  "uuid": "aec8c177-33d8-40df-ba73-ee7ee8aea6f5",
+  "historyId": "2ec4d14f453c261f2eeeb9d44561c46e",
+  "name": "ONEVIEW-795: Verify removed cards persist as hidden after Save and re-login @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877465104,
+  "stop": 1777877468104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Login"
+    },
+    {
+      "name": "feature",
+      "value": "Login"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

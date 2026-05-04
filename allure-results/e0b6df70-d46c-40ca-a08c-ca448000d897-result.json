@@ -1,0 +1,31 @@
+{
+  "uuid": "e0b6df70-d46c-40ca-a08c-ca448000d897",
+  "historyId": "f49742d1038e91d09e8fe81b58d9a1ba",
+  "name": "ONEVIEW-721: Verify fixed cards visual treatment in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877165104,
+  "stop": 1777877168104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

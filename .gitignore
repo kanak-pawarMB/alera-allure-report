@@ -7,7 +7,7 @@ node_modules/
 /playwright/.cache/
 
 # Allure
-/allure-results/
+# /allure-results/  ← temporarily unignored so GitHub Actions can build the report
 /allure-report/
 
 # Environment Variables

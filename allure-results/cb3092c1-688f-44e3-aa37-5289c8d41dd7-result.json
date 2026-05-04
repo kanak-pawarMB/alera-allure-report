@@ -1,0 +1,31 @@
+{
+  "uuid": "cb3092c1-688f-44e3-aa37-5289c8d41dd7",
+  "historyId": "b07cb67ec03300af1b91893c7ce31705",
+  "name": "ONEVIEW-816: Verify layout is saved as Preferred Layout on confirmation @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877300104,
+  "stop": 1777877303104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

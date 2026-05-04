@@ -1,0 +1,31 @@
+{
+  "uuid": "e79b1c58-df9f-491d-be78-a70d29a15f4b",
+  "historyId": "166c6a36929662717f6c546ee280b825",
+  "name": "ONEVIEW-746: Verify Card Selection Drawer header layout @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877005104,
+  "stop": 1777877008104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

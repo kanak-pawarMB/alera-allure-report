@@ -1,0 +1,31 @@
+{
+  "uuid": "0a416298-825b-4ea6-9600-cac7560a7306",
+  "historyId": "620f3775d40f6724f1aca7f6a2e8f171",
+  "name": "ONEVIEW-773: Verify newly added card appears in leftmost column @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777876910104,
+  "stop": 1777876913104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

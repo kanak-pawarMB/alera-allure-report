@@ -1,0 +1,31 @@
+{
+  "uuid": "56201666-6fd8-4593-9400-89009b04b8e7",
+  "historyId": "98295a59124fa1749b8ba0fc19d6c16a",
+  "name": "ONEVIEW-745: Verify Card Selection Drawer opens on Add Cards click @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877000104,
+  "stop": 1777877003104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

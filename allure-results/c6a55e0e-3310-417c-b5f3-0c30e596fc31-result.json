@@ -1,0 +1,31 @@
+{
+  "uuid": "c6a55e0e-3310-417c-b5f3-0c30e596fc31",
+  "historyId": "1138dda04140566abd516ee44f963c71",
+  "name": "ONEVIEW-836: Verify Save after Restore Default creates new Preferred Layout @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877400104,
+  "stop": 1777877403104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

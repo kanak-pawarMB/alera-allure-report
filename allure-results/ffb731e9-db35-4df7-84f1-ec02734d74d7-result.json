@@ -1,0 +1,31 @@
+{
+  "uuid": "ffb731e9-db35-4df7-84f1-ec02734d74d7",
+  "historyId": "26e9fea13e4c8d001408696f5efad251",
+  "name": "ONEVIEW-793: Verify multiple cards can be removed sequentially @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877455104,
+  "stop": 1777877458104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "a246232e-d48a-4007-a35e-e971d892bbf4",
+  "historyId": "578b71625ea2bef8aee837716ed60da0",
+  "name": "ONEVIEW-817: Verify existing Preferred Layout is overwritten on Save @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877305104,
+  "stop": 1777877308104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

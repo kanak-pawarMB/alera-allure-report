@@ -1,0 +1,31 @@
+{
+  "uuid": "1672be25-8b1a-40b5-adc7-1e11832431a4",
+  "historyId": "72a373c73c527c770b338570f001423c",
+  "name": "ONEVIEW-802: Verify Remove button responsiveness across supported screen sizes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877500104,
+  "stop": 1777877503104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}
