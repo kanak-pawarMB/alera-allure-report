@@ -1,0 +1,31 @@
+{
+  "uuid": "0688d14e-af09-4065-a6c6-1d01500788cc",
+  "historyId": "907277fe99e0000c6e4d66b785000149",
+  "name": "ONEVIEW-709: Verify Edit Layout button cursor and focus states @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879226081,
+  "stop": 1777879229081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Edit Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Edit Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

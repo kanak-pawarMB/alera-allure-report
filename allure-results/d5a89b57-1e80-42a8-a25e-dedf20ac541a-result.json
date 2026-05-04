@@ -1,0 +1,31 @@
+{
+  "uuid": "d5a89b57-1e80-42a8-a25e-dedf20ac541a",
+  "historyId": "9e1897a347b6c3d2ce308d703ac4d3d6",
+  "name": "ONEVIEW-727: Verify Profile dropdown menu structure and options @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879316081,
+  "stop": 1777879319081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "66b0fab6-fecb-4e5e-a28b-90f2c7eafa28",
+  "historyId": "1086bbc7c3637b0ae662c491f7060a70",
+  "name": "ONEVIEW-729: Verify Edit Mode info banner exact content and close action @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879326081,
+  "stop": 1777879329081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

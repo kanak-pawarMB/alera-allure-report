@@ -1,0 +1,31 @@
+{
+  "uuid": "4a2bb479-bba0-47c0-8561-be016875a1c1",
+  "historyId": "7117b35f4c192347c179f9afd79f5eb2",
+  "name": "ONEVIEW-762: Verify drawer open and close animations @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879206081,
+  "stop": 1777879209081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

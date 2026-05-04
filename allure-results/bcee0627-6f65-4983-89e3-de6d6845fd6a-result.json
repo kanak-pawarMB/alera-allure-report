@@ -1,0 +1,31 @@
+{
+  "uuid": "bcee0627-6f65-4983-89e3-de6d6845fd6a",
+  "historyId": "67cbe4eed6da1171af74ba9568f8393d",
+  "name": "ONEVIEW-712: Verify card grab cursor is visually displayed in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879241081,
+  "stop": 1777879244081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

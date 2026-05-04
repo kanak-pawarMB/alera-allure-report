@@ -1,0 +1,31 @@
+{
+  "uuid": "34dc2df1-bae6-440e-a57e-2bc52605fd85",
+  "historyId": "b8ebacdb407466f05ae177af31c203e7",
+  "name": "ONEVIEW-742: Verify Add Cards drawer close behavior @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879386081,
+  "stop": 1777879389081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

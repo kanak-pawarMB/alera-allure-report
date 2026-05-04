@@ -1,0 +1,31 @@
+{
+  "uuid": "ffcd8ec3-6153-4e9f-ac54-a99545c05dd6",
+  "historyId": "1f1cbcd55ad0e1474217dacb76840f31",
+  "name": "ONEVIEW-778: Verify card icons and visual identity in the panel @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879056081,
+  "stop": 1777879059081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

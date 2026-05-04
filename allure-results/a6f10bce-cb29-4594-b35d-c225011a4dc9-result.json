@@ -1,0 +1,31 @@
+{
+  "uuid": "a6f10bce-cb29-4594-b35d-c225011a4dc9",
+  "historyId": "bbba79c8f872d90454a9da26e505f642",
+  "name": "ONEVIEW-789: Verify card is removed from dashboard layout on Remove click @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879556081,
+  "stop": 1777879559081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

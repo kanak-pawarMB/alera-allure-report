@@ -1,0 +1,31 @@
+{
+  "uuid": "3658e140-de8f-4456-a8ce-2e11aab9895a",
+  "historyId": "ad3bace2d0fb44cb869271838e9a6fd3",
+  "name": "ONEVIEW-772: Verify card appears in dashboard layout on Add click @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879026081,
+  "stop": 1777879029081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

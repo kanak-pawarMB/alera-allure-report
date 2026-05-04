@@ -1,0 +1,31 @@
+{
+  "uuid": "1fa6401b-086f-4978-92bb-e19279aa176c",
+  "historyId": "0caa80ef5603643649b9fb569e44c6c1",
+  "name": "ONEVIEW-713: Verify card visual feedback during drag-and-drop @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879246081,
+  "stop": 1777879249081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

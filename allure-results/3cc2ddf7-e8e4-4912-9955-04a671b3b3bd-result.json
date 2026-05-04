@@ -1,0 +1,31 @@
+{
+  "uuid": "3cc2ddf7-e8e4-4912-9955-04a671b3b3bd",
+  "historyId": "e7fa2f72d0460adc25a1563d21dfaa39",
+  "name": "ONEVIEW-747: Verify search bar display in Card Selection Drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879131081,
+  "stop": 1777879134081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

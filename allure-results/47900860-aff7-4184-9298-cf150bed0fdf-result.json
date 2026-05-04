@@ -1,0 +1,31 @@
+{
+  "uuid": "47900860-aff7-4184-9298-cf150bed0fdf",
+  "historyId": "0f9db7818a5cd983c81c4f03991cfbf9",
+  "name": "ONEVIEW-799: Verify Remove action does not affect other dashboard data @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879606081,
+  "stop": 1777879609081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

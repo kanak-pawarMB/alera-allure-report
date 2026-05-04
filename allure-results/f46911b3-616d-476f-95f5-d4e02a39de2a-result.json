@@ -1,0 +1,31 @@
+{
+  "uuid": "f46911b3-616d-476f-95f5-d4e02a39de2a",
+  "historyId": "058519bb187d7d3954f4178691172879",
+  "name": "ONEVIEW-715: Verify layout option selection visual indicator @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879256081,
+  "stop": 1777879259081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

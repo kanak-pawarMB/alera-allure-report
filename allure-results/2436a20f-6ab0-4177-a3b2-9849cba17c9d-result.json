@@ -1,0 +1,31 @@
+{
+  "uuid": "2436a20f-6ab0-4177-a3b2-9849cba17c9d",
+  "historyId": "381cfd061a0e9f30c270a3bec20ff432",
+  "name": "ONEVIEW-823: Verify Default Layout is applied on Restore Default confirmation @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879456081,
+  "stop": 1777879459081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

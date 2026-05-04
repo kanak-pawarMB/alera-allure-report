@@ -1,0 +1,31 @@
+{
+  "uuid": "edb8bda6-fd7e-4c1e-bbe5-bb173ee8a5ca",
+  "historyId": "d258f5ea0c76bf348102383866331a85",
+  "name": "ONEVIEW-834: Verify fixed cards remain unaffected during Save and Restore operations @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879511081,
+  "stop": 1777879514081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

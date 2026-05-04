@@ -1,0 +1,31 @@
+{
+  "uuid": "3987b676-904c-4e47-8613-906f60ffa9cd",
+  "historyId": "de60413bb3ebba9f3dee4e7623e3657a",
+  "name": "ONEVIEW-805: Verify Save button is visible in Edit Mode @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879686081,
+  "stop": 1777879689081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "5f099f43-0ffe-4e79-a2ca-c38883949e4d",
+  "historyId": "05a57e27b7250611d7f24bb27775116f",
+  "name": "ONEVIEW-770: Verify all configurable cards are listed in the panel @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879016081,
+  "stop": 1777879019081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

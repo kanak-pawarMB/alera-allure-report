@@ -1,0 +1,31 @@
+{
+  "uuid": "310ccb27-479f-4d5d-9e94-530196149f0b",
+  "historyId": "81f18b2c8c68da4dc4b7efcc49e8a7e7",
+  "name": "ONEVIEW-761: Verify card icons and visual identity in drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879201081,
+  "stop": 1777879204081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

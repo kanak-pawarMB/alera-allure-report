@@ -1,0 +1,31 @@
+{
+  "uuid": "9c059a97-92af-47de-aa6c-7ed4652dd7f2",
+  "historyId": "cae6ed51906de2c8e38bc30d8de94a20",
+  "name": "ONEVIEW-728: Verify 5 layout toggle icons in Edit Dashboard header @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879321081,
+  "stop": 1777879324081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

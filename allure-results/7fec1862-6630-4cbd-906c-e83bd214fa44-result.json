@@ -1,0 +1,31 @@
+{
+  "uuid": "7fec1862-6630-4cbd-906c-e83bd214fa44",
+  "historyId": "8b61006008accf9fb31e181697b36a11",
+  "name": "ONEVIEW-780: Verify visual state of added card matches existing dashboard cards @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879066081,
+  "stop": 1777879069081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "bf9c9486-0b44-41da-8dac-326d843bfc7d",
+  "historyId": "6c1493924d69339e531ba5b5e31d76b9",
+  "name": "ONEVIEW-723: Verify card spacing and alignment in different layouts @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879296081,
+  "stop": 1777879299081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

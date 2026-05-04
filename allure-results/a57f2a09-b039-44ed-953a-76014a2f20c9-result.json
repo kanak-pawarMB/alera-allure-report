@@ -1,0 +1,31 @@
+{
+  "uuid": "a57f2a09-b039-44ed-953a-76014a2f20c9",
+  "historyId": "b3498141736389644429b1b48a9b6c23",
+  "name": "ONEVIEW-835: Verify first-time user sees Default Layout with no Preferred Layout saved @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879516081,
+  "stop": 1777879519081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

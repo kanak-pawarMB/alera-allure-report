@@ -1,0 +1,31 @@
+{
+  "uuid": "476bc4fc-6429-40a2-b993-8dc9ed22c93b",
+  "historyId": "99d664ad5a61994e14d968270a32ab7b",
+  "name": "ONEVIEW-716: Verify Add Cards side drawer UI @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879261081,
+  "stop": 1777879264081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "2c9d6a8e-9b31-4786-9a1e-f5d00ac1f392",
+  "historyId": "e72d840aa152fd7f0b625ae38880cdf4",
+  "name": "ONEVIEW-853: Verify Remove button removes a card from the dashboard layout @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879726081,
+  "stop": 1777879729081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

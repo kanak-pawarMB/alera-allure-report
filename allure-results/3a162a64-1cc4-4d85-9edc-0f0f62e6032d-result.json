@@ -1,0 +1,31 @@
+{
+  "uuid": "3a162a64-1cc4-4d85-9edc-0f0f62e6032d",
+  "historyId": "72d2e77d5632740cbaf1ef5c743bef7e",
+  "name": "ONEVIEW-751: Verify Add button styling for cards not yet added @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879151081,
+  "stop": 1777879154081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

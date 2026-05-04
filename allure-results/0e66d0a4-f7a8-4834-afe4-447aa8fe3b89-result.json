@@ -1,0 +1,31 @@
+{
+  "uuid": "0e66d0a4-f7a8-4834-afe4-447aa8fe3b89",
+  "historyId": "a0ba5a5ce0fe1c84024b4a121af7bf9d",
+  "name": "ONEVIEW-814: Verify Save button becomes enabled after layout modification @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879411081,
+  "stop": 1777879414081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "3b298004-faf2-43be-b507-9f841649182a",
+  "historyId": "e35b40bd941e17a9c4d310204496f346",
+  "name": "ONEVIEW-796: Verify removed card does not appear in any column after layout changes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879591081,
+  "stop": 1777879594081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

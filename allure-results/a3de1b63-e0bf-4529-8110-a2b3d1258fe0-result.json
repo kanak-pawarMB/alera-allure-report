@@ -1,0 +1,31 @@
+{
+  "uuid": "a3de1b63-e0bf-4529-8110-a2b3d1258fe0",
+  "historyId": "75243de7c76a8529150ddc238826ab02",
+  "name": "ONEVIEW-807: Verify layout is saved on confirmation @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879696081,
+  "stop": 1777879699081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

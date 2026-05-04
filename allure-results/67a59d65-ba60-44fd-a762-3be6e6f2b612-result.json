@@ -1,0 +1,31 @@
+{
+  "uuid": "67a59d65-ba60-44fd-a762-3be6e6f2b612",
+  "historyId": "11dd3fe4557d65f8ea982019b2451ac5",
+  "name": "ONEVIEW-788: Verify visual distinction between Add and Remove states @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879551081,
+  "stop": 1777879554081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

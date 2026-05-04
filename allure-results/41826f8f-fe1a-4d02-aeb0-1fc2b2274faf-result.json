@@ -1,0 +1,31 @@
+{
+  "uuid": "41826f8f-fe1a-4d02-aeb0-1fc2b2274faf",
+  "historyId": "a622cb1c214560b3645c2bb82bfcfed4",
+  "name": "ONEVIEW-735: Verify Restore Preferred Layout confirmation popup exact content @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879356081,
+  "stop": 1777879359081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

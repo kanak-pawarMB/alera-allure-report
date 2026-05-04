@@ -1,0 +1,31 @@
+{
+  "uuid": "7efc00e7-0068-435f-8ddb-7a4d7dc6e56a",
+  "historyId": "dc971fba1184633be5ab622d0f3080cb",
+  "name": "ONEVIEW-759: Verify drawer is not accessible outside Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879191081,
+  "stop": 1777879194081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

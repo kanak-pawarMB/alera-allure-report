@@ -1,0 +1,31 @@
+{
+  "uuid": "253f99be-3149-43c1-96a2-746356826110",
+  "historyId": "70740af9c9564685c11e5c9fb0842b48",
+  "name": "ONEVIEW-739: Verify Restore Layout dropdown chevron and position @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879371081,
+  "stop": 1777879374081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "14b1ec3d-5a81-402a-9887-70bdea2074db",
+  "historyId": "3df2fe09da8d66c87a3cae90da6b36dc",
+  "name": "ONEVIEW-720: Verify Save and Cancel button styling in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879281081,
+  "stop": 1777879284081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

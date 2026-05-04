@@ -1,0 +1,31 @@
+{
+  "uuid": "b2d74506-c799-465c-8d94-949b2568235d",
+  "historyId": "090c802de43e1da763a2c38685454623",
+  "name": "ONEVIEW-847: Verify Add Cards drawer opens when Add Cards is clicked @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879651081,
+  "stop": 1777879654081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

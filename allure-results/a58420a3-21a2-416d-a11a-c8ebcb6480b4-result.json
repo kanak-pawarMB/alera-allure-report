@@ -1,0 +1,31 @@
+{
+  "uuid": "a58420a3-21a2-416d-a11a-c8ebcb6480b4",
+  "historyId": "74badf81b3c6069f9c3baf9fec23e7f3",
+  "name": "ONEVIEW-804: Verify removing a card does not affect other users @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879631081,
+  "stop": 1777879634081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

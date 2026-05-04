@@ -1,0 +1,31 @@
+{
+  "uuid": "66c3348d-fc3e-413e-adcd-5b3b28f7f127",
+  "historyId": "64edc1effa85f1939f5df3678e8d0d45",
+  "name": "ONEVIEW-843: Verify Edit Mode can be entered via Profile menu @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879666081,
+  "stop": 1777879669081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

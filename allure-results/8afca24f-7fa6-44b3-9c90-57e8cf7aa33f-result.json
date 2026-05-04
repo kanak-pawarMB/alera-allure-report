@@ -1,0 +1,31 @@
+{
+  "uuid": "8afca24f-7fa6-44b3-9c90-57e8cf7aa33f",
+  "historyId": "aa81de0b686468693d974cbd8bc786ae",
+  "name": "ONEVIEW-849: Verify drawer closes via the X icon @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879661081,
+  "stop": 1777879664081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

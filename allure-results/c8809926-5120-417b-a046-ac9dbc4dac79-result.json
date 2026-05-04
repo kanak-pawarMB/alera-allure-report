@@ -1,0 +1,31 @@
+{
+  "uuid": "c8809926-5120-417b-a046-ac9dbc4dac79",
+  "historyId": "6a111b69036d5499e33829d4360b3539",
+  "name": "ONEVIEW-854: Verify Remove button changes back to Add after removing @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879731081,
+  "stop": 1777879734081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

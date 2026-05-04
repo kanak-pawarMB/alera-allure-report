@@ -1,0 +1,31 @@
+{
+  "uuid": "5d715cab-c9d9-4cbd-8b74-968902b7f53a",
+  "historyId": "1d6379119ea4cc9944d44f1c96a783cd",
+  "name": "ONEVIEW-787: Verify Remove button styling @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879546081,
+  "stop": 1777879549081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

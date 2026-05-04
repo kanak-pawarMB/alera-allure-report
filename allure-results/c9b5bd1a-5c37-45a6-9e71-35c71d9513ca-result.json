@@ -1,0 +1,31 @@
+{
+  "uuid": "c9b5bd1a-5c37-45a6-9e71-35c71d9513ca",
+  "historyId": "31e3e487f01860fcb741f7617a9d16eb",
+  "name": "ONEVIEW-740: Verify card icons and visual identity in Add Cards drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879376081,
+  "stop": 1777879379081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

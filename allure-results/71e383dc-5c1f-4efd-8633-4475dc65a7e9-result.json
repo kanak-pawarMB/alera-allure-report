@@ -1,0 +1,31 @@
+{
+  "uuid": "71e383dc-5c1f-4efd-8633-4475dc65a7e9",
+  "historyId": "694aaac17f3cff4c5f194775a2cd3fdf",
+  "name": "ONEVIEW-718: Verify Restore Layout dropdown UI styling @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879271081,
+  "stop": 1777879274081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

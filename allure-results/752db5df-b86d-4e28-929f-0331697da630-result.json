@@ -1,0 +1,31 @@
+{
+  "uuid": "752db5df-b86d-4e28-929f-0331697da630",
+  "historyId": "728034202f21688c92cc7cd9302e96d2",
+  "name": "ONEVIEW-833: Verify Preferred Layout is user-specific @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879506081,
+  "stop": 1777879509081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

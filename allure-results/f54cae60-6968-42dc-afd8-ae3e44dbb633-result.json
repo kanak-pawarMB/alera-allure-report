@@ -1,0 +1,31 @@
+{
+  "uuid": "f54cae60-6968-42dc-afd8-ae3e44dbb633",
+  "historyId": "e41350e13494254f8ca554d3eaab1054",
+  "name": "ONEVIEW-859: Verify dashboard cards are visible after Save and patient selection @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879536081,
+  "stop": 1777879539081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

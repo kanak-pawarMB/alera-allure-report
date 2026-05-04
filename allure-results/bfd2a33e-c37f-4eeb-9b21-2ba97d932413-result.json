@@ -1,0 +1,31 @@
+{
+  "uuid": "bfd2a33e-c37f-4eeb-9b21-2ba97d932413",
+  "historyId": "ec66075ab95dbf51e45aa8c1c9aa0f8b",
+  "name": "ONEVIEW-803: Verify Remove button typography and color consistency @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879626081,
+  "stop": 1777879629081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

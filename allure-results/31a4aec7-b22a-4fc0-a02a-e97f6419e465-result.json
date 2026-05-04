@@ -1,0 +1,31 @@
+{
+  "uuid": "31a4aec7-b22a-4fc0-a02a-e97f6419e465",
+  "historyId": "138628964945e24ffbf58ed020db7cf9",
+  "name": "ONEVIEW-810: Verify Restore Preferred Layout option and confirmation @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879711081,
+  "stop": 1777879714081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

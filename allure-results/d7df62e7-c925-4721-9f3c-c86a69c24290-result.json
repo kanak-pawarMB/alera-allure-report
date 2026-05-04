@@ -1,0 +1,31 @@
+{
+  "uuid": "d7df62e7-c925-4721-9f3c-c86a69c24290",
+  "historyId": "a107659aee085345a7c5edb1382d1a81",
+  "name": "ONEVIEW-765: Verify Add Cards option visibility in Edit Mode only @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777878991081,
+  "stop": 1777878994081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

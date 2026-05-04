@@ -1,0 +1,31 @@
+{
+  "uuid": "67653ca0-911a-4f77-839c-dc56d211eebc",
+  "historyId": "e7a4225288ef7fdb4b867f2a807ee581",
+  "name": "ONEVIEW-714: Verify column dividers visibility in multi-column layouts @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879251081,
+  "stop": 1777879254081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "f755d3da-83bf-422f-b0ff-88c70bcb73b7",
+  "historyId": "970863d91c0ac91ea4720bcb69f8e49b",
+  "name": "ONEVIEW-779: Verify panel remains open after adding a card @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879061081,
+  "stop": 1777879064081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

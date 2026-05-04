@@ -1,0 +1,31 @@
+{
+  "uuid": "4ae19216-2755-445e-872b-31d46d08e43f",
+  "historyId": "266eb640aaa7404e605c44b14953800d",
+  "name": "ONEVIEW-777: Verify immediate visual feedback on Add action @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879051081,
+  "stop": 1777879054081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

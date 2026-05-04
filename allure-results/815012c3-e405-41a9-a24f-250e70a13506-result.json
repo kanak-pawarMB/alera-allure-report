@@ -1,0 +1,31 @@
+{
+  "uuid": "815012c3-e405-41a9-a24f-250e70a13506",
+  "historyId": "0630d30de3ae5ae8b5075755904fbdce",
+  "name": "ONEVIEW-784: Verify fixed cards are excluded from Add Cards panel @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879086081,
+  "stop": 1777879089081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

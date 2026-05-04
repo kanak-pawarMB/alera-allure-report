@@ -1,0 +1,31 @@
+{
+  "uuid": "d8889151-f27d-4b46-b3dd-fd8e64dc762e",
+  "historyId": "d51b74a078b20be365f169bc09943675",
+  "name": "ONEVIEW-801: Verify drag handle is removed when card is removed @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879616081,
+  "stop": 1777879619081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

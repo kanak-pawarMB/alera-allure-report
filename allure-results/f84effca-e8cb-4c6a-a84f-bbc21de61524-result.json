@@ -1,0 +1,31 @@
+{
+  "uuid": "f84effca-e8cb-4c6a-a84f-bbc21de61524",
+  "historyId": "55b555d3dc6711830fa15e1dcadf025c",
+  "name": "ONEVIEW-724: Verify empty column visual state in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777879301081,
+  "stop": 1777879304081,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}
