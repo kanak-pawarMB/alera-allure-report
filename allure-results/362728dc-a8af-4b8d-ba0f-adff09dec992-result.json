@@ -1,0 +1,31 @@
+{
+  "uuid": "362728dc-a8af-4b8d-ba0f-adff09dec992",
+  "historyId": "bf17f71bad2b1ef32c5d9d61076f11ae",
+  "name": "ONEVIEW-733: Verify \"Fixed\" badge displayed on fixed cards in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877225104,
+  "stop": 1777877228104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

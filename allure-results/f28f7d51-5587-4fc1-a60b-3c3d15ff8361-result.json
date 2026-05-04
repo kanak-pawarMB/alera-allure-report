@@ -1,0 +1,31 @@
+{
+  "uuid": "f28f7d51-5587-4fc1-a60b-3c3d15ff8361",
+  "historyId": "325462ddf5415a868f32252aa0e6dcf6",
+  "name": "ONEVIEW-764: Verify drawer responsiveness across supported screen sizes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877095104,
+  "stop": 1777877098104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

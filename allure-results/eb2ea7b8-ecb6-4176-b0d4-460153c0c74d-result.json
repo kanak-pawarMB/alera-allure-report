@@ -1,0 +1,31 @@
+{
+  "uuid": "eb2ea7b8-ecb6-4176-b0d4-460153c0c74d",
+  "historyId": "4cdfc3496362c90bec671a9abc8f98e9",
+  "name": "ONEVIEW-756: Verify drawer is scrollable when content exceeds viewport @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877055104,
+  "stop": 1777877058104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

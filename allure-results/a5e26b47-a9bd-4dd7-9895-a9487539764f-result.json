@@ -1,0 +1,31 @@
+{
+  "uuid": "a5e26b47-a9bd-4dd7-9895-a9487539764f",
+  "historyId": "d958daef45c2d90a232bef06b25c6aaa",
+  "name": "ONEVIEW-776: Verify multiple cards can be added without restriction @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777876925104,
+  "stop": 1777876928104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

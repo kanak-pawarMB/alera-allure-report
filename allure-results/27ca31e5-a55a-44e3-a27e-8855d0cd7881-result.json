@@ -1,0 +1,31 @@
+{
+  "uuid": "27ca31e5-a55a-44e3-a27e-8855d0cd7881",
+  "historyId": "7a54098ef0b600684c4fa3e2a87933be",
+  "name": "ONEVIEW-760: Verify fixed cards are excluded from the drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877075104,
+  "stop": 1777877078104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "78903c7e-1bef-4364-9964-347b42465775",
+  "historyId": "37f02bbab9c315500719ed05fcf941dc",
+  "name": "ONEVIEW-722: Verify dashboard layout responsiveness across supported screen sizes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877170104,
+  "stop": 1777877173104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "38f0d607-5f20-4f8e-bfd1-5c10b6b16575",
+  "historyId": "7c431bbd4c108a8c711c46fc6d67185a",
+  "name": "ONEVIEW-851: Verify Add button changes to Remove after adding @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877520104,
+  "stop": 1777877523104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

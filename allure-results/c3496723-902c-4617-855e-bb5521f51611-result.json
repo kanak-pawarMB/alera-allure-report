@@ -1,0 +1,31 @@
+{
+  "uuid": "c3496723-902c-4617-855e-bb5521f51611",
+  "historyId": "e1fcddc8881c8e213e88292daf4b23d5",
+  "name": "ONEVIEW-798: Verify removing all configurable cards leaves only fixed cards @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877480104,
+  "stop": 1777877483104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

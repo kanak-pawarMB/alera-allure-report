@@ -1,0 +1,31 @@
+{
+  "uuid": "a17e06ed-7f4d-41a5-b110-3e5b227aa7c1",
+  "historyId": "156e41df3fe9fde2b46ecdba5fb50d9d",
+  "name": "ONEVIEW-831: Verify Preferred Layout persists across browser refresh @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777877375104,
+  "stop": 1777877378104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

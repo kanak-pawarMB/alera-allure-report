@@ -1,0 +1,34 @@
+{
+  "uuid": "f6afe04e-9d28-4201-9147-ee4d15809152",
+  "historyId": "e83a8796734913c887273cab7a01041d",
+  "name": "ONEVIEW-811: Verify saved Preferred Layout persists after re-login @smoke",
+  "status": "skipped",
+  "stage": "finished",
+  "start": 1777877595104,
+  "stop": 1777877595104,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ],
+  "statusDetails": {
+    "message": "Cannot be automated — manual test case"
+  }
+}
