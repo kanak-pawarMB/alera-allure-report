@@ -1,0 +1,31 @@
+{
+  "uuid": "3e5e7265-f1bb-44d4-8c8b-a656c89e55e7",
+  "historyId": "6a0a11b56410d274bea4ad642d7a6f6e",
+  "name": "ONEVIEW-736: Verify Update Preferred Layout confirmation popup with warning note @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972173931,
+  "stop": 1777972176931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "dda6667a-bba1-44e7-b380-39aae2f0506c",
+  "historyId": "83256f3e3ee237195a3e8bdbc15bb04c",
+  "name": "ONEVIEW-748: Verify card list item layout in drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972649099,
+  "stop": 1777972652099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

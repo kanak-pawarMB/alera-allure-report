@@ -1,0 +1,31 @@
+{
+  "uuid": "c8929964-f4d2-4ca9-9484-29b07d68c4ec",
+  "historyId": "73d7c3604e274e4be0f0c4bc24213e9c",
+  "name": "ONEVIEW-792: Verify removed card remains available for re-adding @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973084099,
+  "stop": 1777973087099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

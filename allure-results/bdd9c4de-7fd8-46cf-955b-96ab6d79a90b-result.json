@@ -1,0 +1,31 @@
+{
+  "uuid": "bdd9c4de-7fd8-46cf-955b-96ab6d79a90b",
+  "historyId": "71985523d7b78cc6faaa2ebcc2fc75d4",
+  "name": "ONEVIEW-813: Verify Save button is disabled when no changes are made @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972218931,
+  "stop": 1777972221931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

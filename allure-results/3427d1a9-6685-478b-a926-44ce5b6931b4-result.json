@@ -1,0 +1,31 @@
+{
+  "uuid": "3427d1a9-6685-478b-a926-44ce5b6931b4",
+  "historyId": "d683626b4981a9e65f47c158b8428ec5",
+  "name": "ONEVIEW-719: Verify confirmation popup visual design @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972088931,
+  "stop": 1777972091931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

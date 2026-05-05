@@ -1,0 +1,31 @@
+{
+  "uuid": "76453464-7b6b-4b1b-8357-8e2ad37c775c",
+  "historyId": "a36b71f4448e164ed2e6a9e33b385841",
+  "name": "ONEVIEW-850: Verify Add button adds a card to the dashboard layout @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972448931,
+  "stop": 1777972451931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

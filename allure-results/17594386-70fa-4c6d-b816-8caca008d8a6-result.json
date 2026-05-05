@@ -1,0 +1,31 @@
+{
+  "uuid": "17594386-70fa-4c6d-b816-8caca008d8a6",
+  "historyId": "c41a6a8478b31153a40a7e3808fcac9a",
+  "name": "ONEVIEW-755: Verify drawer reflects real-time layout changes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971983931,
+  "stop": 1777971986931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

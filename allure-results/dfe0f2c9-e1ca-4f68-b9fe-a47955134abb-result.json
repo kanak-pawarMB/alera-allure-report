@@ -1,0 +1,31 @@
+{
+  "uuid": "dfe0f2c9-e1ca-4f68-b9fe-a47955134abb",
+  "historyId": "d10d411b49e8a583003b99afeaad979c",
+  "name": "ONEVIEW-750: Verify cards are displayed in alphabetical order @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971958931,
+  "stop": 1777971961931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

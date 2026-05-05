@@ -1,0 +1,31 @@
+{
+  "uuid": "94b545b4-ef88-41a5-a549-e693d0e16cd1",
+  "historyId": "342ccdcbef536cb65f9fd2d9956f7eb5",
+  "name": "ONEVIEW-845: Verify Save and Cancel buttons appear in Edit Mode @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972488931,
+  "stop": 1777972491931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

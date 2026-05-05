@@ -1,0 +1,31 @@
+{
+  "uuid": "66b5b508-8c8b-4a89-8820-70f758caf4b3",
+  "historyId": "8faa4df9954570db2fed09835549e7af",
+  "name": "ONEVIEW-731: Verify card list item layout in Add Cards drawer @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972148931,
+  "stop": 1777972151931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

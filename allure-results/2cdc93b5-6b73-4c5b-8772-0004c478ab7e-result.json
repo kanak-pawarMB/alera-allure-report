@@ -1,0 +1,31 @@
+{
+  "uuid": "2cdc93b5-6b73-4c5b-8772-0004c478ab7e",
+  "historyId": "b17e10375ea45895f4190d3a72f01e00",
+  "name": "ONEVIEW-768: Verify card selection panel is scrollable @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971818931,
+  "stop": 1777971821931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

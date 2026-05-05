@@ -1,0 +1,31 @@
+{
+  "uuid": "05678184-66f5-4441-8750-fa188f10f532",
+  "historyId": "63ef6545041d013b4b56a2a1db3d289a",
+  "name": "ONEVIEW-726: Verify typography and color consistency in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972824099,
+  "stop": 1777972827099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

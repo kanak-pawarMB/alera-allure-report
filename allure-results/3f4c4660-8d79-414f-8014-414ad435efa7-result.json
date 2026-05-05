@@ -1,0 +1,31 @@
+{
+  "uuid": "3f4c4660-8d79-414f-8014-414ad435efa7",
+  "historyId": "919073a674ad31376c90b4b23527307e",
+  "name": "ONEVIEW-711: Verify visual distinction between view mode and Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972048931,
+  "stop": 1777972051931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "5fbdb48d-236d-4f6b-aace-00b7fc3a35b9",
+  "historyId": "05dfa07c147db7fb17099912432a43d0",
+  "name": "ONEVIEW-808: Verify Restore Layout dropdown is visible in Edit Mode @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972513931,
+  "stop": 1777972516931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

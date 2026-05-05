@@ -1,0 +1,31 @@
+{
+  "uuid": "d3e10552-ae9a-4ad2-9550-11418fedbec4",
+  "historyId": "e5d5530692d715cdb3ae4289ce82e648",
+  "name": "ONEVIEW-732: Verify cards in Add Cards drawer display in alphabetical order @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972153931,
+  "stop": 1777972156931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

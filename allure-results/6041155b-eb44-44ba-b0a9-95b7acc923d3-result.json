@@ -1,0 +1,31 @@
+{
+  "uuid": "6041155b-eb44-44ba-b0a9-95b7acc923d3",
+  "historyId": "04846e12ba78c1c4bb0626cc59995b0c",
+  "name": "ONEVIEW-826: Verify Preferred Layout is restored on Restore Preferred confirmation @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972984099,
+  "stop": 1777972987099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

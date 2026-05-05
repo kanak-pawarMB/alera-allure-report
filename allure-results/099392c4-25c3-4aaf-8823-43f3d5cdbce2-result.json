@@ -1,0 +1,31 @@
+{
+  "uuid": "099392c4-25c3-4aaf-8823-43f3d5cdbce2",
+  "historyId": "f90371f25c4d0c807cdf9d0b8581a91e",
+  "name": "ONEVIEW-806: Verify Save confirmation prompt appears on Save click @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973204099,
+  "stop": 1777973207099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

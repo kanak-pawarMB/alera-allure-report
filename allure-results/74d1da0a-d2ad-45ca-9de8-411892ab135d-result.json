@@ -1,0 +1,31 @@
+{
+  "uuid": "74d1da0a-d2ad-45ca-9de8-411892ab135d",
+  "historyId": "de53bfb5bf72e30c69a98ab2af140914",
+  "name": "ONEVIEW-827: Verify Cancel on Restore Preferred confirmation retains current layout @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972989099,
+  "stop": 1777972992099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

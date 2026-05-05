@@ -1,0 +1,31 @@
+{
+  "uuid": "c1d4eb6d-848c-4a49-b5cc-58ef3e2cc936",
+  "historyId": "c15b8a990e9bd67d31d0f6916eb50098",
+  "name": "ONEVIEW-753: Verify button state toggle on Add action @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971973931,
+  "stop": 1777971976931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

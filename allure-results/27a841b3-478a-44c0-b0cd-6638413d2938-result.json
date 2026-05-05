@@ -1,0 +1,31 @@
+{
+  "uuid": "27a841b3-478a-44c0-b0cd-6638413d2938",
+  "historyId": "610c727e36d3a8fee4cef61bc7648754",
+  "name": "ONEVIEW-852: Verify drawer remains open after adding a card @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973159099,
+  "stop": 1777973162099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

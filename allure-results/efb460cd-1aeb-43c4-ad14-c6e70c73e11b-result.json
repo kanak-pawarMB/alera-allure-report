@@ -1,0 +1,31 @@
+{
+  "uuid": "efb460cd-1aeb-43c4-ad14-c6e70c73e11b",
+  "historyId": "04f0e3b2464524d644d52a3e23709d27",
+  "name": "ONEVIEW-781: Verify added cards persist visually after Save and re-login @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971883931,
+  "stop": 1777971886931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Login"
+    },
+    {
+      "name": "feature",
+      "value": "Login"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

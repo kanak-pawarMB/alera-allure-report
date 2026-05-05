@@ -226,10 +226,15 @@ test.describe('Edit Layout - Regression @regression', () => {
     test.info().annotations.push({ type: 'qaseId', description: '724' });
     await editLayoutPage.enterEditMode();
     await editLayoutPage.selectTwoColumnLayout();
-    // Open Add Cards to remove all cards from one column
+    // Open drawer and remove all configurable cards to create an empty column
     await editLayoutPage.clickAddCards();
     await drawerPage.assertVisible();
-    // Close drawer and check for empty column placeholder
+    // Click every Remove button until none remain (empties at least one column)
+    const removeButtons = drawerPage.drawer.getByRole('button', { name: /^Remove$/i });
+    while (await removeButtons.first().isVisible({ timeout: 2000 }).catch(() => false)) {
+      await removeButtons.first().click();
+      await page.waitForTimeout(400);
+    }
     await drawerPage.close();
     await editLayoutPage.assertEmptyColumnPlaceholderVisible();
   });

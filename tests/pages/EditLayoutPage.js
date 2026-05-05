@@ -96,9 +96,12 @@ export class EditLayoutPage extends BasePage {
       .or(page.getByText('Fixed', { exact: true }))
       .first();
 
-    // Empty column drop-zone placeholder
+    // Empty column drop-zone placeholder (text varies by app version)
     this.emptyColumnPlaceholder = page
       .locator('text=/Drag a Card to the column/i')
+      .or(page.locator('text=/Drop a card here/i'))
+      .or(page.locator('text=/No cards/i'))
+      .or(page.locator('[class*="empty-col"], [class*="emptyCol"], [class*="drop-zone"], [class*="dropzone"], [class*="empty"][class*="column"]'))
       .first();
 
     // Star / favourite icon on card headers (should NOT be visible in Phase-2)

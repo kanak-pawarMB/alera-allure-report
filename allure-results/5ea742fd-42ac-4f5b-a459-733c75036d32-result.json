@@ -1,0 +1,31 @@
+{
+  "uuid": "5ea742fd-42ac-4f5b-a459-733c75036d32",
+  "historyId": "e4ccbd92b228b9df33c6a52ba85575ff",
+  "name": "ONEVIEW-800: Verify Cancel preserves the removed state until Save @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973124099,
+  "stop": 1777973127099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

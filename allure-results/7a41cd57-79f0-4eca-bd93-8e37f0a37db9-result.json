@@ -1,0 +1,34 @@
+{
+  "uuid": "7a41cd57-79f0-4eca-bd93-8e37f0a37db9",
+  "historyId": "590c9e979933091a311d3d000b8f0ad7",
+  "name": "ONEVIEW-840: Verify card can be reordered within the same column via drag-and-drop @regression",
+  "status": "skipped",
+  "stage": "finished",
+  "start": 1777971913931,
+  "stop": 1777971913931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ],
+  "statusDetails": {
+    "message": "Cannot be automated — manual test case"
+  }
+}

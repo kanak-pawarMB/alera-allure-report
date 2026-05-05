@@ -1,0 +1,31 @@
+{
+  "uuid": "3ad84362-a3fa-442a-9769-c5e143da4ed0",
+  "historyId": "9de10951a9d62e6df631cd36632af170",
+  "name": "ONEVIEW-822: Verify Restore Default Layout confirmation popup content @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972263931,
+  "stop": 1777972266931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

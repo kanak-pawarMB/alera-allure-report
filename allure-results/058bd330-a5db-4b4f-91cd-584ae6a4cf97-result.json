@@ -1,0 +1,35 @@
+{
+  "uuid": "058bd330-a5db-4b4f-91cd-584ae6a4cf97",
+  "historyId": "7a54098ef0b600684c4fa3e2a87933be",
+  "name": "ONEVIEW-760: Verify fixed cards are excluded from the drawer @regression",
+  "status": "broken",
+  "stage": "finished",
+  "start": 1777972709099,
+  "stop": 1777972710899,
+  "flaky": true,
+  "statusDetails": {
+    "message": "Test failed on first attempt but passed on retry (flaky)"
+  },
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

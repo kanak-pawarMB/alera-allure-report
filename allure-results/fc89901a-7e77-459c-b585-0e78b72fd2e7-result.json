@@ -1,0 +1,31 @@
+{
+  "uuid": "fc89901a-7e77-459c-b585-0e78b72fd2e7",
+  "historyId": "d536fd365da1a6df9987f3b0e4ef265a",
+  "name": "ONEVIEW-829: Verify Restore Layout dropdown toggles based on active layout @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972298931,
+  "stop": 1777972301931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

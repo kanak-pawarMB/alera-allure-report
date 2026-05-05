@@ -1,0 +1,31 @@
+{
+  "uuid": "df7b66b8-2f61-4b13-8629-ae6807f8d551",
+  "historyId": "5bc3366b9a8fb164a0230d101c7d9cbf",
+  "name": "ONEVIEW-818: Verify Cancel on Save confirmation retains unsaved changes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972944099,
+  "stop": 1777972947099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

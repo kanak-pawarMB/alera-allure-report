@@ -1,0 +1,31 @@
+{
+  "uuid": "b3b832f8-8c48-4e5e-a545-225c1492c734",
+  "historyId": "e6d56ca4d6cea8a920a49dc87d3dd9a8",
+  "name": "ONEVIEW-769: Verify card list item layout with name, description, and action button @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971823931,
+  "stop": 1777971826931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

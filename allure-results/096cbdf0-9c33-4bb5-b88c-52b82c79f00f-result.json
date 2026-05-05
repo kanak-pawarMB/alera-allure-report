@@ -1,0 +1,31 @@
+{
+  "uuid": "096cbdf0-9c33-4bb5-b88c-52b82c79f00f",
+  "historyId": "b1c4a229cfb8180f9998cb4e6073242a",
+  "name": "ONEVIEW-797: Verify immediate visual feedback on Remove action @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972408931,
+  "stop": 1777972411931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

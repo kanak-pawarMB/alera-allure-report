@@ -1,0 +1,31 @@
+{
+  "uuid": "e284c1de-ec1f-4e8e-90c8-3fb7c7d3e2f4",
+  "historyId": "d78b011b49a1d47977c77f2d1f0451e0",
+  "name": "ONEVIEW-794: Verify fixed cards do not appear in Remove list @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973094099,
+  "stop": 1777973097099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

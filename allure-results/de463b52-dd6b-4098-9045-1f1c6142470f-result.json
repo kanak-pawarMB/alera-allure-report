@@ -1,0 +1,31 @@
+{
+  "uuid": "de463b52-dd6b-4098-9045-1f1c6142470f",
+  "historyId": "a3566b6396efc5f819b423aae3270236",
+  "name": "ONEVIEW-790: Verify Remove button changes back to Add after removal @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973074099,
+  "stop": 1777973077099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -288,7 +288,7 @@
   },
   {
     "title": "ONEVIEW-760: Verify fixed cards are excluded from the drawer @regression",
-    "status": "passed",
+    "status": "flaky",
     "caseId": 0,
     "duration": 0,
     "suite": ""

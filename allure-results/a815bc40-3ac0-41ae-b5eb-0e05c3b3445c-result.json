@@ -1,0 +1,31 @@
+{
+  "uuid": "a815bc40-3ac0-41ae-b5eb-0e05c3b3445c",
+  "historyId": "3c3434c9fec6b2142fec146577411b45",
+  "name": "ONEVIEW-757: Verify drawer close via close (×) icon @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971993931,
+  "stop": 1777971996931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

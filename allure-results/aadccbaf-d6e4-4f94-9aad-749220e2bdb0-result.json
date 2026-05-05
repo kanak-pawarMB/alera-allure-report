@@ -1,0 +1,31 @@
+{
+  "uuid": "aadccbaf-d6e4-4f94-9aad-749220e2bdb0",
+  "historyId": "735460d567f82854bb0ccc200994da29",
+  "name": "ONEVIEW-754: Verify button state toggle on Remove action @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972679099,
+  "stop": 1777972682099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

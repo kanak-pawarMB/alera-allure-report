@@ -1,0 +1,31 @@
+{
+  "uuid": "ddb5704f-a5c9-47c5-b735-4783834d5893",
+  "historyId": "5df60aea4cb9a48ccc3f45f769375b6f",
+  "name": "ONEVIEW-710: Verify Edit Mode banner styling and placement @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972744099,
+  "stop": 1777972747099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "f9cab558-d689-43ee-bc7f-7e314b931403",
+  "historyId": "60b5185ef25e884b818a19c1ad5cbba6",
+  "name": "ONEVIEW-828: Verify Revert to Preferred Layout discards unsaved changes @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972994099,
+  "stop": 1777972997099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

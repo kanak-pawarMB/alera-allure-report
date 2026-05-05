@@ -1,0 +1,31 @@
+{
+  "uuid": "a740ead0-6434-45bb-9182-bf98a08d71ca",
+  "historyId": "12100ec8e58d358c97aaf6f9b7b5211e",
+  "name": "ONEVIEW-791: Verify layout reflows correctly after card removal @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972378931,
+  "stop": 1777972381931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

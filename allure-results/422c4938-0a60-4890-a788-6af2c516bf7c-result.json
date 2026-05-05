@@ -1,0 +1,31 @@
+{
+  "uuid": "422c4938-0a60-4890-a788-6af2c516bf7c",
+  "historyId": "4853d7815295df312705f97120848d1d",
+  "name": "ONEVIEW-809: Verify Restore Default Layout option and confirmation @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972518931,
+  "stop": 1777972521931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

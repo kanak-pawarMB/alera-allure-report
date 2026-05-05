@@ -1,0 +1,34 @@
+{
+  "uuid": "a5366ddd-d06e-4bc0-aceb-7422343efc9a",
+  "historyId": "c2eb064bdc8aed16fbf0264a29a6953d",
+  "name": "ONEVIEW-839: Verify card can be dragged and dropped to a different column @regression",
+  "status": "skipped",
+  "stage": "finished",
+  "start": 1777972609099,
+  "stop": 1777972609099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "feature",
+      "value": "Drag and Drop"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ],
+  "statusDetails": {
+    "message": "Cannot be automated — manual test case"
+  }
+}

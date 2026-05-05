@@ -1,0 +1,31 @@
+{
+  "uuid": "516a8f4f-edb2-468a-9211-fabfa1e95c4d",
+  "historyId": "14823dbe88ab617afd56c37d4da3b851",
+  "name": "ONEVIEW-820: Verify Restore Layout dropdown shows only Default Layout when Preferred Layout is active @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972954099,
+  "stop": 1777972957099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Preferred Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

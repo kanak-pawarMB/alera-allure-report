@@ -1,0 +1,31 @@
+{
+  "uuid": "73e196f7-61b4-4b49-98f5-852402787da8",
+  "historyId": "76392dffe03dae0742245325f81c8254",
+  "name": "ONEVIEW-741: Verify star/favorite icon does not display on dashboard cards @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972193931,
+  "stop": 1777972196931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

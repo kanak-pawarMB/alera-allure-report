@@ -1,0 +1,31 @@
+{
+  "uuid": "8d5470b3-c8bb-4963-b9b7-b1e1ebc2bbfd",
+  "historyId": "79e22d020c080d2b40bfb100d0cef8f5",
+  "name": "ONEVIEW-743: Verify empty state before patient search in view mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972203931,
+  "stop": 1777972206931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Search"
+    },
+    {
+      "name": "feature",
+      "value": "Search"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

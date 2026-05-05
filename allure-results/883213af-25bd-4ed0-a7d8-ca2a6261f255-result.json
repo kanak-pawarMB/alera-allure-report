@@ -1,0 +1,31 @@
+{
+  "uuid": "883213af-25bd-4ed0-a7d8-ca2a6261f255",
+  "historyId": "ba04f3a123ccae4e9d4371c077fab1b4",
+  "name": "ONEVIEW-771: Verify Add button default state styling @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972534099,
+  "stop": 1777972537099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

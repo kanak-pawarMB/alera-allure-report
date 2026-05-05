@@ -1,0 +1,31 @@
+{
+  "uuid": "743b8024-8d37-44b4-85a9-eb8e111ae37f",
+  "historyId": "141037c2405e9b34769574bc3a7edbc9",
+  "name": "ONEVIEW-725: Verify scrollbar behavior in Edit Mode @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972819099,
+  "stop": 1777972822099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "b96eee32-b2d2-4fb1-8763-888224342266",
+  "historyId": "8d8e430498fed1cf4c3f5329a9748f23",
+  "name": "ONEVIEW-767: Verify card selection panel opens on Add Cards click @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777971813931,
+  "stop": 1777971816931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Add Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Add Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

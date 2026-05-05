@@ -1,0 +1,31 @@
+{
+  "uuid": "f7e2ede9-10d1-4770-94df-194e234e596a",
+  "historyId": "9e1977215c89bc81c39d93a47f428b8a",
+  "name": "ONEVIEW-812: Verify Cancel on Save confirmation does not save layout @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973234099,
+  "stop": 1777973237099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

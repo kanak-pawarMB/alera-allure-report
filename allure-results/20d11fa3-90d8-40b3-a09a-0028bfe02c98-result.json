@@ -1,0 +1,31 @@
+{
+  "uuid": "20d11fa3-90d8-40b3-a09a-0028bfe02c98",
+  "historyId": "bd318ba855696473eb64c3ec5b845e3d",
+  "name": "ONEVIEW-846: Verify Cancel exits Edit Mode without saving @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973194099,
+  "stop": 1777973197099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

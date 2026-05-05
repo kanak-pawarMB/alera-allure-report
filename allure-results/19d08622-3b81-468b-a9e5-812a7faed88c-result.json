@@ -1,0 +1,31 @@
+{
+  "uuid": "19d08622-3b81-468b-a9e5-812a7faed88c",
+  "historyId": "da90c8d501201d549636a65d3a882f55",
+  "name": "ONEVIEW-857: Verify 70/30 two-column layout selection and column structure @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972213931,
+  "stop": 1777972216931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "feature",
+      "value": "Phase-2 Regression"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

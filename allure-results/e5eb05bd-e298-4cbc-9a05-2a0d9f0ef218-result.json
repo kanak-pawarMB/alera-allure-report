@@ -1,0 +1,31 @@
+{
+  "uuid": "e5eb05bd-e298-4cbc-9a05-2a0d9f0ef218",
+  "historyId": "7ad04e92930fa42f5386a8f468aa13b6",
+  "name": "ONEVIEW-708: Verify Edit Layout option styling and label in Profile menu @regression",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777972033931,
+  "stop": 1777972036931,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Edit Layout"
+    },
+    {
+      "name": "feature",
+      "value": "Edit Layout"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "19418234-e201-45a4-be69-9cb9f21a1ede",
+  "historyId": "b7bdb897a710daa3079dee77dfc7ccdc",
+  "name": "ONEVIEW-848: Verify drawer displays card list with Add and Remove buttons @smoke",
+  "status": "passed",
+  "stage": "finished",
+  "start": 1777973169099,
+  "stop": 1777973172099,
+  "labels": [
+    {
+      "name": "parentSuite",
+      "value": "Phase-2"
+    },
+    {
+      "name": "suite",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "feature",
+      "value": "Remove Cards"
+    },
+    {
+      "name": "framework",
+      "value": "Playwright"
+    },
+    {
+      "name": "language",
+      "value": "JavaScript"
+    }
+  ]
+}
