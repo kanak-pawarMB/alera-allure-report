@@ -1,1 +1,0 @@
-Care Management fields are read-only as expected

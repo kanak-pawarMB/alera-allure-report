@@ -1,1 +1,0 @@
-ONEVIEW-119: "View All" link hover cursor: pointer

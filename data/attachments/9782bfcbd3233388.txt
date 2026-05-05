@@ -1,1 +1,0 @@
-Dark mode toggle not found - feature may not be implemented

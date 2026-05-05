@@ -1,1 +1,0 @@
-ONEVIEW-371: Card text length: 955

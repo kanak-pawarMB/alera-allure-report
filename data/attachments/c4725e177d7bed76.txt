@@ -1,1 +1,0 @@
-ONEVIEW-97: Card shows column headers: true

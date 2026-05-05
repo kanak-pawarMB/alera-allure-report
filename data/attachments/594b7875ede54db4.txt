@@ -1,1 +1,0 @@
-Layout consistency verified - logout/login test requires manual verification

@@ -1,2 +1,0 @@
-ONEVIEW-117: Found 12 rows for scroll functionality
-ONEVIEW-117: Scroll functionality verified

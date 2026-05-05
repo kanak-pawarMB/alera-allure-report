@@ -1,2 +1,0 @@
-ONEVIEW-187: Loading indicators in DOM: 0
-ONEVIEW-187: Card loaded with content: true, text length: 15

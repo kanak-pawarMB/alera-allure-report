@@ -1,1 +1,1 @@
-[{"values":["Local"],"name":"Environment"},{"values":["v22.17.0"],"name":"Node Version"},{"values":["win32"],"name":"OS"}]
+[{"values":["Phase-2"],"name":"QASE_Run"},{"values":["2026-05-05"],"name":"Run_Date"},{"values":["149"],"name":"Total_Tests"},{"values":["143"],"name":"Passed"},{"values":["6"],"name":"Manual_Skipped"},{"values":["Playwright"],"name":"Framework"},{"values":["Alera ONEView"],"name":"Project"}]

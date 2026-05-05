@@ -1,1 +1,0 @@
-Data mapping verified: 1 enrollment fields, 5 care management fields

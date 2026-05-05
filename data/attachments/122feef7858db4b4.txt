@@ -1,1 +1,0 @@
-ONEVIEW-86: Header shows title ✓, date ✗

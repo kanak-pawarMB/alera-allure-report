@@ -1,1 +1,0 @@
-ONEVIEW-188: Card data loaded successfully: true, text length: 15

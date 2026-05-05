@@ -1,1 +1,0 @@
-ONEVIEW-181: Font consistency check - Labels: 0, Values: 0

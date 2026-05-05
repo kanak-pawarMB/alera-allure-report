@@ -1,1 +1,0 @@
-ONEVIEW-336: lowercase="20" rows, uppercase="10" rows

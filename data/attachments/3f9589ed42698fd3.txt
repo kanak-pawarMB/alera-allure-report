@@ -1,1 +1,0 @@
-ONEVIEW-79: URL-based redirect not supported - page loaded but no patient cards rendered
