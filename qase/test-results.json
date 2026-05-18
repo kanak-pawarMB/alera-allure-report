@@ -1,0 +1,274 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\kanak.pawar\\Alera Automation\\playwright.config.js",
+    "rootDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "C:\\Users\\kanak.pawar\\Alera Automation\\global-setup.js",
+    "globalTeardown": "C:\\Users\\kanak.pawar\\Alera Automation\\global-teardown.js",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "auth-setup",
+        "name": "auth-setup",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "smoke",
+        "name": "smoke",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [
+          "/tests\\/api\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "/tests\\/smoke[^/]*\\/.+\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api-smoke",
+        "name": "api-smoke",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/api\\/smoke\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api-regression",
+        "name": "api-regression",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/api\\/regression\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Alera Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "safari",
+        "name": "safari",
+        "testDir": "C:/Users/kanak.pawar/Alera Automation/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "qase/test-results.json"
+        }
+      ],
+      [
+        "C:\\Users\\kanak.pawar\\Alera Automation\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        {
+          "outputFolder": "allure-results",
+          "detail": true,
+          "suiteTitle": true,
+          "environmentInfo": {
+            "Environment": "Local",
+            "Node Version": "v24.14.1",
+            "OS": "win32"
+          }
+        }
+      ],
+      [
+        "C:\\Users\\kanak.pawar\\Alera Automation\\node_modules\\playwright-qase-reporter\\dist\\index.js",
+        {
+          "mode": "testops",
+          "testops": {
+            "api": {
+              "token": "c893decfa9d54bc0415572859835b9f95344b29172c5b4218ce36b96bcebd1c2"
+            },
+            "project": "ONEVIEW",
+            "uploadAttachments": true,
+            "run": {
+              "complete": true
+            }
+          }
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth\\auth.setup.spec.js",
+      "file": "auth/auth.setup.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Microsoft Login Setup — Save session",
+          "file": "auth/auth.setup.spec.js",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "login and save session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "auth-setup",
+                  "projectName": "auth-setup",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 48594,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": ">>> Cleared previous auth.json\n"
+                        },
+                        {
+                          "text": ">>> Session stored in auth.json — LOGIN SUCCESS\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-05T05:20:34.175Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "490ba2a33698f13c030a-75a17ddc49b145e3a166",
+              "file": "auth/auth.setup.spec.js",
+              "line": 5,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-05-05T05:20:33.047Z",
+    "duration": 51930.695999999996,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

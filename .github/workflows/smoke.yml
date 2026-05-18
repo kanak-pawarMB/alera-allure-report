@@ -1,0 +1,29 @@
+name: Smoke Tests
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        
+      # FIXED: Pass MS_TOKEN as ENV to ALL steps
+      - name: Run smoke tests
+        env:
+          MS_TOKEN: ${{ vars.MS_TOKEN }}
+        run: 
+          

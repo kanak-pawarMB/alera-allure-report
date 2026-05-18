@@ -1,10 +1,5 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,23 +8,38 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
+// playwright-qase-reporter v2 reads QASE_TESTOPS_API_TOKEN and QASE_MODE from env.
+// Bridge the legacy QASE_API_TOKEN name and ensure mode is set so env-schema doesn't
+// return null and override the reporter config in playwright.config.js.
+// playwright-qase-reporter v2 reads its config from env vars via env-schema,
+// which returns null (not undefined) for unset nullable fields — null silently
+// overrides any values passed via playwright.config.js. Bridge the env vars
+// so they are actual strings before the reporter initialises.
+if (!process.env.QASE_TESTOPS_API_TOKEN && process.env.QASE_API_TOKEN) {
+  process.env.QASE_TESTOPS_API_TOKEN = process.env.QASE_API_TOKEN;
+}
+if (!process.env.QASE_TESTOPS_PROJECT) {
+  process.env.QASE_TESTOPS_PROJECT = process.env.QASE_PROJECT || 'ONEVIEW';
+}
+if (!process.env.QASE_MODE) {
+  process.env.QASE_MODE = 'testops';
+}
+
 export default defineConfig({
+  globalSetup: './global-setup.js',
+  globalTeardown: './global-teardown.js',
   testDir: './tests',
-  /* Run tests in files in parallel */
+  timeout: parseInt(process.env.TEST_TIMEOUT) || 120000,
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  
+  // SINGLE REPORTER CONFIG - Qase + others
   reporter: [
-    ['html'],
-    ['list'], // Console output during test execution
+    ['html', { open: 'never' }],
+    ['list'],
+    ['json', { outputFile: 'qase/test-results.json' }],
     ['allure-playwright', {
       outputFolder: 'allure-results',
       detail: true,
@@ -40,112 +50,82 @@ export default defineConfig({
         'OS': process.platform,
       }
     }],
+    // Qase TestOps configuration
     ['playwright-qase-reporter', {
-      apiToken: process.env.QASE_API_TOKEN,
-      projectCode: process.env.QASE_PROJECT_CODE,
-      runComplete: process.env.QASE_RUN_COMPLETE === 'true',
-      logging: true,
-      uploadAttachments: true,
-      basePath: 'https://api.qase.io/v1',
+      mode: 'testops',
+      testops: {
+        api: {
+          token: process.env.QASE_API_TOKEN,
+        },
+        project: process.env.QASE_PROJECT || 'ONEVIEW',
+        uploadAttachments: true,
+        run: {
+          complete: true,
+        },
+      },
     }]
   ],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+  use: {
+    trace: 'retain-on-failure',
+    screenshots: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
   projects: [
-    // UI Smoke Tests - Fast critical path tests (Chromium only)
-    // USAGE: npx playwright test --project=smoke
-    // For headed mode: npx playwright test --project=smoke --headed
-    // IMPORTANT: Use --project=smoke (NOT --project=chromium) for smoke tests
+    // Auth Setup - Chromium only
     {
-      name: 'smoke',
-      testMatch: /tests\/smoke\/.*\.spec\.js/,
-      testIgnore: /tests\/api\/.*\.spec\.js/, // Exclude API tests
-      use: { ...devices['Desktop Chrome'] },
-      retries: 0, // Smoke tests should not retry - they must be stable
+      name: 'auth-setup',
+      testMatch: /tests\/auth\/.*\.spec\.js/,
+      use: { ...devices['Desktop Chrome'], headless: false },
+      retries: 0,
     },
 
-    // API Smoke Tests - Fast critical API endpoint tests
-    // USAGE: npx playwright test --project=api-smoke
+    // Smoke UI Tests (covers tests/smoke/, tests/smoke Phase-1/, tests/smoke Phase-2/, etc.)
+    {
+      name: 'smoke',
+      testMatch: /tests\/smoke[^/]*\/.+\.spec\.js/,
+      testIgnore: /tests\/api\/.*\.spec\.js/,
+      use: { ...devices['Desktop Chrome'] },
+      retries: 0,
+      fullyParallel: false,
+    },
+    
+    // API Smoke
     {
       name: 'api-smoke',
       testMatch: /tests\/api\/smoke\/.*\.spec\.js/,
-      use: {
-        baseURL: process.env.API_BASE_URL,
-      },
-      retries: 0, // API smoke tests should not retry
+      use: { baseURL: process.env.API_BASE_URL },
+      retries: 0,
     },
-
-    // API Regression Tests - Comprehensive API test coverage
-    // USAGE: npx playwright test --project=api-regression
+    
+    // API Regression
     {
       name: 'api-regression',
       testMatch: /tests\/api\/regression\/.*\.spec\.js/,
-      use: {
-        baseURL: process.env.API_BASE_URL,
-      },
+      use: { baseURL: process.env.API_BASE_URL },
       retries: process.env.CI ? 2 : 0,
     },
-
-    // Full UI Regression Test Suite - Chromium (excludes smoke tests)
-    // USAGE: npx playwright test --project=chromium
-    // NOTE: This project excludes smoke tests to avoid duplication
-    // To run smoke tests, use --project=smoke instead
+    
+    // UI Regression (Chromium)
     {
       name: 'chromium',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/], // Exclude smoke and API tests
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // Full UI Regression Test Suite - Firefox (excludes smoke tests)
-    // USAGE: npx playwright test --project=firefox
+    // UI Regression (Firefox)
     {
       name: 'firefox',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Firefox'] },
     },
 
-    // Full UI Regression Test Suite - Safari (excludes smoke tests)
-    // USAGE: npx playwright test --project=safari
+    // UI Regression (Safari)
     {
       name: 'safari',
-      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/],
+      testIgnore: [/.*smoke.*\.spec\.js/, /tests\/api\/.*\.spec\.js/, /tests\/auth\/.*\.spec\.js/],
       use: { ...devices['Desktop Safari'] },
     },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
-

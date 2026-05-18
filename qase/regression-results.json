@@ -1,0 +1,1055 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\playwright.config.js",
+    "rootDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\global-setup.js",
+    "globalTeardown": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\global-teardown.js",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "auth-setup",
+        "name": "auth-setup",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "smoke",
+        "name": "smoke",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [
+          "/tests\\/api\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "/tests\\/smoke\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "api-smoke",
+        "name": "api-smoke",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/api\\/smoke\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "api-regression",
+        "name": "api-regression",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/tests\\/api\\/regression\\/.*\\.spec\\.js/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "safari",
+        "name": "safari",
+        "testDir": "C:/Users/kanak.pawar/Documents/Playwright-Automation/alera2/alera-health-oneview-QA/tests",
+        "testIgnore": [
+          "/.*smoke.*\\.spec\\.js/",
+          "/tests\\/api\\/.*\\.spec\\.js/",
+          "/tests\\/auth\\/.*\\.spec\\.js/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "regression\\PCPCard.spec.js",
+      "file": "regression/PCPCard.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "PCP Card - Regression @regression",
+          "file": "regression/PCPCard.spec.js",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "ONEVIEW-51: Verify all required PCP fields displayed correctly",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 43466436,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:19:8",
+                        "location": {
+                          "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                          "column": 8,
+                          "line": 19
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 17 |\u001b[39m   \u001b[36mlet\u001b[39m pcpCard\u001b[33m;\u001b[39m\n \u001b[90m 18 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 19 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 20 |\u001b[39m     dashboard \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mDashboardPage\u001b[39m(page)\u001b[33m;\u001b[39m\n \u001b[90m 21 |\u001b[39m     pcpCard \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPCPCard\u001b[39m(page)\u001b[33m;\u001b[39m\n \u001b[90m 22 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39msetViewportSize({ width\u001b[33m:\u001b[39m \u001b[35m1280\u001b[39m\u001b[33m,\u001b[39m height\u001b[33m:\u001b[39m \u001b[35m720\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                            "column": 8,
+                            "line": 19
+                          },
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  17 |   let pcpCard;\n  18 |\n> 19 |   test.beforeEach(async ({ page }) => {\n     |        ^\n  20 |     dashboard = new DashboardPage(page);\n  21 |     pcpCard = new PCPCard(page);\n  22 |     await page.setViewportSize({ width: 1280, height: 720 });\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:19:8"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\BasePage.js",
+                            "column": 21,
+                            "line": 17
+                          },
+                          "message": "TimeoutError: page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://qa.oneview.alerahealth.com/dashboard\", waiting until \"load\"\u001b[22m\n\n\n   at pages\\BasePage.js:17\n\n  15 |    */\n  16 |   async navigate(url, opts = { timeout: 90000 }) {\n> 17 |     await this.page.goto(url, opts);\n     |                     ^\n  18 |     await this.page.waitForLoadState('networkidle', { timeout: 60000 });\n  19 |   }\n  20 |\n    at DashboardPage.navigate (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\BasePage.js:17:21)\n    at DashboardPage.goto (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:56:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:24:23"
+                        },
+                        {
+                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 120000ms.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:44:15.833Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-f088f--fields-displayed-correctly-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                        "column": 8,
+                        "line": 19
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-6dff267e198d018f3dc0",
+              "file": "regression/PCPCard.spec.js",
+              "line": 32,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-52: Verify PCP address formatted correctly with both lines",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 43466565,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:19:8",
+                        "location": {
+                          "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                          "column": 8,
+                          "line": 19
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 17 |\u001b[39m   \u001b[36mlet\u001b[39m pcpCard\u001b[33m;\u001b[39m\n \u001b[90m 18 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 19 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m    |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 20 |\u001b[39m     dashboard \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mDashboardPage\u001b[39m(page)\u001b[33m;\u001b[39m\n \u001b[90m 21 |\u001b[39m     pcpCard \u001b[33m=\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mPCPCard\u001b[39m(page)\u001b[33m;\u001b[39m\n \u001b[90m 22 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39msetViewportSize({ width\u001b[33m:\u001b[39m \u001b[35m1280\u001b[39m\u001b[33m,\u001b[39m height\u001b[33m:\u001b[39m \u001b[35m720\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                            "column": 8,
+                            "line": 19
+                          },
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  17 |   let pcpCard;\n  18 |\n> 19 |   test.beforeEach(async ({ page }) => {\n     |        ^\n  20 |     dashboard = new DashboardPage(page);\n  21 |     pcpCard = new PCPCard(page);\n  22 |     await page.setViewportSize({ width: 1280, height: 720 });\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:19:8"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\BasePage.js",
+                            "column": 21,
+                            "line": 17
+                          },
+                          "message": "TimeoutError: page.goto: Timeout 90000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://qa.oneview.alerahealth.com/dashboard\", waiting until \"load\"\u001b[22m\n\n\n   at pages\\BasePage.js:17\n\n  15 |    */\n  16 |   async navigate(url, opts = { timeout: 90000 }) {\n> 17 |     await this.page.goto(url, opts);\n     |                     ^\n  18 |     await this.page.waitForLoadState('networkidle', { timeout: 60000 });\n  19 |   }\n  20 |\n    at DashboardPage.navigate (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\BasePage.js:17:21)\n    at DashboardPage.goto (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:56:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:24:23"
+                        },
+                        {
+                          "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 120000ms.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:44:15.754Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-29d33-d-correctly-with-both-lines-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js",
+                        "column": 8,
+                        "line": 19
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-6aa435cd6730112df771",
+              "file": "regression/PCPCard.spec.js",
+              "line": 42,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-56: Verify all PCP fields are read-only",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "56"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 122858,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:69:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:20:09.251Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "56"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-03cf2-ll-PCP-fields-are-read-only-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-03cf2-ll-PCP-fields-are-read-only-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-03cf2-ll-PCP-fields-are-read-only-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-e16ace051f7e083f9368",
+              "file": "regression/PCPCard.spec.js",
+              "line": 66,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-57: Verify provider name bold and initials displayed",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "57"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 122521,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:80:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:20:11.448Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "57"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-e44c8-bold-and-initials-displayed-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-e44c8-bold-and-initials-displayed-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-e44c8-bold-and-initials-displayed-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-d59e0cfa000cfcca2e01",
+              "file": "regression/PCPCard.spec.js",
+              "line": 77,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-58: Verify PCP card layout hierarchy",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "58"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 124382,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:92:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:22:17.650Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "58"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-202f5-y-PCP-card-layout-hierarchy-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-202f5-y-PCP-card-layout-hierarchy-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-202f5-y-PCP-card-layout-hierarchy-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-ae5bb0654939bf8bf807",
+              "file": "regression/PCPCard.spec.js",
+              "line": 89,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-59: Verify PCP data updates when different patient selected",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "59"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 124053,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:103:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:22:18.600Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "59"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-15268--different-patient-selected-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-15268--different-patient-selected-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-15268--different-patient-selected-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-96a15b703017d52eb9b5",
+              "file": "regression/PCPCard.spec.js",
+              "line": 99,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-60: Verify PCP data reloads when page refreshed",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "60"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 125009,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:120:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:24:26.981Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "60"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-71978-reloads-when-page-refreshed-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-71978-reloads-when-page-refreshed-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-71978-reloads-when-page-refreshed-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-4e5164faf21751266886",
+              "file": "regression/PCPCard.spec.js",
+              "line": 117,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-62: Verify provider name with title/prefix displayed correctly",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "62"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 124574,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:138:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:24:27.047Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "62"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-36d85--prefix-displayed-correctly-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-36d85--prefix-displayed-correctly-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-36d85--prefix-displayed-correctly-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-607f2bd385c332d6f845",
+              "file": "regression/PCPCard.spec.js",
+              "line": 135,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-63: Verify initials derived from first/last name, ignoring title",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "63"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 138072,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:149:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:26:36.367Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "63"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-cf76f-st-last-name-ignoring-title-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-cf76f-st-last-name-ignoring-title-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-cf76f-st-last-name-ignoring-title-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-9c54a8ea21c443c85817",
+              "file": "regression/PCPCard.spec.js",
+              "line": 146,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-157: Verify PCP Address 1/Address 2 fields display correctly",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "157"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 138115,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:161:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:26:36.281Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "157"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-b1d4b--2-fields-display-correctly-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-b1d4b--2-fields-display-correctly-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-b1d4b--2-fields-display-correctly-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-ef699b1c3b1061d559b8",
+              "file": "regression/PCPCard.spec.js",
+              "line": 158,
+              "column": 3
+            },
+            {
+              "title": "ONEVIEW-158: Verify PCP City and State fields display correctly",
+              "ok": false,
+              "tags": [
+                "regression"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [
+                    {
+                      "type": "qaseId",
+                      "description": "158"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 122945,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js",
+                            "column": 44,
+                            "line": 82
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Search by Patient\\'s Medicaid' }).or(locator('input[placeholder*=\"Medicaid\"]')).or(locator('input[placeholder*=\"Search by Patient\"]')).or(locator('input[type=\"search\"]').first()).first()\u001b[22m\n\n\n   at pages\\DashboardPage.js:82\n\n  80 |    */\n  81 |   async loadPatientByMedicaidId(medicaidId, displayText) {\n> 82 |     await expect(this.medicaidSearchInput).toBeVisible({ timeout: 30000 });\n     |                                            ^\n  83 |     await this.medicaidSearchInput.click();\n  84 |     await this.medicaidSearchInput.fill(medicaidId);\n  85 |\n    at DashboardPage.loadPatientByMedicaidId (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:82:44)\n    at DashboardPage.loadDefaultPatient (C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\pages\\DashboardPage.js:108:16)\n    at C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\tests\\regression\\PCPCard.spec.js:186:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-12T06:28:59.238Z",
+                      "annotations": [
+                        {
+                          "type": "qaseId",
+                          "description": "158"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-0449b-te-fields-display-correctly-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-0449b-te-fields-display-correctly-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\kanak.pawar\\Documents\\Playwright-Automation\\alera2\\alera-health-oneview-QA\\test-results\\regression-PCPCard-PCP-Car-0449b-te-fields-display-correctly-chromium\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "95cb341f21a3d18caf55-f6912bc0dae80b7bb0cf",
+              "file": "regression/PCPCard.spec.js",
+              "line": 183,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mWorker teardown timeout of 120000ms exceeded.\u001b[39m\n\n\u001b[31mFailed worker ran 1 test:\u001b[39m\n[chromium] › tests\\regression\\PCPCard.spec.js:32:3 › PCP Card - Regression @regression › ONEVIEW-51: Verify all required PCP fields displayed correctly",
+      "stack": "\u001b[31mWorker teardown timeout of 120000ms exceeded.\u001b[39m\n\n\u001b[31mFailed worker ran 1 test:\u001b[39m\n[chromium] › tests\\regression\\PCPCard.spec.js:32:3 › PCP Card - Regression @regression › ONEVIEW-51: Verify all required PCP fields displayed correctly"
+    },
+    {
+      "message": "\u001b[31mWorker teardown timeout of 120000ms exceeded.\u001b[39m\n\n\u001b[31mFailed worker ran 1 test:\u001b[39m\n[chromium] › tests\\regression\\PCPCard.spec.js:42:3 › PCP Card - Regression @regression › ONEVIEW-52: Verify PCP address formatted correctly with both lines",
+      "stack": "\u001b[31mWorker teardown timeout of 120000ms exceeded.\u001b[39m\n\n\u001b[31mFailed worker ran 1 test:\u001b[39m\n[chromium] › tests\\regression\\PCPCard.spec.js:42:3 › PCP Card - Regression @regression › ONEVIEW-52: Verify PCP address formatted correctly with both lines"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-03-11T17:44:11.786Z",
+    "duration": 46020071.764000006,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 11,
+    "flaky": 0
+  }
+}

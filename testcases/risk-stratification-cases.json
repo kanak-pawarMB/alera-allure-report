@@ -1,0 +1,291 @@
+[
+  {
+    "id": 379,
+    "title": "Validate latest risk score record",
+    "description": "Verify that UI displays only the most recent record based on Score_Date",
+    "steps": [
+      {
+        "hash": "fcf61b1e14d27bb7102ccc3e581c896951f29ff2",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Note latest Score_Date from DB",
+        "expected_result": "Only the latest Score_Date record is shown",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "a0632c7da39703367c4f1290e1fba6b22e6bb5cc",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Open Risk Stratification card",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 380,
+    "title": "Validate central risk score display",
+    "description": "Ensure central bold risk score matches latest Score",
+    "steps": [
+      {
+        "hash": "7a771685d3423cab75e0d6d6accc10c686ed5f20",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load card",
+        "expected_result": "Score is bold, numeric, and matches DB",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "4cdb7abf77d744eef674f76476afd360069e1078",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check central score",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 381,
+    "title": "Validate Last Updated Date",
+    "description": "Verify the latest Score_Date is displayed",
+    "steps": [
+      {
+        "hash": "a4024db9f59c4cbba2be60532f452e6c5f941574",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load card",
+        "expected_result": "Date matches latest Score_Date",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "3b5eef438ed44bb48c6a27e2a34e5e230e0fe9b3",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Validate Last Updated Date",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 382,
+    "title": "Validate display of 5 factorial bullet points",
+    "description": "Ensure Factorial1–5 appear as bullet points",
+    "steps": [
+      {
+        "hash": "7470a00c8f208c5e8b557c67904dbe65255dd578",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load card",
+        "expected_result": "All 5 factorials appear exactly once",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "6366d7ce8586e1d25cc27f58887a59ef8b027dd0",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check bullet points",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 383,
+    "title": "Validate trend image mapping",
+    "description": "Check trend color image matches Factorial_Color from DB",
+    "steps": [
+      {
+        "hash": "81c940a3d17b9039d29cc7d77b94175e7438eb23",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load card",
+        "expected_result": "Trend images match respective Factorial_Color",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "c8421f0af096740d62966c84ca8d1c225d2dda3d",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Validate each trend image color",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 384,
+    "title": "Validate card title",
+    "description": "Ensure “Risk Stratification” title is displayed",
+    "steps": [
+      {
+        "hash": "ea7f03a9cfa234b50fd8bba772296eedbb176efb",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Inspect top of card",
+        "expected_result": "Title displayed correctly per design",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 388,
+    "title": "Validate modal close via X icon",
+    "description": "Ensure modal closes properly",
+    "steps": [
+      {
+        "hash": "e4f3a72ab859c4a1cddba62bc22825010d78c2de",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Click close icon",
+        "expected_result": "Modal closes immediately",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 391,
+    "title": "Validate dynamic update of graph",
+    "description": "Graph must update instantly based on selected filter",
+    "steps": [
+      {
+        "hash": "4ea92cc052dbc41192be85d6659f8de44af86fb3",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Select different timeline options",
+        "expected_result": "Graph updates without page reload",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 392,
+    "title": "Validate graph correctness for timeline",
+    "description": "Ensure graph reflects score changes for selected timeline",
+    "steps": [
+      {
+        "hash": "53130cf0b4e0bbac0138525ddca975f425ebd71b",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Apply timeline range",
+        "expected_result": "Graph shows correct trend for selected period",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 393,
+    "title": "Validate no records found message",
+    "description": "Show proper message when no timeline data exists",
+    "steps": [
+      {
+        "hash": "51920a87826a3518db4f64bdbf942a57385f5a53",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Select an empty timeline",
+        "expected_result": "“No records found” is displayed",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 395,
+    "title": "Validate wrapping of risk drivers",
+    "description": "Bullet points should wrap neatly per design",
+    "steps": [
+      {
+        "hash": "d35ec7ecf46cc1b3401a3e122de29e3bad4bb0b6",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Inspect bullet section",
+        "expected_result": "Bullets wrap without UI break",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 396,
+    "title": "Validate score alignment & formatting",
+    "description": "Ensure number is centered and visually prominent",
+    "steps": [
+      {
+        "hash": "a385993ab8b5b8f291b70a439f1197851efd16db",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check center alignment and size",
+        "expected_result": "Score aligned center, bold, proper size",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 397,
+    "title": "Validate design spacing & padding",
+    "description": "Ensure spacing matches Figma design",
+    "steps": [
+      {
+        "hash": "a72063a511f97abfe227c0dde8550ed39c0a9e15",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare spacing, padding, alignment",
+        "expected_result": "All spacing meets design specs",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]

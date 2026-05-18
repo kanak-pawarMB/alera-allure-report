@@ -1,0 +1,317 @@
+[
+  {
+    "id": 283,
+    "title": "Verify total cost calculation",
+    "description": "Ensure total equals sum of all cost fields",
+    "preconditions": "Valid cost data available",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "09435c8964d64192a971ec856546353774d331a2",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check each cost value",
+        "expected_result": "Total = Sum of all cost fields",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "a3d4071c746cbb0539068c0e7378c83d6b6801b1",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Manually sum values",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "7d8fdf69d9b6fdeb1b27392143ebbcbecb2f6c7f",
+        "position": 3,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare with displayed total",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 284,
+    "title": "Validate data limited to last 12 months",
+    "description": "Confirm data older than 12 months is excluded",
+    "preconditions": "DB contains records >12 months old",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "b5e8fe2d65fc06ea2c9c783d74a1eecce070958a",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View Cost Breakdown for patient",
+        "expected_result": "Only costs within last 12 months are displayed",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "313e9af518f73d11697fb7aec415b06f5bf5211c",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Check data timeframe",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 286,
+    "title": "Validate cost formatting in USD",
+    "description": "Verify cost values appear with $, commas, and decimals",
+    "preconditions": "Valid numeric data",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "84066f9526bdc82f4a0fc6b1f22f09d885428826",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe displayed values",
+        "expected_result": "Costs appear as $1,234.56",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 287,
+    "title": "Verify Total Cost highlight",
+    "description": "Confirm Total Cost is displayed prominently in blue",
+    "preconditions": "Cost data loaded",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "796c04a08ee94b600de224725c3812fa2867d74a",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe Total Cost field",
+        "expected_result": "Total Cost field is highlighted in blue per client request",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 288,
+    "title": "Verify card title text",
+    "description": "Ensure title is correctly displayed",
+    "preconditions": "UI page loaded",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "a59f66f8c26654be071be753673b09994078b35e",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View header text",
+        "expected_result": "Title shows “12-Month Cost / Utilization”",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 289,
+    "title": "Verify alignment and spacing per Figma",
+    "description": "Ensure layout follows Figma design",
+    "preconditions": "Access to design reference",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "0a41d003f36343dd03abe17dad7fec29589bbd09",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Compare actual vs Figma layout",
+        "expected_result": "Alignment, spacing, font sizes match Figma",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 290,
+    "title": "Handle missing data fields",
+    "description": "Validate null cost fields are handled gracefully",
+    "preconditions": "Some fields null in DB",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "0591463ef3f2650af7794381d0727699a3f8a4c2",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View cost breakdown",
+        "expected_result": "Null fields display --.",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "b0c6e834f0021a1b9dcb1164bc25f5b0f187357b",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Observe missing field handling",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 291,
+    "title": "Handle all zero cost values",
+    "description": "Verify display for zero-cost patients",
+    "preconditions": "All cost fields = 0",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "2949970a7bbbe6b8bba97e7373766ec5bd107f47",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View cost breakdown",
+        "expected_result": "All costs and total shown as $0.00",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 292,
+    "title": "Handle missing patient record",
+    "description": "Validate system response for invalid patient ID",
+    "preconditions": "Invalid patient ID",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "1d1e67a1aa488eba11e356c5069bc67105f6568f",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Search for invalid patient",
+        "expected_result": "“No data available” message displayed; no crash",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 293,
+    "title": "Validate API response status",
+    "description": "Ensure backend API returns correct status",
+    "preconditions": "API accessible",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "983067758b1d8d2aca19d0bcbbef34d95ae61a5d",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Trigger API manually or via UI",
+        "expected_result": "200 OK for valid, 404/204 for invalid",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 294,
+    "title": "Verify page load performance",
+    "description": "Ensure data loads within acceptable time",
+    "preconditions": "Stable connection",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "7eec4f10360fcd4934934cdf0f9f0b46c8acc229",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Load cost breakdown view",
+        "expected_result": "Data loads within 3 seconds",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 295,
+    "title": "Validate consistent currency format",
+    "description": "Check formatting across multiple patients",
+    "preconditions": "Multiple patient records",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "29734218a2c1ed03737173708ff65dcb16c8c039",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "View several patients’ cost cards",
+        "expected_result": "All costs displayed in same USD format",
+        "data": "",
+        "steps": []
+      }
+    ]
+  },
+  {
+    "id": 296,
+    "title": "Validate real-time total recalculation",
+    "description": "Ensure total updates when DB data changes",
+    "preconditions": "Modify cost in DB",
+    "postconditions": null,
+    "steps": [
+      {
+        "hash": "a0826d111bde474f0573b6195589711a7bfd3a7e",
+        "position": 1,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Update cost value",
+        "expected_result": "Updated total reflects changes",
+        "data": "",
+        "steps": []
+      },
+      {
+        "hash": "682485560300f4e52b6167ce6961f821574356ac",
+        "position": 2,
+        "shared_step_hash": null,
+        "shared_step_nested_hash": null,
+        "attachments": [],
+        "action": "Refresh UI",
+        "expected_result": "",
+        "data": "",
+        "steps": []
+      }
+    ]
+  }
+]
